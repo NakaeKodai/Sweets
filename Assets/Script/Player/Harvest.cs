@@ -16,6 +16,7 @@ public class Harvest : MonoBehaviour
 
     void Update()
     {
+        //仮としてFireにしている
         if(playerInputAction.Player.Fire.triggered && isEnter)
         {
             Debug.Log("採集");
