@@ -14,8 +14,13 @@ public class Talk : MonoBehaviour
     private byte talkPage;
     NPCState npcState;
 
+    // 文字表示のためのテキスト
     public GameObject talkWindow;
     [SerializeField] private TextMeshProUGUI textWindow;
+    // NPCの名前表示のためのテキスト
+    public GameObject nameWindow;
+    [SerializeField] private TextMeshProUGUI nameTextWindow;
+
     private bool windowStop = false;//画面に文字を表示させたかを判別
 
     void Start()
@@ -41,6 +46,11 @@ public class Talk : MonoBehaviour
             }
             isTalking = true;
             interval = true;
+            if(npcState.name != ""){
+                nameTextWindow = nameWindow.GetComponent<TextMeshProUGUI>();
+                nameTextWindow.text = npcState.name;
+                nameWindow.SetActive(true);
+            }
         }
         playerInputAction.Player.Fire.canceled += ctx => interval = false;
         if(isTalking)
@@ -53,6 +63,7 @@ public class Talk : MonoBehaviour
             {
                 talkWindow.SetActive(false);
                 isTalking = false;
+                nameWindow.SetActive(false);
             }
             else if(!windowStop)
             {

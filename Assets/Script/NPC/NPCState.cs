@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class NPCState : MonoBehaviour
 {
+    public string name;
     public byte state;
     public List<string> list;
     [SerializeField] public List<List<string>> talk = new List<List<string>>();
