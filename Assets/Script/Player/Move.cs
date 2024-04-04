@@ -29,12 +29,12 @@ public class Move : MonoBehaviour
         playerDirection = playerInputAction.Player.Move.ReadValue<Vector2>();
         // 以下Raycastを利用した壁の判定（未完成）
         Vector3 playerPosition = transform.position;
-        Vector3 rayDirection = playerDirection;
+        Vector3 rayDirection = new Vector3(playerDirection.x, 0, playerDirection.y);
         // RaycastHit wallHit = Physics.Raycast(playerPosition, rayDirection, 5f,WallLayer);
         Ray ray = new Ray(playerPosition, rayDirection);
         Debug.DrawRay(playerPosition,rayDirection,Color.blue,0.5f);
         RaycastHit wallHit;
-        if(!Physics.Raycast(ray, out wallHit, 6.0f, WallLayer)){
+        if(!Physics.Raycast(ray, out wallHit, 1.0f, WallLayer)){
             transform.Translate(
             playerDirection.x * speed * Time.deltaTime,
             0.0f,
