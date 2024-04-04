@@ -11,8 +11,6 @@ public class Move : MonoBehaviour
     private Vector2 playerDirection; //プレイヤーの向き
     public byte speed = 5; //移動の速さ
     
-    public static bool tachWall = false; //壁に当たっているかを判別
-    // public static bool ta
     [SerializeField]LayerMask WallLayer;
 
     void Start()
@@ -27,14 +25,13 @@ public class Move : MonoBehaviour
         playerInputAction.Player.Dash.canceled += ctx => speed = 5;
 
         playerDirection = playerInputAction.Player.Move.ReadValue<Vector2>();
-        // 以下Raycastを利用した壁の判定（未完成）
-        Vector3 playerPosition = transform.position;
-        Vector3 rayDirection = new Vector3(playerDirection.x, 0, playerDirection.y);
-        // RaycastHit wallHit = Physics.Raycast(playerPosition, rayDirection, 5f,WallLayer);
-        Ray ray = new Ray(playerPosition, rayDirection);
-        Debug.DrawRay(playerPosition,rayDirection,Color.blue,0.5f);
+
+        // 以下Raycastを利用した壁の判定
+        Vector3 playerPosition = transform.position;//プレイヤーの位置を取得
+        Vector3 rayDirection = new Vector3(playerDirection.x, 0, playerDirection.y);//プレイヤーの向きを取得
+        Ray ray = new Ray(playerPosition, rayDirection);//プライヤーの向きにあるものを判別するものを飛ばす
         RaycastHit wallHit;
-        if(!Physics.Raycast(ray, out wallHit, 1.0f, WallLayer)){
+        if(!Physics.Raycast(ray, out wallHit, 1.0f, WallLayer)){//プレイヤーの方向の少し先にレイヤーの「Wall」がないかを判別する
             transform.Translate(
             playerDirection.x * speed * Time.deltaTime,
             0.0f,
@@ -45,26 +42,4 @@ public class Move : MonoBehaviour
 
     }
 
-    // Trigerを使用した判定（没）
-    // void OnTriggerEnter(Collider collider){
-    //     if(collider.tag == "Wall"){
-    //         // tachWall = true;
-    //         // Debug.Log("tachWallをオン");
-    //         speed = 0;
-    //     }
-    // }
-    // void OnTriggerStay(Collider collider){
-    //     if(collider.tag == "Wall" && speed != 0){
-    // //         tachWall = true;
-    // //         Debug.Log("tachWallをオン");
-    // speed = 0;
-    //     }
-    // }
-    // void OnTriggerExit(Collider collider){
-    //     if(collider.tag == "Wall"){
-    //         // tachWall = false;
-    //         // Debug.Log("tachWallをオフ");
-    //         // speed = 5;
-    //     }
-    // }
 }
