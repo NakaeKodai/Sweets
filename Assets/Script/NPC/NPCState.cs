@@ -7,8 +7,14 @@ public class NPCState : MonoBehaviour
     public string name;
     public byte state;
     public List<string> list;
-    [SerializeField] public List<List<string>> talk = new List<List<string>>();
-    // public List<TalkTopic> talk = new List<TalkTopic>();
+    [SerializeField]
+    public List<Topic> topicList = new List<Topic>();
+
+    [System.Serializable]
+    public class Topic
+    {
+        public List<string> topic = new List<string>();
+    }
     
     void Start()
     {

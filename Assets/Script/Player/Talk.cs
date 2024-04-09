@@ -39,7 +39,7 @@ public class Talk : MonoBehaviour
         {
             talkPage = 0;
             textWindow = talkWindow.GetComponent<TextMeshProUGUI>();
-            textWindow.text = npcState.list[talkPage];
+            textWindow.text = npcState.topicList[npcState.state].topic[talkPage];
             talkWindow.SetActive(true);
             if(!windowStop){
                 StartCoroutine(Simple());
@@ -59,7 +59,7 @@ public class Talk : MonoBehaviour
                 talkPage++;
                 windowStop = false;
             } 
-            if(talkPage >= npcState.list.Count) 
+            if(talkPage >= npcState.topicList[npcState.state].topic.Count) 
             {
                 talkWindow.SetActive(false);
                 isTalking = false;
@@ -68,7 +68,7 @@ public class Talk : MonoBehaviour
             else if(!windowStop)
             {
                 textWindow = talkWindow.GetComponent<TextMeshProUGUI>();
-                textWindow.text = npcState.list[talkPage];
+                textWindow.text = npcState.topicList[npcState.state].topic[talkPage];
                 StartCoroutine(Simple());    
             }
         }
