@@ -5718,8 +5718,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemId: 0
+  itemId2: 1
+  itemId3: 2
   maxAmount: 2
   ingredientsDB: {fileID: 11400000, guid: 89317c2866f8d824a88d23ec19f537e2, type: 2}
+  harvestCount: 3
 --- !u!1 &332263589
 GameObject:
   m_ObjectHideFlags: 0
