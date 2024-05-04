@@ -6,6 +6,7 @@ public class Harvest : MonoBehaviour
 {
     private PlayerInputAction playerInputAction;  //InputSystemを入れている変数 
     private bool isEnter;
+    HarvestPoint material;
 
     void Start()
     {
@@ -19,6 +20,8 @@ public class Harvest : MonoBehaviour
         //仮としてFireにしている
         if(playerInputAction.Player.Fire.triggered && isEnter)
         {
+            material.Harvesting();
+            isEnter = false;
             Debug.Log("採集");
         }
     }
@@ -27,6 +30,7 @@ public class Harvest : MonoBehaviour
     {
         if (other.CompareTag("Material"))
         {
+            material = other.gameObject.GetComponent<HarvestPoint>();
             isEnter = true;
         }
     }

@@ -5,6 +5,8 @@ using System;
 
 [Serializable] public class Ingredients
 {
-    public string name;
-    public Sprite image;
+    public int ID;//アイテムのID
+    public string name;//アイテム名
+    public Sprite image;//アイテムの画像
+    public int quantity;//アイテムの個数
 }

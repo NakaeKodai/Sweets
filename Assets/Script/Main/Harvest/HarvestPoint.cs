@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class HarvestPoint : MonoBehaviour
 {
-    private byte hp = 10;
-
     public int itemId;//採取できるアイテムIDの指定
     public int maxAmount = 2;//最大採取量、これをプレイヤーの変数からとってスキルによる採取量変化とかやりたい
     [SerializeField] public IngredientsDB ingredientsDB;//データベースの取得
+    bool HarvestPointKiller = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,10 +18,11 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(hp <= 0)
-        {
-            // gameObject.SetActive(false);
-            int rand = Random.Range(1,101);//1から100を乱数で指定
+        if(HarvestPointKiller) Destroy(gameObject);
+    }
+
+    public void Harvesting(){
+        int rand = Random.Range(1,101);//1から100を乱数で指定
             Debug.Log(rand);
             int amount;//採取量の指定
             // 採取量を乱数で変更
@@ -44,13 +45,6 @@ public class Enemy : MonoBehaviour
             ingredientsDB.ingredientsList[itemId].quantity += amount;//採取した個数分をアイテムの個数に追加
             
             Debug.Log(ingredientsDB.ingredientsList[itemId].name+"を"+amount+"個手に入れた");
-            Destroy(gameObject);
-        }
-    }
-
-    public void Damage(byte attackPoint)
-    {
-        hp -= attackPoint;
-        Debug.Log(hp);
+            this.HarvestPointKiller = true;
     }
 }

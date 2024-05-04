@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: Ingredients DB
   m_EditorClassIdentifier: 
   ingredientsList:
-  - name: 
+  - ID: 0
+    name: kari1
     image: {fileID: 0}
+    quantity: 0
