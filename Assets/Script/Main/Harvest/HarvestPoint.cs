@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HarvestPoint : MonoBehaviour
 {
+    [Header("percentは合計が100以下で設定してにゃ")]
+    [Header("percentは小数点第一位まで")]
     public List<HarvestItem> HarvestList = new List<HarvestItem>();//採取できるアイテムのリスト
     public int maxAmount = 2;//最大採取量、これをプレイヤーの変数からとってスキルによる採取量変化とかやりたい
     [SerializeField] public IngredientsDB ingredientsDB;//データベースの取得
