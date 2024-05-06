@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class HarvestPoint : MonoBehaviour
 {
-    public int itemId;//採取できるアイテムIDの指定
-    public int itemId2;
-    public int itemId3;
+    public List<HarvestItem> HarvestList = new List<HarvestItem>();//採取できるアイテムのリスト
     public int maxAmount = 2;//最大採取量、これをプレイヤーの変数からとってスキルによる採取量変化とかやりたい
     [SerializeField] public IngredientsDB ingredientsDB;//データベースの取得
     bool HarvestPointKiller = false;
     public int harvestCount;//採取する回数
+
 
     // Start is called before the first frame update
     void Start()
@@ -25,9 +24,24 @@ public class HarvestPoint : MonoBehaviour
     }
 
     public void Harvesting(){
+        // 取得できるアイテムの乱数設定
+        int selectItemId = HarvestList[0].Id;
+            int[] itemPercent = new int[1000];
+            int listNumber = 0;
+            int listPercentNum = 0;
+            // itemPercentにListのpercent*10の分の要素にIDを入れることで乱数をやりやすくしている
+            for(int l = 0; l < 1000; l++){
+                itemPercent[l] = HarvestList[listNumber].Id;
+                if(l == (int)(HarvestList[listNumber].percent * 10) + listPercentNum - 1){
+                    listPercentNum += (int)(HarvestList[listNumber].percent * 10);
+                    listNumber++;
+                }
+            }
+
+        // アイテム採取の乱数決定
         for(int i = 0; i < harvestCount; i++){
             int rand = Random.Range(1,101);//1から100を乱数で指定
-            Debug.Log(rand);
+            // Debug.Log(rand);
             int amount;//採取量の指定
             // 採取量を乱数で変更
             if(rand >= 80){
@@ -46,15 +60,13 @@ public class HarvestPoint : MonoBehaviour
                 if(amount <= 0) amount = 1;
             }
 
-            int serectItemId = 2;
-            int randItem = Random.Range(1,4);
-            if(randItem == 1) serectItemId = itemId;
-            if(randItem == 2) serectItemId = itemId2;
-            if(randItem == 3) serectItemId = itemId3;
+            // 乱数によって取得できるアイテムを調整
+            int randItem = Random.Range(0,1000);
+            selectItemId = itemPercent[randItem];
 
-            ingredientsDB.ingredientsList[serectItemId].quantity += amount;//採取した個数分をアイテムの個数に追加
+            ingredientsDB.ingredientsList[selectItemId].quantity += amount;//採取した個数分をアイテムの個数に追加
             
-            Debug.Log(ingredientsDB.ingredientsList[serectItemId].name+"を"+amount+"個手に入れた");
+            Debug.Log(ingredientsDB.ingredientsList[selectItemId].name+"を"+amount+"個手に入れた");
         }
         
             this.HarvestPointKiller = true;

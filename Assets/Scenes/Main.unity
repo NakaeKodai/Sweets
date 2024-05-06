@@ -5717,9 +5717,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03f0352d60a7e6d4987b67a0bf32fd33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: 0
-  itemId2: 1
-  itemId3: 2
+  HarvestList:
+  - Id: 0
+    percent: 50
+  - Id: 1
+    percent: 30
+  - Id: 2
+    percent: 20
   maxAmount: 2
   ingredientsDB: {fileID: 11400000, guid: 89317c2866f8d824a88d23ec19f537e2, type: 2}
   harvestCount: 3
