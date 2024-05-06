@@ -31,11 +31,14 @@ public class HarvestPoint : MonoBehaviour
             int listPercentNum = 0;
             // itemPercentにListのpercent*10の分の要素にIDを入れることで乱数をやりやすくしている
             for(int l = 0; l < 1000; l++){
-                itemPercent[l] = HarvestList[listNumber].Id;
-                if(l == (int)(HarvestList[listNumber].percent * 10) + listPercentNum - 1){
+                if(listNumber < HarvestList.Count){
+                    itemPercent[l] = HarvestList[listNumber].Id;
+                    if(l == (int)(HarvestList[listNumber].percent * 10) + listPercentNum - 1){
                     listPercentNum += (int)(HarvestList[listNumber].percent * 10);
                     listNumber++;
                 }
+                } 
+                else itemPercent[l] = -1;
             }
 
         // アイテム採取の乱数決定
@@ -61,8 +64,11 @@ public class HarvestPoint : MonoBehaviour
             }
 
             // 乱数によって取得できるアイテムを調整
-            int randItem = Random.Range(0,1000);
-            selectItemId = itemPercent[randItem];
+            do{
+                int randItem = Random.Range(0,1000);
+                selectItemId = itemPercent[randItem];
+            }while(selectItemId == -1);
+            
 
             ingredientsDB.ingredientsList[selectItemId].quantity += amount;//採取した個数分をアイテムの個数に追加
             
