@@ -5699,11 +5699,11 @@ Transform:
   m_GameObject: {fileID: 317129712}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 57.3, y: 3.2, z: 25.4}
+  m_LocalPosition: {x: -8.566868, y: 8.947577, z: -15.0100155}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1129141927}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &317129717
 MonoBehaviour:
@@ -7629,6 +7629,39 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ff6844dceca3cd489090e94f0e1c6dd, type: 3}
+--- !u!1 &1129141926
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1129141927}
+  m_Layer: 0
+  m_Name: HarvestPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1129141927
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129141926}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 65.86687, y: -5.7475777, z: 40.410015}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 317129716}
+  - {fileID: 1979563340}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1147438765 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2552295241722750518, guid: 220a89b8d70579d4cb5cf5167249da92, type: 3}
@@ -8622,9 +8655,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d20e15e9b8709df498ef880762e61433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: 0
+  HarvestList:
+  - Id: 0
+    percent: 100
   maxAmount: 4
   ingredientsDB: {fileID: 11400000, guid: 89317c2866f8d824a88d23ec19f537e2, type: 2}
+  harvestCount: 1
 --- !u!136 &1462718945
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -10599,12 +10635,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1979563335}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 58.15, y: 3.0357, z: 33.7}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -7.7168655, y: 8.7832775, z: -6.7100143}
   m_LocalScale: {x: 1.6173028, y: 2.0712922, z: 1.4414289}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1129141927}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2023601013 stripped
 Transform:
@@ -15860,11 +15896,11 @@ SceneRoots:
   - {fileID: 413928238}
   - {fileID: 652241369}
   - {fileID: 1525532226}
+  - {fileID: 1129141927}
   - {fileID: 537782604}
   - {fileID: 1717400135}
   - {fileID: 1855126576}
   - {fileID: 430487398}
-  - {fileID: 317129716}
   - {fileID: 1379835997}
   - {fileID: 914323647}
   - {fileID: 808731093}
@@ -15875,4 +15911,3 @@ SceneRoots:
   - {fileID: 1967838929}
   - {fileID: 344465285}
   - {fileID: 1505132233}
-  - {fileID: 1979563340}
