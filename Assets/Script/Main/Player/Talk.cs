@@ -34,11 +34,50 @@ public class Talk : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // //仮としてFireにしている
+        // if(playerInputAction.Player.Fire.triggered && isEnter && !isTalking)
+        // {
+        //     talkPage = 0;
+        //     textWindow = talkWindow.GetComponent<TextMeshProUGUI>();
+        //     textWindow.text = npcState.topicList[npcState.state].topic[talkPage];
+        //     talkWindow.SetActive(true);
+        //     if(!windowStop){
+        //         StartCoroutine(Simple());
+        //     }
+        //     isTalking = true;
+        //     interval = true;
+        //     if(npcState.name != ""){
+        //         nameTextWindow = nameWindow.GetComponent<TextMeshProUGUI>();
+        //         nameTextWindow.text = npcState.name;
+        //         nameWindow.SetActive(true);
+        //     }
+        // }
+        // playerInputAction.Player.Fire.canceled += ctx => interval = false;
+        // if(isTalking)
+        // {
+        //     if(playerInputAction.Player.Fire.triggered && !interval){
+        //         talkPage++;
+        //         windowStop = false;
+        //     } 
+        //     if(talkPage >= npcState.topicList[npcState.state].topic.Count) 
+        //     {
+        //         talkWindow.SetActive(false);
+        //         isTalking = false;
+        //         nameWindow.SetActive(false);
+        //     }
+        //     else if(!windowStop)
+        //     {
+        //         textWindow = talkWindow.GetComponent<TextMeshProUGUI>();
+        //         textWindow.text = npcState.topicList[npcState.state].topic[talkPage];
+        //         StartCoroutine(Simple());    
+        //     }
+        // }
+
         //仮としてFireにしている
         if(playerInputAction.Player.Fire.triggered && isEnter && !isTalking)
         {
             talkPage = 0;
-            textWindow = talkWindow.GetComponent<TextMeshProUGUI>();
+            // textWindow = talkWindow.GetComponent<TextMeshProUGUI>();
             textWindow.text = npcState.topicList[npcState.state].topic[talkPage];
             talkWindow.SetActive(true);
             if(!windowStop){
@@ -47,7 +86,7 @@ public class Talk : MonoBehaviour
             isTalking = true;
             interval = true;
             if(npcState.name != ""){
-                nameTextWindow = nameWindow.GetComponent<TextMeshProUGUI>();
+                // nameTextWindow = nameWindow.GetComponent<TextMeshProUGUI>();
                 nameTextWindow.text = npcState.name;
                 nameWindow.SetActive(true);
             }
@@ -67,7 +106,7 @@ public class Talk : MonoBehaviour
             }
             else if(!windowStop)
             {
-                textWindow = talkWindow.GetComponent<TextMeshProUGUI>();
+                // textWindow = talkWindow.GetComponent<TextMeshProUGUI>();
                 textWindow.text = npcState.topicList[npcState.state].topic[talkPage];
                 StartCoroutine(Simple());    
             }
