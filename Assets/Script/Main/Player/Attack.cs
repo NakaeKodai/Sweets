@@ -8,6 +8,7 @@ public class Attack : MonoBehaviour
     public bool isEnter;
     public byte attackPoint = 2;
     Enemy enemy;
+    public Pause pauseScript;
     
     void Start()
     {
@@ -18,7 +19,7 @@ public class Attack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(playerInputAction.Player.Fire.triggered && isEnter)
+        if(playerInputAction.Player.Fire.triggered && isEnter && !pauseScript.pause)
         {
             enemy.Damage(attackPoint);
             isEnter = false;

@@ -5,7 +5,6 @@ using UnityEngine;
 //プレイヤーの移動のスクリプト
 public class Move : MonoBehaviour
 {
-   
     private PlayerInputAction playerInputAction;  //InputSystemを入れている変数 
 
     private Vector2 playerDirection; //プレイヤーの向き
@@ -20,6 +19,7 @@ public class Move : MonoBehaviour
     
     [SerializeField]LayerMask WallLayer;
 
+    public Pause pauseScript;
     void Start()
     {
         playerInputAction = new PlayerInputAction();
@@ -33,7 +33,8 @@ public class Move : MonoBehaviour
 
     void Update()
     {
-        // playerInputAction.Player.Dash.performed += ctx => speed = maxSpeed;
+        if(!pauseScript.pause){
+            // playerInputAction.Player.Dash.performed += ctx => speed = maxSpeed;
         // playerInputAction.Player.Dash.canceled += ctx => speed = normalSpeed;
         playerInputAction.Player.Dash.performed += ctx => {
             speed = maxSpeed;
@@ -58,6 +59,8 @@ public class Move : MonoBehaviour
         }
         animator.SetBool("IsDush",isDush);
         animator.SetBool("IsWalk",isWalk);
+        }
+        
 
         // if(playerDirection.x != 0 || playerDirection.y != 0)
 
@@ -75,6 +78,10 @@ public class Move : MonoBehaviour
         
 
 
+    }
+
+    void FixedUpdate(){
+        
     }
 
 }

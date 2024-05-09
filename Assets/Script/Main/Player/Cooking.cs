@@ -8,6 +8,7 @@ public class Cooking : MonoBehaviour
     private bool isEnter = false;
     MakeSweets makeSweets;
     public int sweetsID;//作るスイーツの指定
+    public Pause pauseScript;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +19,7 @@ public class Cooking : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(playerInputAction.Player.Fire.triggered && isEnter)
+        if(playerInputAction.Player.Fire.triggered && isEnter && !pauseScript.pause)
         {
             // クリックによってスイーツを作成
             makeSweets.Cook(sweetsID);

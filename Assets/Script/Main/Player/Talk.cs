@@ -13,6 +13,7 @@ public class Talk : MonoBehaviour
     private bool interval = false;
     private byte talkPage;
     NPCState npcState;
+    public Pause pauseScript;
 
     // 文字表示のためのテキスト
     public GameObject talkWindow;
@@ -74,7 +75,7 @@ public class Talk : MonoBehaviour
         // }
 
         //仮としてFireにしている
-        if(playerInputAction.Player.Fire.triggered && isEnter && !isTalking)
+        if(playerInputAction.Player.Fire.triggered && isEnter && !isTalking && !pauseScript.pause)
         {
             talkPage = 0;
             // textWindow = talkWindow.GetComponent<TextMeshProUGUI>();

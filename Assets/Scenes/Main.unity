@@ -7266,6 +7266,51 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4c0ad69677398b49a549d72beed42cd, type: 3}
+--- !u!1 &849605300
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 849605302}
+  - component: {fileID: 849605301}
+  m_Layer: 0
+  m_Name: "Pause(\u4EEE)"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &849605301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 849605300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffc67c4d38c6c314b9b8d5a206be132f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pause: 0
+--- !u!4 &849605302
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 849605300}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 73.18789, y: 3.5638103, z: 27.962309}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &880631718
 GameObject:
   m_ObjectHideFlags: 0
@@ -8337,6 +8382,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isEnter: 0
   attackPoint: 2
+  pauseScript: {fileID: 849605301}
 --- !u!114 &1427255696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8349,6 +8395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2a4a41227b54a14db7ac915c2495b13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseScript: {fileID: 849605301}
   talkWindow: {fileID: 1271292292}
   textWindow: {fileID: 193505745}
   nameWindow: {fileID: 1933196397}
@@ -8365,6 +8412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 059807e829e212141865deca3cc76672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseScript: {fileID: 849605301}
 --- !u!114 &1427255698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8384,6 +8432,7 @@ MonoBehaviour:
   WallLayer:
     serializedVersion: 2
     m_Bits: 64
+  pauseScript: {fileID: 849605301}
 --- !u!54 &1427255699
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8566,6 +8615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sweetsID: 0
+  pauseScript: {fileID: 849605301}
 --- !u!1001 &1429294617
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16046,3 +16096,4 @@ SceneRoots:
   - {fileID: 344465285}
   - {fileID: 1505132233}
   - {fileID: 1154263070}
+  - {fileID: 849605302}
