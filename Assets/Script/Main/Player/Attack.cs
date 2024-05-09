@@ -8,6 +8,7 @@ public class Attack : MonoBehaviour
     public bool isEnter;
     public byte attackPoint = 2;
     Enemy enemy;
+    
     public Pause pauseScript;
     
     void Start()
