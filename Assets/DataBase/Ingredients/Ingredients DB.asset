@@ -16,12 +16,12 @@ MonoBehaviour:
   - ID: 0
     name: kari1
     image: {fileID: 0}
-    quantity: 2
+    quantity: 0
   - ID: 1
     name: kari2
     image: {fileID: 0}
-    quantity: 3
+    quantity: 0
   - ID: 2
     name: kari3
     image: {fileID: 0}
-    quantity: 6
+    quantity: 0

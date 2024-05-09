@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sweetsList:
   - ID: 0
-    name: 
+    name: kariSweets1
     image: {fileID: 0}
-    quantity: 0
+    quantity: 1
     materialsList:
     - ID: 0
-      "\u500B\u6570": 0
-    - ID: 0
-      "\u500B\u6570": 0
-    - ID: 0
-      "\u500B\u6570": 0
+      "\u500B\u6570": 3
+    - ID: 1
+      "\u500B\u6570": 2
+    - ID: 2
+      "\u500B\u6570": 1
