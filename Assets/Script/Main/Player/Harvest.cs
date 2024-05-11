@@ -7,7 +7,7 @@ public class Harvest : MonoBehaviour
     private PlayerInputAction playerInputAction;  //InputSystemを入れている変数 
     private bool isEnter;
     HarvestPoint material;
-    public Pause pauseScript;
+    public GameManager gameManager;
 
     void Start()
     {
@@ -19,7 +19,7 @@ public class Harvest : MonoBehaviour
     void Update()
     {
         //仮としてFireにしている
-        if(playerInputAction.Player.Fire.triggered && isEnter && !pauseScript.pause)
+        if(playerInputAction.Player.Fire.triggered && isEnter && !gameManager.pause)
         {
             material.Harvesting();
             isEnter = false;

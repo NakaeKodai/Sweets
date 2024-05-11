@@ -19,7 +19,7 @@ public class Move : MonoBehaviour
     
     [SerializeField]LayerMask WallLayer;
 
-    public Pause pauseScript;
+    public GameManager gameManager;
     void Start()
     {
         playerInputAction = new PlayerInputAction();
@@ -33,7 +33,7 @@ public class Move : MonoBehaviour
 
     void Update()
     {
-        if(!pauseScript.pause){
+        if(!gameManager.pause){
             // playerInputAction.Player.Dash.performed += ctx => speed = maxSpeed;
         // playerInputAction.Player.Dash.canceled += ctx => speed = normalSpeed;
         playerInputAction.Player.Dash.performed += ctx => {

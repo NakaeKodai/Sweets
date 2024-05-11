@@ -9,7 +9,7 @@ public class Attack : MonoBehaviour
     public byte attackPoint = 2;
     Enemy enemy;
     
-    public Pause pauseScript;
+    public GameManager gameManager;
     
     void Start()
     {
@@ -20,7 +20,7 @@ public class Attack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(playerInputAction.Player.Fire.triggered && isEnter && !pauseScript.pause)
+        if(playerInputAction.Player.Fire.triggered && isEnter && !gameManager.pause)
         {
             enemy.Damage(attackPoint);
             isEnter = false;
