@@ -274,6 +274,17 @@
                 },
                 {
                     "name": "",
+                    "id": "6a23e30c-0d48-47b3-a82b-fb418d896ab0",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "607a0a42-eaf8-4de3-9081-66e3fd144be0",
                     "path": "<Keyboard>/ctrl",
                     "interactions": "",
@@ -355,6 +366,24 @@
                     "name": "CursorMoveDown",
                     "type": "Button",
                     "id": "8f1d2d2c-1eff-452c-8544-23e9b17ffb06",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MenuSelect",
+                    "type": "Button",
+                    "id": "bff00aca-f1ea-404c-936a-8e237d847f1f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Cancel",
+                    "type": "Button",
+                    "id": "471c7e16-d245-4a73-a218-f3bfb957ea72",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -447,6 +476,61 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "CursorMoveDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d8608e75-45d9-418c-a8e5-6fcd9c43dfbc",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "MenuSelect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "359f0779-a2cf-4c44-b625-d9d2f55960f2",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "MenuSelect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c817dc7b-0ac6-42af-afe8-8364de0a538c",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "MenuSelect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5ad0eff7-9cb9-4a21-a126-44c4fda2e2c1",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "654b3eb3-4215-4d41-b29f-416f492f3769",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Cancel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
