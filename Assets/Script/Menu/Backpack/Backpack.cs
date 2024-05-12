@@ -8,8 +8,9 @@ public class Backpack : MonoBehaviour
     private bool opening = false;
     // private List<int> BackpackList = new List<int>();
     public IngredientsDB ingredientsDB;
-    public GameObject BackpackObjekt;
-    public BackpackItemIcon backpackItemIcon;
+    public GameObject BackpackObjekt;//メニューUIの表示
+    public BackpackItemIcon backpackItemIcon;//アイコン設定のスクリプト
+    
     private PlayerInputAction playerInputAction;
     public MenuManager menuManager;
     public GameManager gameManager;
@@ -24,6 +25,7 @@ public class Backpack : MonoBehaviour
     void Update()
     {
         if(opening){
+            //メニュー開くボタンとキャンセルボタンで反応
             if(playerInputAction.UI.OpenMenu.triggered || playerInputAction.UI.Cancel.triggered){
                 BackpackObjekt.SetActive(false);
                 opening = false;
@@ -35,15 +37,16 @@ public class Backpack : MonoBehaviour
     public void OpenBackpack(){
         if(!opening){
             opening = true;
-            List<int> BackpackList = new List<int>();
+            List<int> BackpackList = new List<int>();//所持アイテムだけのリスト（IDだけ）
             int j = 0;//インベントリのリスト用
             for(int i = 0; i < ingredientsDB.ingredientsList.Count; i++){
-                if(ingredientsDB.ingredientsList[i].quantity != 0){
+                if(ingredientsDB.ingredientsList[i].quantity != 0){//アイテムの所字数が0じゃなければBackpackListに追加する
                     BackpackList.Add(ingredientsDB.ingredientsList[i].ID);
                     Debug.Log(ingredientsDB.ingredientsList[BackpackList[j]].name);
                     j++;
                 }
             }
+            //アイコンの代入を行うスクリプトにBackpackListを投げたのち、UIを表示させる
             backpackItemIcon.ItemIconSetting(BackpackList);
             BackpackObjekt.SetActive(true);
         }

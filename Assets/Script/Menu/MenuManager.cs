@@ -92,7 +92,7 @@ public class MenuManager : MonoBehaviour
                 backpackScript.OpenBackpack();
             }
         }
-        else if(isMenu && selectMenuNow){
+        else if(isMenu && selectMenuNow){//メニュー項目を開いてるときになんか使えそうだから現在放置
 
         }
     }
