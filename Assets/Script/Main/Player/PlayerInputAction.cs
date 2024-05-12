@@ -536,6 +536,17 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""db55bf72-be8e-4d73-b88a-7c42de092547"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""MenuSelect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""5ad0eff7-9cb9-4a21-a126-44c4fda2e2c1"",
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
