@@ -4,12 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class BackpackItemIcon : MonoBehaviour
+public class BackpackItemQuantity : MonoBehaviour
 {
     public IngredientsDB ingredientsDB;
-    private Image image;//画像
+    private TextMeshProUGUI text;//テキスト
     private GameObject icon;
 
+    // Start is called before the first frame update
     void Start()
     {
         
@@ -21,23 +22,23 @@ public class BackpackItemIcon : MonoBehaviour
         
     }
 
-    public void ItemIconSetting(List<int> BackpackList){
+    public void ItemQuantitySetting(List<int> BackpackList){
         //先に所持アイテムを設定した分アイテムの枠に入れる
         for(int i = 0; i < BackpackList.Count; i++){
             // image = itemList[i].GetComponent<Image>();
             icon = gameObject.transform.GetChild(i).gameObject;
-            image = icon.GetComponent<Image>();
-            image.sprite = ingredientsDB.ingredientsList[BackpackList[i]].image;
-            var c = image.color;
-            image.color = new Color(c.r, c.g, c.b, 255f);
+            text = icon.GetComponent<TextMeshProUGUI>();
+            text.text = ingredientsDB.ingredientsList[BackpackList[i]].quantity.ToString();
+            var c = text.color;
+            text.color = new Color(c.r, c.g, c.b, 255f);
         }
         //空白は透明度を0にする
         for(int i = BackpackList.Count; i < 40; i++){
             // image = itemList[i].GetComponent<Image>();
             icon = gameObject.transform.GetChild(i).gameObject;
-            image = icon.GetComponent<Image>();
-            var c = image.color;
-            image.color = new Color(c.r, c.g, c.b, 0f);
+            text = icon.GetComponent<TextMeshProUGUI>();
+            var c = text.color;
+            text.color = new Color(c.r, c.g, c.b, 0f);
         }
     }
 }

@@ -10,7 +10,8 @@ public class Backpack : MonoBehaviour
     public IngredientsDB ingredientsDB;
     public GameObject BackpackObjekt;//メニューUIの表示
     public BackpackItemIcon backpackItemIcon;//アイコン設定のスクリプト
-    
+    public BackpackItemQuantity backpackItemQuantity;//所字数設定のスクリプト
+
     private PlayerInputAction playerInputAction;
     public MenuManager menuManager;
     public GameManager gameManager;
@@ -48,6 +49,7 @@ public class Backpack : MonoBehaviour
             }
             //アイコンの代入を行うスクリプトにBackpackListを投げたのち、UIを表示させる
             backpackItemIcon.ItemIconSetting(BackpackList);
+            backpackItemQuantity.ItemQuantitySetting(BackpackList);
             BackpackObjekt.SetActive(true);
         }
     }
