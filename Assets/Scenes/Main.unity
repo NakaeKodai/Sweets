@@ -15491,6 +15491,7 @@ GameObject:
   - component: {fileID: 1196433468}
   - component: {fileID: 1196433467}
   - component: {fileID: 1196433469}
+  - component: {fileID: 1196433470}
   m_Layer: 5
   m_Name: images
   m_TagString: Untagged
@@ -15619,6 +15620,23 @@ MonoBehaviour:
   m_Spacing: {x: 20, y: 20}
   m_Constraint: 1
   m_ConstraintCount: 10
+--- !u!114 &1196433470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1196433465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61e94c7cd3b2039459d03cf93ef37df6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nomalColor: {r: 0, g: 0, b: 0, a: 0.46666667}
+  selectColor: {r: 1, g: 0, b: 0, a: 1}
+  nowListNumber: 0
+  backpackScript: {fileID: 1443199650}
+  rowNum: 10
 --- !u!1 &1206015301
 GameObject:
   m_ObjectHideFlags: 0
@@ -18090,6 +18108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d56cec4d5ec52b24d86d813ba5f79cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  opening: 0
   ingredientsDB: {fileID: 11400000, guid: 89317c2866f8d824a88d23ec19f537e2, type: 2}
   BackpackObjekt: {fileID: 1443199649}
   backpackItemIcon: {fileID: 773455605}
