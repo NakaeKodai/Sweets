@@ -72,6 +72,14 @@ public class Enemy : MonoBehaviour
             ingredientsDB.ingredientsList[selectItemId].quantity += amount;//採取した個数分をアイテムの個数に追加
             
             Debug.Log(ingredientsDB.ingredientsList[selectItemId].name+"を"+amount+"個手に入れた");
+
+            int difference;//カンストしたときの入手できなかった分
+            if(ingredientsDB.ingredientsList[selectItemId].quantity > 999){
+                difference = ingredientsDB.ingredientsList[selectItemId].quantity - 999;
+                Debug.Log(ingredientsDB.ingredientsList[selectItemId].name+"を持ちすぎていたため、"+difference+"個入手できなかった。");
+                ingredientsDB.ingredientsList[selectItemId].quantity = 999;
+            }
+            
         }
             Destroy(gameObject);
         }
