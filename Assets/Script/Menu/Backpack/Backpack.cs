@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Backpack : MonoBehaviour
 {
-    private bool opening = false;
+    public bool opening = false;
     // private List<int> BackpackList = new List<int>();
     public IngredientsDB ingredientsDB;
     public GameObject BackpackObjekt;//メニューUIの表示

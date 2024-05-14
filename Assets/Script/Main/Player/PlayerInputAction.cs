@@ -394,6 +394,24 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""CursorMoveRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""e726dce0-97a9-40e2-b190-f0a102a1ba73"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CursorMoveLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""1e4554c1-f504-48c1-81a8-2f1360b19f82"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""MenuSelect"",
                     ""type"": ""Button"",
                     ""id"": ""bff00aca-f1ea-404c-936a-8e237d847f1f"",
@@ -566,6 +584,72 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""action"": ""Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1a30d216-11e6-48e5-bb6c-42f6780ac74e"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""CursorMoveRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a599a026-c723-4e5d-ad08-30e06f90f897"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""CursorMoveRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6874d0fd-e98f-4f03-a9b2-13ab1962c10e"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""CursorMoveRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2c5cf29a-20b1-40d8-9dc0-e247e7159cd3"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""CursorMoveLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""39a07eef-df43-4801-93d5-664636284be0"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CursorMoveLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""64ac774a-931c-491b-a9ee-fb1ba76ed89d"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""CursorMoveLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -645,6 +729,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_UI_OpenMenu = m_UI.FindAction("OpenMenu", throwIfNotFound: true);
         m_UI_CursorMoveUp = m_UI.FindAction("CursorMoveUp", throwIfNotFound: true);
         m_UI_CursorMoveDown = m_UI.FindAction("CursorMoveDown", throwIfNotFound: true);
+        m_UI_CursorMoveRight = m_UI.FindAction("CursorMoveRight", throwIfNotFound: true);
+        m_UI_CursorMoveLeft = m_UI.FindAction("CursorMoveLeft", throwIfNotFound: true);
         m_UI_MenuSelect = m_UI.FindAction("MenuSelect", throwIfNotFound: true);
         m_UI_Cancel = m_UI.FindAction("Cancel", throwIfNotFound: true);
     }
@@ -789,6 +875,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_OpenMenu;
     private readonly InputAction m_UI_CursorMoveUp;
     private readonly InputAction m_UI_CursorMoveDown;
+    private readonly InputAction m_UI_CursorMoveRight;
+    private readonly InputAction m_UI_CursorMoveLeft;
     private readonly InputAction m_UI_MenuSelect;
     private readonly InputAction m_UI_Cancel;
     public struct UIActions
@@ -798,6 +886,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @OpenMenu => m_Wrapper.m_UI_OpenMenu;
         public InputAction @CursorMoveUp => m_Wrapper.m_UI_CursorMoveUp;
         public InputAction @CursorMoveDown => m_Wrapper.m_UI_CursorMoveDown;
+        public InputAction @CursorMoveRight => m_Wrapper.m_UI_CursorMoveRight;
+        public InputAction @CursorMoveLeft => m_Wrapper.m_UI_CursorMoveLeft;
         public InputAction @MenuSelect => m_Wrapper.m_UI_MenuSelect;
         public InputAction @Cancel => m_Wrapper.m_UI_Cancel;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
@@ -818,6 +908,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @CursorMoveDown.started += instance.OnCursorMoveDown;
             @CursorMoveDown.performed += instance.OnCursorMoveDown;
             @CursorMoveDown.canceled += instance.OnCursorMoveDown;
+            @CursorMoveRight.started += instance.OnCursorMoveRight;
+            @CursorMoveRight.performed += instance.OnCursorMoveRight;
+            @CursorMoveRight.canceled += instance.OnCursorMoveRight;
+            @CursorMoveLeft.started += instance.OnCursorMoveLeft;
+            @CursorMoveLeft.performed += instance.OnCursorMoveLeft;
+            @CursorMoveLeft.canceled += instance.OnCursorMoveLeft;
             @MenuSelect.started += instance.OnMenuSelect;
             @MenuSelect.performed += instance.OnMenuSelect;
             @MenuSelect.canceled += instance.OnMenuSelect;
@@ -837,6 +933,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @CursorMoveDown.started -= instance.OnCursorMoveDown;
             @CursorMoveDown.performed -= instance.OnCursorMoveDown;
             @CursorMoveDown.canceled -= instance.OnCursorMoveDown;
+            @CursorMoveRight.started -= instance.OnCursorMoveRight;
+            @CursorMoveRight.performed -= instance.OnCursorMoveRight;
+            @CursorMoveRight.canceled -= instance.OnCursorMoveRight;
+            @CursorMoveLeft.started -= instance.OnCursorMoveLeft;
+            @CursorMoveLeft.performed -= instance.OnCursorMoveLeft;
+            @CursorMoveLeft.canceled -= instance.OnCursorMoveLeft;
             @MenuSelect.started -= instance.OnMenuSelect;
             @MenuSelect.performed -= instance.OnMenuSelect;
             @MenuSelect.canceled -= instance.OnMenuSelect;
@@ -918,6 +1020,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnOpenMenu(InputAction.CallbackContext context);
         void OnCursorMoveUp(InputAction.CallbackContext context);
         void OnCursorMoveDown(InputAction.CallbackContext context);
+        void OnCursorMoveRight(InputAction.CallbackContext context);
+        void OnCursorMoveLeft(InputAction.CallbackContext context);
         void OnMenuSelect(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
     }

@@ -28,7 +28,12 @@ public class BackpackItemQuantity : MonoBehaviour
             // image = itemList[i].GetComponent<Image>();
             icon = gameObject.transform.GetChild(i).gameObject;
             text = icon.GetComponent<TextMeshProUGUI>();
-            text.text = ingredientsDB.ingredientsList[BackpackList[i]].quantity.ToString();
+            if(ingredientsDB.ingredientsList[BackpackList[i]].quantity < 1000){//文字が崩れるのを防ぐためのカンスト
+                text.text = ingredientsDB.ingredientsList[BackpackList[i]].quantity.ToString();
+            }else{
+                text.text = 999.ToString();
+            }
+            
             var c = text.color;
             text.color = new Color(c.r, c.g, c.b, 255f);
         }
