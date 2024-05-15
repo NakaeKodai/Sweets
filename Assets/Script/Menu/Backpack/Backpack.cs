@@ -8,9 +8,13 @@ public class Backpack : MonoBehaviour
     public bool opening = false;
     // private List<int> BackpackList = new List<int>();
     public IngredientsDB ingredientsDB;
+    // public GameObject 
     public GameObject BackpackObjekt;//メニューUIの表示
+    public GameObject ItemInfoObject;//説明メニューのUI
     public BackpackItemIcon backpackItemIcon;//アイコン設定のスクリプト
     public BackpackItemQuantity backpackItemQuantity;//所字数設定のスクリプト
+    public BackpackCursor backpackCursor;//カーソル移動のスクリプト
+    public ItemInfoBackpack itemInfoBackpack;//説明文設定のスクリプト
 
     private PlayerInputAction playerInputAction;
     public MenuManager menuManager;
@@ -29,8 +33,8 @@ public class Backpack : MonoBehaviour
             //メニュー開くボタンとキャンセルボタンで反応
             if(playerInputAction.UI.OpenMenu.triggered || playerInputAction.UI.Cancel.triggered){
                 BackpackObjekt.SetActive(false);
+                ItemInfoObject.SetActive(false);
                 opening = false;
-                menuManager.selectMenuNow = false;
             }
         }
     }
@@ -50,7 +54,10 @@ public class Backpack : MonoBehaviour
             //アイコンの代入を行うスクリプトにBackpackListを投げたのち、UIを表示させる
             backpackItemIcon.ItemIconSetting(BackpackList);
             backpackItemQuantity.ItemQuantitySetting(BackpackList);
+            itemInfoBackpack.SetItemInfo(BackpackList[0]);
+            backpackCursor.SetmenuSelect(BackpackList);
             BackpackObjekt.SetActive(true);
+            ItemInfoObject.SetActive(true);
         }
     }
 }

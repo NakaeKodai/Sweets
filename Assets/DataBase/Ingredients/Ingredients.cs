@@ -9,4 +9,5 @@ using System;
     public string name;//アイテム名
     public Sprite image;//アイテムの画像
     public int quantity;//アイテムの個数
+    public string infomation;//アイテムの説明文
 }

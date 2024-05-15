@@ -88,12 +88,16 @@ public class MenuManager : MonoBehaviour
             // アイテムを開く項目
             if(selectBottuonNum == 0 && playerInputAction.UI.MenuSelect.triggered){
                 selectMenuNow = true;
+                menuWindow.SetActive(false);
                 Debug.Log("アイテム開く");
                 backpackScript.OpenBackpack();
             }
         }
         else if(isMenu && selectMenuNow){//メニュー項目を開いてるときになんか使えそうだから現在放置
-
+            if(playerInputAction.UI.OpenMenu.triggered || playerInputAction.UI.Cancel.triggered){
+                selectMenuNow = false;
+                menuWindow.SetActive(true);
+            }
         }
     }
 }

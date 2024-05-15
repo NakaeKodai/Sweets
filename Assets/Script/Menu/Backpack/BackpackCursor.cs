@@ -10,9 +10,10 @@ public class BackpackCursor : MonoBehaviour
     private Image nowCursorImage;//画像
     public Color nomalColor;
     public Color selectColor;
-    int[,] menuList;
+    int[,] menuList = new int[5,8];
     public int nowListNumber = 0;
     public Backpack backpackScript;
+    public ItemInfoBackpack itemInfoBackpack;
 
     public int rowNum = 10; //持ち物の横のアイコンの数
 
@@ -21,7 +22,7 @@ public class BackpackCursor : MonoBehaviour
     {
         playerInputAction = new PlayerInputAction();
         playerInputAction.Enable();
-        menuList = new int[4,10];
+        // menuList = new int[5,8];
     }
 
     // Update is called once per frame
@@ -38,6 +39,7 @@ public class BackpackCursor : MonoBehaviour
                 nowCursorImage.color = nomalColor;
                 nowListNumber ++;
                 if(nowListNumber >= menuList.Length) nowListNumber = 0;
+                itemInfoBackpack.SetItemInfo(menuList[(nowListNumber/8), (nowListNumber%8)]);
             }
             
             if(playerInputAction.UI.CursorMoveLeft.triggered){
@@ -46,6 +48,7 @@ public class BackpackCursor : MonoBehaviour
                 nowCursorImage.color = nomalColor;
                 nowListNumber --;
                 if(nowListNumber < 0) nowListNumber =  menuList.Length - 1;
+                itemInfoBackpack.SetItemInfo(menuList[(nowListNumber/8), (nowListNumber%8)]);
             }
 
             if(playerInputAction.UI.CursorMoveUp.triggered){
@@ -54,6 +57,7 @@ public class BackpackCursor : MonoBehaviour
                 nowCursorImage.color = nomalColor;
                 nowListNumber -= rowNum;
                 if(nowListNumber < 0) nowListNumber +=  menuList.Length;
+                itemInfoBackpack.SetItemInfo(menuList[(nowListNumber/8), (nowListNumber%8)]);
             }
             
             if(playerInputAction.UI.CursorMoveDown.triggered){
@@ -62,15 +66,25 @@ public class BackpackCursor : MonoBehaviour
                 nowCursorImage.color = nomalColor;
                 nowListNumber += rowNum;
                 if(nowListNumber >= menuList.Length) nowListNumber -= menuList.Length;
+                itemInfoBackpack.SetItemInfo(menuList[(nowListNumber/8), (nowListNumber%8)]);
             }
         }
     }
 
-    public void SetmenuSelect(){
-        for(int i = 0; i < menuList.Length; i++){
-            for(int j = 0; j < 10; i++){
-                menuList[i,j] = j+10*i;
+    public void SetmenuSelect(List<int> BackpackList){
+        for(int i = 0; i < 5; i++){
+            for(int j = 0; j < 8; j++){
+                // menuList[i,j] = j+8*i;
+                if(BackpackList.Count > (j+8*i)){
+                    menuList[i,j] = BackpackList[j+8*i];
+                    Debug.Log("menuList["+i+","+j+"]に"+BackpackList[j+8*i]+"をいれた");
+                }
+                else{
+                    menuList[i,j] = -1;
+                    Debug.Log("menuList["+i+","+j+"]に-1をいれた");
+                }
             }
         }
+        itemInfoBackpack.SetItemInfo(menuList[0,0]);
     }
 }
