@@ -406,6 +406,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Sort",
+                    "type": "Button",
+                    "id": "5d5c9412-b166-4f8c-9033-986c23ecd9ea",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -626,6 +635,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "CursorMoveLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "16980e20-3620-466d-be73-6e572eea3bb5",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Sort",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "308ea634-185f-40ae-ac85-251019ce6c7f",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Sort",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

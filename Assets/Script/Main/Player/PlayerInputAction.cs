@@ -428,6 +428,15 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Sort"",
+                    ""type"": ""Button"",
+                    ""id"": ""5d5c9412-b166-4f8c-9033-986c23ecd9ea"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -650,6 +659,28 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""action"": ""CursorMoveLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""16980e20-3620-466d-be73-6e572eea3bb5"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Sort"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""308ea634-185f-40ae-ac85-251019ce6c7f"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Sort"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -733,6 +764,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_UI_CursorMoveLeft = m_UI.FindAction("CursorMoveLeft", throwIfNotFound: true);
         m_UI_MenuSelect = m_UI.FindAction("MenuSelect", throwIfNotFound: true);
         m_UI_Cancel = m_UI.FindAction("Cancel", throwIfNotFound: true);
+        m_UI_Sort = m_UI.FindAction("Sort", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -879,6 +911,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_CursorMoveLeft;
     private readonly InputAction m_UI_MenuSelect;
     private readonly InputAction m_UI_Cancel;
+    private readonly InputAction m_UI_Sort;
     public struct UIActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -890,6 +923,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @CursorMoveLeft => m_Wrapper.m_UI_CursorMoveLeft;
         public InputAction @MenuSelect => m_Wrapper.m_UI_MenuSelect;
         public InputAction @Cancel => m_Wrapper.m_UI_Cancel;
+        public InputAction @Sort => m_Wrapper.m_UI_Sort;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -920,6 +954,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Cancel.started += instance.OnCancel;
             @Cancel.performed += instance.OnCancel;
             @Cancel.canceled += instance.OnCancel;
+            @Sort.started += instance.OnSort;
+            @Sort.performed += instance.OnSort;
+            @Sort.canceled += instance.OnSort;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -945,6 +982,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Cancel.started -= instance.OnCancel;
             @Cancel.performed -= instance.OnCancel;
             @Cancel.canceled -= instance.OnCancel;
+            @Sort.started -= instance.OnSort;
+            @Sort.performed -= instance.OnSort;
+            @Sort.canceled -= instance.OnSort;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -1024,5 +1064,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnCursorMoveLeft(InputAction.CallbackContext context);
         void OnMenuSelect(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
+        void OnSort(InputAction.CallbackContext context);
     }
 }
