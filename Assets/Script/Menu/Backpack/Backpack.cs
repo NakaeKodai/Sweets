@@ -23,7 +23,8 @@ public class Backpack : MonoBehaviour
 
     string sortState = "ID";//ID順ならID,名前順はname,所字数順はquantity
     List<int> BackpackList = new List<int>();//所持アイテムだけのリスト（IDだけ）
-    // List<int> BackpackNameSort = new List<int>;
+    
+    public int menuPage = 0;//ページ数-1で打ってほしい(プログラムのため)
 
     public class ItemData{
         public int ID;
@@ -66,26 +67,18 @@ public class Backpack : MonoBehaviour
                     ListSort();
                 }
             }
+            else if(playerInputAction.UI.MenuPageRight.triggered){
+                TurnMenuPage(1);
+            }
+            else if(playerInputAction.UI.MenuPageLeft.triggered){
+                TurnMenuPage(-1);
+            }
         }
     }
 
     public void OpenBackpack(){
         if(!opening){
             opening = true;
-            // List<int> BackpackList = new List<int>();//所持アイテムだけのリスト（IDだけ）
-            // int j = 0;//インベントリのリスト用
-            // for(int i = 0; i < ingredientsDB.ingredientsList.Count; i++){
-            //     if(ingredientsDB.ingredientsList[i].quantity != 0){//アイテムの所字数が0じゃなければBackpackListに追加する
-            //         BackpackList.Add(ingredientsDB.ingredientsList[i].ID);
-            //         Debug.Log(ingredientsDB.ingredientsList[BackpackList[j]].name);
-            //         j++;
-            //     }
-            // }
-            // //アイコンの代入を行うスクリプトにBackpackListを投げたのち、UIを表示させる
-            // backpackItemIcon.ItemIconSetting(BackpackList);
-            // backpackItemQuantity.ItemQuantitySetting(BackpackList);
-            // itemInfoBackpack.SetItemInfo(BackpackList[0]);
-            // backpackCursor.SetmenuSelect(BackpackList);
             if(!firstOpening){
                 int j = 0;//インベントリのリスト用
                 for(int i = 0; i < ingredientsDB.ingredientsList.Count; i++){
@@ -156,5 +149,18 @@ public class Backpack : MonoBehaviour
             backpackItemQuantity.ItemQuantitySetting(BackpackList);
             backpackCursor.SetmenuSelect(BackpackList);
         }
+    }
+
+    public void TurnMenuPage(int TurnPage){//右にいくなら1,左なら-1
+        menuPage += TurnPage;
+        if(BackpackList.Count < 40*menuPage){
+            menuPage = 0;
+        }
+        else if(menuPage < 0){
+            menuPage = BackpackList.Count/40;
+        }
+        backpackItemIcon.ItemIconSetting(BackpackList);
+        backpackItemQuantity.ItemQuantitySetting(BackpackList);
+        backpackCursor.SetmenuSelect(BackpackList);
     }
 }

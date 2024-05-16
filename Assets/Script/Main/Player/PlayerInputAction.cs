@@ -437,6 +437,24 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MenuPageRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""58cc6adf-6148-4535-adec-e67ed9e5e555"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MenuPageLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""c4c51834-71fc-48f7-9deb-3a86d0cc71bb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -681,6 +699,50 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""action"": ""Sort"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""752a40b6-085f-474d-8b59-8b5123665d7f"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""MenuPageRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""57f7a020-3010-4799-a733-2eb231da39bc"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""MenuPageRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f7514db8-9caa-44be-9efc-89a5a78adc7a"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""MenuPageLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1faa9921-6fd8-4fb7-8a99-18294925ac73"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""MenuPageLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -765,6 +827,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_UI_MenuSelect = m_UI.FindAction("MenuSelect", throwIfNotFound: true);
         m_UI_Cancel = m_UI.FindAction("Cancel", throwIfNotFound: true);
         m_UI_Sort = m_UI.FindAction("Sort", throwIfNotFound: true);
+        m_UI_MenuPageRight = m_UI.FindAction("MenuPageRight", throwIfNotFound: true);
+        m_UI_MenuPageLeft = m_UI.FindAction("MenuPageLeft", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -912,6 +976,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_MenuSelect;
     private readonly InputAction m_UI_Cancel;
     private readonly InputAction m_UI_Sort;
+    private readonly InputAction m_UI_MenuPageRight;
+    private readonly InputAction m_UI_MenuPageLeft;
     public struct UIActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -924,6 +990,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @MenuSelect => m_Wrapper.m_UI_MenuSelect;
         public InputAction @Cancel => m_Wrapper.m_UI_Cancel;
         public InputAction @Sort => m_Wrapper.m_UI_Sort;
+        public InputAction @MenuPageRight => m_Wrapper.m_UI_MenuPageRight;
+        public InputAction @MenuPageLeft => m_Wrapper.m_UI_MenuPageLeft;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -957,6 +1025,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Sort.started += instance.OnSort;
             @Sort.performed += instance.OnSort;
             @Sort.canceled += instance.OnSort;
+            @MenuPageRight.started += instance.OnMenuPageRight;
+            @MenuPageRight.performed += instance.OnMenuPageRight;
+            @MenuPageRight.canceled += instance.OnMenuPageRight;
+            @MenuPageLeft.started += instance.OnMenuPageLeft;
+            @MenuPageLeft.performed += instance.OnMenuPageLeft;
+            @MenuPageLeft.canceled += instance.OnMenuPageLeft;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -985,6 +1059,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Sort.started -= instance.OnSort;
             @Sort.performed -= instance.OnSort;
             @Sort.canceled -= instance.OnSort;
+            @MenuPageRight.started -= instance.OnMenuPageRight;
+            @MenuPageRight.performed -= instance.OnMenuPageRight;
+            @MenuPageRight.canceled -= instance.OnMenuPageRight;
+            @MenuPageLeft.started -= instance.OnMenuPageLeft;
+            @MenuPageLeft.performed -= instance.OnMenuPageLeft;
+            @MenuPageLeft.canceled -= instance.OnMenuPageLeft;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -1065,5 +1145,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnMenuSelect(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
         void OnSort(InputAction.CallbackContext context);
+        void OnMenuPageRight(InputAction.CallbackContext context);
+        void OnMenuPageLeft(InputAction.CallbackContext context);
     }
 }

@@ -72,12 +72,13 @@ public class BackpackCursor : MonoBehaviour
     }
 
     public void SetmenuSelect(List<int> BackpackList){
+        int menuPage = backpackScript.menuPage;
         for(int i = 0; i < 5; i++){
             for(int j = 0; j < 8; j++){
                 // menuList[i,j] = j+8*i;
-                if(BackpackList.Count > (j+8*i)){
-                    menuList[i,j] = BackpackList[j+8*i];
-                    Debug.Log("menuList["+i+","+j+"]に"+BackpackList[j+8*i]+"をいれた");
+                if(BackpackList.Count > (j+8*i + menuPage*40)){
+                    menuList[i,j] = BackpackList[j+8*i + menuPage*40];
+                    Debug.Log("menuList["+i+","+j+"]に"+BackpackList[j+8*i + menuPage*40]+"をいれた");
                 }
                 else{
                     menuList[i,j] = -1;

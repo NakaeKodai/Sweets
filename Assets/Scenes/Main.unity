@@ -12660,6 +12660,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientsDB: {fileID: 11400000, guid: 89317c2866f8d824a88d23ec19f537e2, type: 2}
+  backpackScript: {fileID: 1443199650}
 --- !u!114 &773455606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16293,6 +16294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientsDB: {fileID: 11400000, guid: 89317c2866f8d824a88d23ec19f537e2, type: 2}
+  backpackScript: {fileID: 1443199650}
 --- !u!1 &1235440028
 GameObject:
   m_ObjectHideFlags: 0
@@ -18392,6 +18394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   opening: 0
+  firstOpening: 0
   ingredientsDB: {fileID: 11400000, guid: 89317c2866f8d824a88d23ec19f537e2, type: 2}
   BackpackObjekt: {fileID: 1443199649}
   ItemInfoObject: {fileID: 1744789748}
@@ -18401,6 +18404,7 @@ MonoBehaviour:
   itemInfoBackpack: {fileID: 1744789752}
   menuManager: {fileID: 849605303}
   gameManager: {fileID: 565515798}
+  menuPage: 0
 --- !u!114 &1443199651
 MonoBehaviour:
   m_ObjectHideFlags: 0

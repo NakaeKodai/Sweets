@@ -9,6 +9,7 @@ public class BackpackItemIcon : MonoBehaviour
     public IngredientsDB ingredientsDB;
     private Image image;//画像
     private GameObject icon;
+    public Backpack backpackScript;
 
     void Start()
     {
@@ -22,17 +23,20 @@ public class BackpackItemIcon : MonoBehaviour
     }
 
     public void ItemIconSetting(List<int> BackpackList){
+        int menuPage = backpackScript.menuPage;
+        int BackpackPageItem = BackpackList.Count - 40*menuPage;
+        if(BackpackPageItem > 40) BackpackPageItem = 40;
         //先に所持アイテムを設定した分アイテムの枠に入れる
-        for(int i = 0; i < BackpackList.Count; i++){
+        for(int i = 0; i < BackpackPageItem; i++){
             // image = itemList[i].GetComponent<Image>();
             icon = gameObject.transform.GetChild(i).gameObject;
             image = icon.GetComponent<Image>();
-            image.sprite = ingredientsDB.ingredientsList[BackpackList[i]].image;
+            image.sprite = ingredientsDB.ingredientsList[BackpackList[i+menuPage*40]].image;
             var c = image.color;
             image.color = new Color(c.r, c.g, c.b, 255f);
         }
         //空白は透明度を0にする
-        for(int i = BackpackList.Count; i < 40; i++){
+        for(int i = BackpackPageItem; i < 40; i++){
             // image = itemList[i].GetComponent<Image>();
             icon = gameObject.transform.GetChild(i).gameObject;
             image = icon.GetComponent<Image>();
