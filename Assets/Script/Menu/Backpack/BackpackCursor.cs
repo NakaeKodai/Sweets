@@ -85,6 +85,6 @@ public class BackpackCursor : MonoBehaviour
                 }
             }
         }
-        itemInfoBackpack.SetItemInfo(menuList[0,0]);
+        itemInfoBackpack.SetItemInfo(menuList[(nowListNumber/8), (nowListNumber%8)]);
     }
 }
