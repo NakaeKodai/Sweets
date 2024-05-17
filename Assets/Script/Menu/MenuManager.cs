@@ -14,7 +14,13 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Button[] menuList;//メニューウィンドウのボタンを格納しているリスト
     private int selectBottuonNum;//選択中のボタンのリスト番号
     private Button selectBottuon;//今選択中のボタン
+    private Image buttonImage;
     public bool selectMenuNow;//メニュー項目が選択されているかを判別
+    private bool isLongPushUp;
+    private bool isLongPushDown;
+    private  float pushDuration = 0.3f;
+    private float downTime = 0f;
+
     public Color nomalColor;
     public Color selectColor;
 
@@ -31,11 +37,11 @@ public class MenuManager : MonoBehaviour
     {
         if(!gameManager.pause && playerInputAction.UI.OpenMenu.triggered){
             menuWindow.SetActive(true);
-                Time.timeScale = 0;
-                gameManager.pause = true;
-                isMenu = true;
-                selectBottuonNum = 0;
-                Debug.Log("ザ・ワールド！");
+            Time.timeScale = 0;
+            gameManager.pause = true;
+            isMenu = true;
+            selectBottuonNum = 0;
+            Debug.Log("ザ・ワールド！");
         }
         else if((gameManager.pause && playerInputAction.UI.OpenMenu.triggered) || (gameManager.pause && playerInputAction.UI.Cancel.triggered && !selectMenuNow)){
                 menuWindow.SetActive(false);
@@ -53,10 +59,16 @@ public class MenuManager : MonoBehaviour
         if(isMenu && !selectMenuNow)
         {
             selectBottuon = menuList[selectBottuonNum];
-            Image buttonImage = selectBottuon.GetComponent<Image>();
+            buttonImage = selectBottuon.GetComponent<Image>();
             buttonImage.color = selectColor;
+            
+
+
+            //上ボタン
             if(playerInputAction.UI.CursorMoveUp.triggered)
             {
+                downTime = Time.realtimeSinceStartup;
+                isLongPushUp = true;
                 selectBottuon = menuList[selectBottuonNum];
                 buttonImage = selectBottuon.GetComponent<Image>();
                 buttonImage.color = nomalColor;
@@ -65,13 +77,33 @@ public class MenuManager : MonoBehaviour
                 {
                     selectBottuonNum = menuList.Length - 1;
                 } 
-                // selectBottuon = menuList[selectBottuonNum];
-                // buttonImage = selectBottuon.GetComponent<Image>();
-                // buttonImage.color = selectColor;
             }
-
+            if(isLongPushUp)
+            {
+                if(Time.realtimeSinceStartup - downTime >=  pushDuration)
+                {
+                    selectBottuon = menuList[selectBottuonNum];
+                    buttonImage = selectBottuon.GetComponent<Image>();
+                    buttonImage.color = nomalColor;
+                    selectBottuonNum --;
+                    if(selectBottuonNum < 0)
+                    {
+                        selectBottuonNum = menuList.Length - 1;
+                    }
+                    pushDuration = 0.1f;
+                    downTime = Time.realtimeSinceStartup;
+                }
+            }
+            playerInputAction.UI.CursorMoveUp.canceled += ctx => {
+                isLongPushUp = false;
+                pushDuration = 0.3f;
+            };
+            
+            //下ボタン
             if(playerInputAction.UI.CursorMoveDown.triggered)
             {
+                downTime = Time.realtimeSinceStartup;
+                isLongPushDown = true;
                 selectBottuon = menuList[selectBottuonNum];
                 buttonImage = selectBottuon.GetComponent<Image>();
                 buttonImage.color = nomalColor;
@@ -79,11 +111,29 @@ public class MenuManager : MonoBehaviour
                 if(selectBottuonNum >= menuList.Length)
                 {
                     selectBottuonNum = 0;
-                } 
-                // selectBottuon = menuList[selectBottuonNum];
-                // buttonImage = selectBottuon.GetComponent<Image>();
-                // buttonImage.color = selectColor;
+                }
             }
+            if(isLongPushDown)
+            {
+                if(Time.realtimeSinceStartup - downTime >=  pushDuration)
+                {
+                    selectBottuon = menuList[selectBottuonNum];
+                    buttonImage = selectBottuon.GetComponent<Image>();
+                    buttonImage.color = nomalColor;
+                    selectBottuonNum ++;
+                    if(selectBottuonNum >= menuList.Length)
+                    {
+                        selectBottuonNum = 0;
+                    }
+                    pushDuration = 0.1f;
+                    downTime = Time.realtimeSinceStartup;
+                }
+            }
+            playerInputAction.UI.CursorMoveDown.canceled += ctx => {
+                isLongPushDown = false;
+                pushDuration = 0.3f;
+            };
+
 
             // アイテムを開く項目
             if(selectBottuonNum == 0 && playerInputAction.UI.MenuSelect.triggered){

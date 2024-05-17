@@ -11,7 +11,13 @@ public class BackpackCursor : MonoBehaviour
     public Color nomalColor;
     public Color selectColor;
     int[,] menuList = new int[5,8];
-    public int nowListNumber = 0;
+    private int nowListNumber = 0;
+    private bool isLongPushUp;
+    private bool isLongPushDown;
+    private bool isLongPushRight;
+    private bool isLongPushLeft;
+    private  float pushDuration = 0.3f;
+    private float downTime = 0f;
     public Backpack backpackScript;
     public ItemInfoBackpack itemInfoBackpack;
 
@@ -33,7 +39,11 @@ public class BackpackCursor : MonoBehaviour
             nowCursorImage = nowCursor.GetComponent<Image>();
             nowCursorImage.color = selectColor;
 
+
+            //右移動
             if(playerInputAction.UI.CursorMoveRight.triggered){
+                downTime = Time.realtimeSinceStartup;
+                isLongPushRight = true;
                 nowCursor = gameObject.transform.GetChild(nowListNumber).gameObject;
                 nowCursorImage = nowCursor.GetComponent<Image>();
                 nowCursorImage.color = nomalColor;
@@ -41,8 +51,30 @@ public class BackpackCursor : MonoBehaviour
                 if(nowListNumber >= menuList.Length) nowListNumber = 0;
                 itemInfoBackpack.SetItemInfo(menuList[(nowListNumber/8), (nowListNumber%8)]);
             }
-            
+            if(isLongPushRight)
+            {
+                if(Time.realtimeSinceStartup - downTime >=  pushDuration)
+                {
+                    nowCursor = gameObject.transform.GetChild(nowListNumber).gameObject;
+                    nowCursorImage = nowCursor.GetComponent<Image>();
+                    nowCursorImage.color = nomalColor;
+                    nowListNumber ++;
+                    if(nowListNumber >= menuList.Length) nowListNumber = 0;
+                    itemInfoBackpack.SetItemInfo(menuList[(nowListNumber/8), (nowListNumber%8)]);
+                    pushDuration = 0.1f;
+                    downTime = Time.realtimeSinceStartup;
+                }
+            }
+            playerInputAction.UI.CursorMoveRight.canceled += ctx => {
+                isLongPushRight = false;
+                pushDuration = 0.3f;
+            };
+
+
+            //左移動
             if(playerInputAction.UI.CursorMoveLeft.triggered){
+                downTime = Time.realtimeSinceStartup;
+                isLongPushLeft = true;
                 nowCursor = gameObject.transform.GetChild(nowListNumber).gameObject;
                 nowCursorImage = nowCursor.GetComponent<Image>();
                 nowCursorImage.color = nomalColor;
@@ -50,8 +82,30 @@ public class BackpackCursor : MonoBehaviour
                 if(nowListNumber < 0) nowListNumber =  menuList.Length - 1;
                 itemInfoBackpack.SetItemInfo(menuList[(nowListNumber/8), (nowListNumber%8)]);
             }
+            if(isLongPushLeft)
+            {
+                if(Time.realtimeSinceStartup - downTime >=  pushDuration)
+                {
+                    nowCursor = gameObject.transform.GetChild(nowListNumber).gameObject;
+                    nowCursorImage = nowCursor.GetComponent<Image>();
+                    nowCursorImage.color = nomalColor;
+                    nowListNumber --;
+                    if(nowListNumber < 0) nowListNumber =  menuList.Length - 1;
+                    itemInfoBackpack.SetItemInfo(menuList[(nowListNumber/8), (nowListNumber%8)]);
+                    pushDuration = 0.1f;
+                    downTime = Time.realtimeSinceStartup;
+                }
+            }
+            playerInputAction.UI.CursorMoveLeft.canceled += ctx => {
+                isLongPushLeft = false;
+                pushDuration = 0.3f;
+            };
 
+
+            //上移動
             if(playerInputAction.UI.CursorMoveUp.triggered){
+                downTime = Time.realtimeSinceStartup;
+                isLongPushUp = true;
                 nowCursor = gameObject.transform.GetChild(nowListNumber).gameObject;
                 nowCursorImage = nowCursor.GetComponent<Image>();
                 nowCursorImage.color = nomalColor;
@@ -59,8 +113,30 @@ public class BackpackCursor : MonoBehaviour
                 if(nowListNumber < 0) nowListNumber +=  menuList.Length;
                 itemInfoBackpack.SetItemInfo(menuList[(nowListNumber/8), (nowListNumber%8)]);
             }
+            if(isLongPushUp)
+            {
+                if(Time.realtimeSinceStartup - downTime >=  pushDuration)
+                {
+                    nowCursor = gameObject.transform.GetChild(nowListNumber).gameObject;
+                    nowCursorImage = nowCursor.GetComponent<Image>();
+                    nowCursorImage.color = nomalColor;
+                    nowListNumber -= rowNum;
+                    if(nowListNumber < 0) nowListNumber +=  menuList.Length;
+                    itemInfoBackpack.SetItemInfo(menuList[(nowListNumber/8), (nowListNumber%8)]);
+                    pushDuration = 0.1f;
+                    downTime = Time.realtimeSinceStartup;
+                }
+            }
+            playerInputAction.UI.CursorMoveUp.canceled += ctx => {
+                isLongPushUp = false;
+                pushDuration = 0.3f;
+            };
             
+
+            //下移動
             if(playerInputAction.UI.CursorMoveDown.triggered){
+                downTime = Time.realtimeSinceStartup;
+                isLongPushDown = true;
                 nowCursor = gameObject.transform.GetChild(nowListNumber).gameObject;
                 nowCursorImage = nowCursor.GetComponent<Image>();
                 nowCursorImage.color = nomalColor;
@@ -68,6 +144,24 @@ public class BackpackCursor : MonoBehaviour
                 if(nowListNumber >= menuList.Length) nowListNumber -= menuList.Length;
                 itemInfoBackpack.SetItemInfo(menuList[(nowListNumber/8), (nowListNumber%8)]);
             }
+            if(isLongPushDown)
+            {
+                if(Time.realtimeSinceStartup - downTime >=  pushDuration)
+                {
+                    nowCursor = gameObject.transform.GetChild(nowListNumber).gameObject;
+                    nowCursorImage = nowCursor.GetComponent<Image>();
+                    nowCursorImage.color = nomalColor;
+                    nowListNumber += rowNum;
+                    if(nowListNumber >= menuList.Length) nowListNumber -= menuList.Length;
+                    itemInfoBackpack.SetItemInfo(menuList[(nowListNumber/8), (nowListNumber%8)]);
+                    pushDuration = 0.1f;
+                    downTime = Time.realtimeSinceStartup;
+                }
+            }
+            playerInputAction.UI.CursorMoveDown.canceled += ctx => {
+                isLongPushDown = false;
+                pushDuration = 0.3f;
+            };
         }
     }
 
