@@ -37,7 +37,7 @@ public class Backpack : MonoBehaviour
         }
     }
 
-    List<ItemData> dataList = new List<ItemData>();
+    public List<ItemData> dataList = new List<ItemData>();
 
     // Start is called before the first frame update
     void Start()
@@ -79,26 +79,37 @@ public class Backpack : MonoBehaviour
     public void OpenBackpack(){
         if(!opening){
             opening = true;
-            if(!firstOpening){
-                int j = 0;//インベントリのリスト用
-                for(int i = 0; i < ingredientsDB.ingredientsList.Count; i++){
-                    if(ingredientsDB.ingredientsList[i].quantity != 0){//アイテムの所字数が0じゃなければBackpackListに追加する
-                        dataList.Add(new ItemData(ingredientsDB.ingredientsList[i].ID, ingredientsDB.ingredientsList[i].name, ingredientsDB.ingredientsList[i].quantity));
-                        j++;
-                    }
-                }
-                for(int i = 0; i < dataList.Count; i++){
+            // if(!firstOpening){
+            //     int j = 0;//インベントリのリスト用
+            //     for(int i = 0; i < ingredientsDB.ingredientsList.Count; i++){
+            //         if(ingredientsDB.ingredientsList[i].quantity != 0){//アイテムの所字数が0じゃなければBackpackListに追加する
+            //             dataList.Add(new ItemData(ingredientsDB.ingredientsList[i].ID, ingredientsDB.ingredientsList[i].name, ingredientsDB.ingredientsList[i].quantity));
+            //             j++;
+            //         }
+            //     }
+            //     for(int i = 0; i < dataList.Count; i++){
+            //         if(dataList[i].quantity != 0){//アイテムの所字数が0じゃなければBackpackListに追加する
+            //             BackpackList.Add(dataList[i].ID);
+            //             j++;
+            //         }
+            //     }
+            //     // backpackItemIcon.ItemIconSetting(BackpackList);
+            //     // backpackItemQuantity.ItemQuantitySetting(BackpackList);
+            //     // itemInfoBackpack.SetItemInfo(BackpackList[0]);
+            //     // backpackCursor.SetmenuSelect(BackpackList);
+            //     firstOpening = true;
+            // }
+
+             BackpackList.Clear();
+            for(int i = 0; i < dataList.Count; i++){
                     if(dataList[i].quantity != 0){//アイテムの所字数が0じゃなければBackpackListに追加する
                         BackpackList.Add(dataList[i].ID);
-                        j++;
                     }
                 }
-                backpackItemIcon.ItemIconSetting(BackpackList);
-                backpackItemQuantity.ItemQuantitySetting(BackpackList);
-                // itemInfoBackpack.SetItemInfo(BackpackList[0]);
-                backpackCursor.SetmenuSelect(BackpackList);
-                firstOpening = true;
-            }
+
+            backpackItemIcon.ItemIconSetting(BackpackList);
+            backpackItemQuantity.ItemQuantitySetting(BackpackList);
+            backpackCursor.SetmenuSelect(BackpackList);
             BackpackObjekt.SetActive(true);
             ItemInfoObject.SetActive(true);
         }
@@ -162,5 +173,10 @@ public class Backpack : MonoBehaviour
         backpackItemIcon.ItemIconSetting(BackpackList);
         backpackItemQuantity.ItemQuantitySetting(BackpackList);
         backpackCursor.SetmenuSelect(BackpackList);
+    }
+
+    //アイテム入手時に持ち物欄に追加する
+    public void AddDataList(int i, string n, int q){
+         dataList.Add(new ItemData(i, n, q));
     }
 }

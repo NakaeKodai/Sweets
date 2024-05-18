@@ -12,6 +12,8 @@ public class Enemy : MonoBehaviour
     public int maxAmount = 2;//最大採取量、これをプレイヤーの変数からとってスキルによる採取量変化とかやりたい
     [SerializeField] public IngredientsDB ingredientsDB;//データベースの取得
     public int harvestCount;//採取する回数
+    public Backpack backpackScript;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -68,6 +70,10 @@ public class Enemy : MonoBehaviour
                 selectItemId = itemPercent[randItem];
             }while(selectItemId == -1);
             
+            // 所持していないアイテムを取得したときに持ち物欄に加える
+            if(ingredientsDB.ingredientsList[selectItemId].quantity == 0){
+                backpackScript.AddDataList(ingredientsDB.ingredientsList[selectItemId].ID, ingredientsDB.ingredientsList[selectItemId].name, amount);
+            }
 
             ingredientsDB.ingredientsList[selectItemId].quantity += amount;//採取した個数分をアイテムの個数に追加
             
