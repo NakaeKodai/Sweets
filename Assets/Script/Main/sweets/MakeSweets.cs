@@ -6,6 +6,7 @@ public class MakeSweets : MonoBehaviour
 {
     [SerializeField] public IngredientsDB ingredientsDB;
     [SerializeField] public SweetsDB sweetsDB;
+    public Backpack backpackScript;
     
     // Start is called before the first frame update
     void Start()
@@ -45,6 +46,10 @@ public class MakeSweets : MonoBehaviour
                 materialID = materialIDs[i];
                 requiredQuantity = sweetsDB.sweetsList[sweetsID].materialsList[i].個数;
                 ingredientsDB.ingredientsList[materialID].quantity -= requiredQuantity;
+                //素材の個数が0になったときの対応
+                if(ingredientsDB.ingredientsList[materialID].quantity == 0){
+                    backpackScript.RemoveDataList(materialID);
+                }
             }
             sweetsDB.sweetsList[sweetsID].quantity++;
             Debug.Log(sweetsDB.sweetsList[sweetsID].name+"を一つ作った。");
