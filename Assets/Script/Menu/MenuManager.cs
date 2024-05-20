@@ -142,6 +142,10 @@ public class MenuManager : MonoBehaviour
                 Debug.Log("アイテム開く");
                 backpackScript.OpenBackpack();
             }
+            else if(selectBottuonNum == 1 && playerInputAction.UI.MenuSelect.triggered){
+                selectMenuNow = true;
+                menuWindow.SetActive(false);
+            }
         }
         else if(isMenu && selectMenuNow){//メニュー項目を開いてるときになんか使えそうだから現在放置
             if(playerInputAction.UI.OpenMenu.triggered || playerInputAction.UI.Cancel.triggered){
