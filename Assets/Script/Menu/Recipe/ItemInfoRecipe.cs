@@ -40,19 +40,27 @@ public class ItemInfoRecipe : MonoBehaviour
             for(int i = 0; i < 4; i++){
                 // 名前
                 if(i < sweetsDB.sweetsList[ItemID].materialsList.Count){
+                int materialsID = sweetsDB.sweetsList[ItemID].materialsList[i].ID;
+                int red;//文字の赤色成分
+                if(ingredientsDB.ingredientsList[materialsID].quantity < sweetsDB.sweetsList[ItemID].materialsList[i].個数){
+                    red = 255;
+                }
+                else{
+                    red = 0;
+                }
                 materials = materialsName.transform.GetChild(i).gameObject;
                 text = materials.GetComponent<TextMeshProUGUI>();
-                int materialsID = sweetsDB.sweetsList[ItemID].materialsList[i].ID;
+                
                 text.text = ingredientsDB.ingredientsList[materialsID].name;
                 var c = text.color;
-                text.color = new Color(c.r, c.g, c.b, 255f);
+                text.color = new Color(red, c.g, c.b, 255f);
 
                 // 個数
                 materials = materialsQuantity.transform.GetChild(i).gameObject;
                 text = materials.GetComponent<TextMeshProUGUI>();
                 text.text = ingredientsDB.ingredientsList[materialsID].quantity.ToString() + "/" + sweetsDB.sweetsList[ItemID].materialsList[i].個数;
                 c = text.color;
-                text.color = new Color(c.r, c.g, c.b, 255f);
+                text.color = new Color(red, c.g, c.b, 255f);
                 }
                 else{
                 materials = materialsName.transform.GetChild(i).gameObject;
