@@ -25,6 +25,7 @@ public class MenuManager : MonoBehaviour
     public Color selectColor;
 
     public Backpack backpackScript;
+    public Recipe recipeScript;
 
     void Start()
     {
@@ -145,6 +146,7 @@ public class MenuManager : MonoBehaviour
             else if(selectBottuonNum == 1 && playerInputAction.UI.MenuSelect.triggered){
                 selectMenuNow = true;
                 menuWindow.SetActive(false);
+                recipeScript.OpenRecipe();
             }
         }
         else if(isMenu && selectMenuNow){//メニュー項目を開いてるときになんか使えそうだから現在放置

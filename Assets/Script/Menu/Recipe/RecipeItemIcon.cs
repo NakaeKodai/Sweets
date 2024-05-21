@@ -7,6 +7,7 @@ using TMPro;
 public class RecipeItemIcon : MonoBehaviour
 {
     public IngredientsDB ingredientsDB;
+    public SweetsDB sweetsDB;
     private Image image;//画像
     private GameObject icon;
     public Recipe recipeScript;
@@ -31,7 +32,7 @@ public class RecipeItemIcon : MonoBehaviour
             // image = itemList[i].GetComponent<Image>();
             icon = gameObject.transform.GetChild(i).gameObject;
             image = icon.GetComponent<Image>();
-            image.sprite = ingredientsDB.ingredientsList[RecipeList[i+menuPage*6]].image;
+            image.sprite = sweetsDB.sweetsList[RecipeList[i+menuPage*6]].image;
             var c = image.color;
             image.color = new Color(c.r, c.g, c.b, 255f);
         }

@@ -7,6 +7,7 @@ using TMPro;
 public class RecipeItemName : MonoBehaviour
 {
     public IngredientsDB ingredientsDB;
+    public SweetsDB sweetsDB;
     private TextMeshProUGUI text;//テキスト
     private GameObject icon;
     public Recipe recipeScript;
@@ -22,7 +23,7 @@ public class RecipeItemName : MonoBehaviour
         
     }
 
-    public void RecipeSetting(List<int> RecipeList){
+    public void RecipeNameSetting(List<int> RecipeList){
         int menuPage = recipeScript.menuPage;
         int RecipePageItem = RecipeList.Count - 6*menuPage;
         if(RecipePageItem > 6) RecipePageItem = 6;
@@ -31,7 +32,7 @@ public class RecipeItemName : MonoBehaviour
             // image = itemList[i].GetComponent<Image>();
             icon = gameObject.transform.GetChild(i).gameObject;
             text = icon.GetComponent<TextMeshProUGUI>();
-            text.text = ingredientsDB.ingredientsList[RecipeList[i]+menuPage*6].name;
+            text.text = sweetsDB.sweetsList[RecipeList[i]+menuPage*6].name;
             
             var c = text.color;
             text.color = new Color(c.r, c.g, c.b, 255f);
