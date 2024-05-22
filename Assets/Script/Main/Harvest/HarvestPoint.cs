@@ -11,12 +11,14 @@ public class HarvestPoint : MonoBehaviour
     [SerializeField] public IngredientsDB ingredientsDB;//データベースの取得
     bool HarvestPointKiller = false;
     public int harvestCount;//採取する回数
+    public Backpack backpackScript;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        // backpackScript = GetComponent<Backpack>();
+        // Backpack.ItemData itemDataList = backpackScript.itemData;
     }
 
     // Update is called once per frame
@@ -71,10 +73,24 @@ public class HarvestPoint : MonoBehaviour
                 selectItemId = itemPercent[randItem];
             }while(selectItemId == -1);
             
+            // 所持していないアイテムを取得したときに持ち物欄に加える
+            if(ingredientsDB.ingredientsList[selectItemId].quantity == 0){
+                backpackScript.AddDataList(ingredientsDB.ingredientsList[selectItemId].ID, ingredientsDB.ingredientsList[selectItemId].name, amount);
+            }
 
             ingredientsDB.ingredientsList[selectItemId].quantity += amount;//採取した個数分をアイテムの個数に追加
-            
+
             Debug.Log(ingredientsDB.ingredientsList[selectItemId].name+"を"+amount+"個手に入れた");
+
+            int difference;//カンストしたときの入手できなかった分
+            if(ingredientsDB.ingredientsList[selectItemId].quantity > 999){
+                difference = ingredientsDB.ingredientsList[selectItemId].quantity - 999;
+                Debug.Log(ingredientsDB.ingredientsList[selectItemId].name+"を持ちすぎていたため、"+difference+"個入手できなかった。");
+                ingredientsDB.ingredientsList[selectItemId].quantity = 999;
+            }
+
+            
+            
         }
         
             this.HarvestPointKiller = true;

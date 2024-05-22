@@ -4,13 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class BackpackItemIcon : MonoBehaviour
+public class BackpackItemQuantity : MonoBehaviour
 {
     public IngredientsDB ingredientsDB;
-    private Image image;//画像
+    private TextMeshProUGUI text;//テキスト
     private GameObject icon;
     public Backpack backpackScript;
 
+    // Start is called before the first frame update
     void Start()
     {
         
@@ -22,7 +23,7 @@ public class BackpackItemIcon : MonoBehaviour
         
     }
 
-    public void ItemIconSetting(List<int> BackpackList){
+    public void ItemQuantitySetting(List<int> BackpackList){
         int menuPage = backpackScript.menuPage;
         int BackpackPageItem = BackpackList.Count - 40*menuPage;
         if(BackpackPageItem > 40) BackpackPageItem = 40;
@@ -30,18 +31,19 @@ public class BackpackItemIcon : MonoBehaviour
         for(int i = 0; i < BackpackPageItem; i++){
             // image = itemList[i].GetComponent<Image>();
             icon = gameObject.transform.GetChild(i).gameObject;
-            image = icon.GetComponent<Image>();
-            image.sprite = ingredientsDB.ingredientsList[BackpackList[i+menuPage*40]].image;
-            var c = image.color;
-            image.color = new Color(c.r, c.g, c.b, 255f);
+            text = icon.GetComponent<TextMeshProUGUI>();
+            text.text = ingredientsDB.ingredientsList[BackpackList[i]+menuPage*40].quantity.ToString();
+            
+            var c = text.color;
+            text.color = new Color(c.r, c.g, c.b, 255f);
         }
         //空白は透明度を0にする
         for(int i = BackpackPageItem; i < 40; i++){
             // image = itemList[i].GetComponent<Image>();
             icon = gameObject.transform.GetChild(i).gameObject;
-            image = icon.GetComponent<Image>();
-            var c = image.color;
-            image.color = new Color(c.r, c.g, c.b, 0f);
+            text = icon.GetComponent<TextMeshProUGUI>();
+            var c = text.color;
+            text.color = new Color(c.r, c.g, c.b, 0f);
         }
     }
 }

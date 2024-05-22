@@ -394,6 +394,24 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""CursorMoveRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""e726dce0-97a9-40e2-b190-f0a102a1ba73"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CursorMoveLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""1e4554c1-f504-48c1-81a8-2f1360b19f82"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""MenuSelect"",
                     ""type"": ""Button"",
                     ""id"": ""bff00aca-f1ea-404c-936a-8e237d847f1f"",
@@ -406,6 +424,33 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""name"": ""Cancel"",
                     ""type"": ""Button"",
                     ""id"": ""471c7e16-d245-4a73-a218-f3bfb957ea72"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Sort"",
+                    ""type"": ""Button"",
+                    ""id"": ""5d5c9412-b166-4f8c-9033-986c23ecd9ea"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MenuPageRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""58cc6adf-6148-4535-adec-e67ed9e5e555"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MenuPageLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""c4c51834-71fc-48f7-9deb-3a86d0cc71bb"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -566,6 +611,138 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""action"": ""Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1a30d216-11e6-48e5-bb6c-42f6780ac74e"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""CursorMoveRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a599a026-c723-4e5d-ad08-30e06f90f897"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""CursorMoveRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6874d0fd-e98f-4f03-a9b2-13ab1962c10e"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""CursorMoveRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2c5cf29a-20b1-40d8-9dc0-e247e7159cd3"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""CursorMoveLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""39a07eef-df43-4801-93d5-664636284be0"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CursorMoveLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""64ac774a-931c-491b-a9ee-fb1ba76ed89d"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""CursorMoveLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""16980e20-3620-466d-be73-6e572eea3bb5"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Sort"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""308ea634-185f-40ae-ac85-251019ce6c7f"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Sort"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""752a40b6-085f-474d-8b59-8b5123665d7f"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""MenuPageRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""57f7a020-3010-4799-a733-2eb231da39bc"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""MenuPageRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f7514db8-9caa-44be-9efc-89a5a78adc7a"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""MenuPageLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1faa9921-6fd8-4fb7-8a99-18294925ac73"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""MenuPageLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -645,8 +822,13 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_UI_OpenMenu = m_UI.FindAction("OpenMenu", throwIfNotFound: true);
         m_UI_CursorMoveUp = m_UI.FindAction("CursorMoveUp", throwIfNotFound: true);
         m_UI_CursorMoveDown = m_UI.FindAction("CursorMoveDown", throwIfNotFound: true);
+        m_UI_CursorMoveRight = m_UI.FindAction("CursorMoveRight", throwIfNotFound: true);
+        m_UI_CursorMoveLeft = m_UI.FindAction("CursorMoveLeft", throwIfNotFound: true);
         m_UI_MenuSelect = m_UI.FindAction("MenuSelect", throwIfNotFound: true);
         m_UI_Cancel = m_UI.FindAction("Cancel", throwIfNotFound: true);
+        m_UI_Sort = m_UI.FindAction("Sort", throwIfNotFound: true);
+        m_UI_MenuPageRight = m_UI.FindAction("MenuPageRight", throwIfNotFound: true);
+        m_UI_MenuPageLeft = m_UI.FindAction("MenuPageLeft", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -789,8 +971,13 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_OpenMenu;
     private readonly InputAction m_UI_CursorMoveUp;
     private readonly InputAction m_UI_CursorMoveDown;
+    private readonly InputAction m_UI_CursorMoveRight;
+    private readonly InputAction m_UI_CursorMoveLeft;
     private readonly InputAction m_UI_MenuSelect;
     private readonly InputAction m_UI_Cancel;
+    private readonly InputAction m_UI_Sort;
+    private readonly InputAction m_UI_MenuPageRight;
+    private readonly InputAction m_UI_MenuPageLeft;
     public struct UIActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -798,8 +985,13 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @OpenMenu => m_Wrapper.m_UI_OpenMenu;
         public InputAction @CursorMoveUp => m_Wrapper.m_UI_CursorMoveUp;
         public InputAction @CursorMoveDown => m_Wrapper.m_UI_CursorMoveDown;
+        public InputAction @CursorMoveRight => m_Wrapper.m_UI_CursorMoveRight;
+        public InputAction @CursorMoveLeft => m_Wrapper.m_UI_CursorMoveLeft;
         public InputAction @MenuSelect => m_Wrapper.m_UI_MenuSelect;
         public InputAction @Cancel => m_Wrapper.m_UI_Cancel;
+        public InputAction @Sort => m_Wrapper.m_UI_Sort;
+        public InputAction @MenuPageRight => m_Wrapper.m_UI_MenuPageRight;
+        public InputAction @MenuPageLeft => m_Wrapper.m_UI_MenuPageLeft;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -818,12 +1010,27 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @CursorMoveDown.started += instance.OnCursorMoveDown;
             @CursorMoveDown.performed += instance.OnCursorMoveDown;
             @CursorMoveDown.canceled += instance.OnCursorMoveDown;
+            @CursorMoveRight.started += instance.OnCursorMoveRight;
+            @CursorMoveRight.performed += instance.OnCursorMoveRight;
+            @CursorMoveRight.canceled += instance.OnCursorMoveRight;
+            @CursorMoveLeft.started += instance.OnCursorMoveLeft;
+            @CursorMoveLeft.performed += instance.OnCursorMoveLeft;
+            @CursorMoveLeft.canceled += instance.OnCursorMoveLeft;
             @MenuSelect.started += instance.OnMenuSelect;
             @MenuSelect.performed += instance.OnMenuSelect;
             @MenuSelect.canceled += instance.OnMenuSelect;
             @Cancel.started += instance.OnCancel;
             @Cancel.performed += instance.OnCancel;
             @Cancel.canceled += instance.OnCancel;
+            @Sort.started += instance.OnSort;
+            @Sort.performed += instance.OnSort;
+            @Sort.canceled += instance.OnSort;
+            @MenuPageRight.started += instance.OnMenuPageRight;
+            @MenuPageRight.performed += instance.OnMenuPageRight;
+            @MenuPageRight.canceled += instance.OnMenuPageRight;
+            @MenuPageLeft.started += instance.OnMenuPageLeft;
+            @MenuPageLeft.performed += instance.OnMenuPageLeft;
+            @MenuPageLeft.canceled += instance.OnMenuPageLeft;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -837,12 +1044,27 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @CursorMoveDown.started -= instance.OnCursorMoveDown;
             @CursorMoveDown.performed -= instance.OnCursorMoveDown;
             @CursorMoveDown.canceled -= instance.OnCursorMoveDown;
+            @CursorMoveRight.started -= instance.OnCursorMoveRight;
+            @CursorMoveRight.performed -= instance.OnCursorMoveRight;
+            @CursorMoveRight.canceled -= instance.OnCursorMoveRight;
+            @CursorMoveLeft.started -= instance.OnCursorMoveLeft;
+            @CursorMoveLeft.performed -= instance.OnCursorMoveLeft;
+            @CursorMoveLeft.canceled -= instance.OnCursorMoveLeft;
             @MenuSelect.started -= instance.OnMenuSelect;
             @MenuSelect.performed -= instance.OnMenuSelect;
             @MenuSelect.canceled -= instance.OnMenuSelect;
             @Cancel.started -= instance.OnCancel;
             @Cancel.performed -= instance.OnCancel;
             @Cancel.canceled -= instance.OnCancel;
+            @Sort.started -= instance.OnSort;
+            @Sort.performed -= instance.OnSort;
+            @Sort.canceled -= instance.OnSort;
+            @MenuPageRight.started -= instance.OnMenuPageRight;
+            @MenuPageRight.performed -= instance.OnMenuPageRight;
+            @MenuPageRight.canceled -= instance.OnMenuPageRight;
+            @MenuPageLeft.started -= instance.OnMenuPageLeft;
+            @MenuPageLeft.performed -= instance.OnMenuPageLeft;
+            @MenuPageLeft.canceled -= instance.OnMenuPageLeft;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -918,7 +1140,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnOpenMenu(InputAction.CallbackContext context);
         void OnCursorMoveUp(InputAction.CallbackContext context);
         void OnCursorMoveDown(InputAction.CallbackContext context);
+        void OnCursorMoveRight(InputAction.CallbackContext context);
+        void OnCursorMoveLeft(InputAction.CallbackContext context);
         void OnMenuSelect(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
+        void OnSort(InputAction.CallbackContext context);
+        void OnMenuPageRight(InputAction.CallbackContext context);
+        void OnMenuPageLeft(InputAction.CallbackContext context);
     }
 }
