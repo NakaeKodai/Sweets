@@ -53,14 +53,14 @@ public class ItemInfoRecipe : MonoBehaviour
                 
                     text.text = ingredientsDB.ingredientsList[materialsID].name;
                     var c = text.color;
-                    text.color = new Color(red, c.g, c.b, 255f);
+                        text.color = new Color(red, c.g, c.b, 255f);
 
                     // 個数
                     materials = materialsQuantity.transform.GetChild(i).gameObject;
                     text = materials.GetComponent<TextMeshProUGUI>();
                     text.text = ingredientsDB.ingredientsList[materialsID].quantity.ToString() + "/" + sweetsDB.sweetsList[ItemID].materialsList[i].個数;
                     c = text.color;
-                    text.color = new Color(red, c.g, c.b, 255f);
+                        text.color = new Color(red, c.g, c.b, 255f);
                 }
                 else{
                     materials = materialsName.transform.GetChild(i).gameObject;

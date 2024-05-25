@@ -11,6 +11,9 @@ public class RecipeItemName : MonoBehaviour
     private TextMeshProUGUI text;//テキスト
     private GameObject icon;
     public Recipe recipeScript;
+
+    public Color canMakeColor;
+    public Color notCanMakeColor;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +38,11 @@ public class RecipeItemName : MonoBehaviour
             text.text = sweetsDB.sweetsList[RecipeList[i]+menuPage*6].name;
             
             var c = text.color;
-            text.color = new Color(c.r, c.g, c.b, 255f);
+            if(sweetsDB.sweetsList[RecipeList[i]].canMake){
+                 text.color = canMakeColor;
+            }else{
+                text.color = notCanMakeColor;
+            }
         }
         //空白は透明度を0にする
         for(int i = RecipePageItem; i < 6; i++){

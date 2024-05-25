@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.63061225, g: 0.867598, b: 0.9903818, a: 1}
+  m_IndirectSpecularColor: {r: 0.63057953, g: 0.867575, b: 0.99038166, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9172,6 +9172,8 @@ MonoBehaviour:
   ingredientsDB: {fileID: 11400000, guid: 89317c2866f8d824a88d23ec19f537e2, type: 2}
   sweetsDB: {fileID: 11400000, guid: e0ca94ceffe1439459fd67cd7dbd71ed, type: 2}
   recipeScript: {fileID: 1910984596}
+  canMakeColor: {r: 1, g: 1, b: 1, a: 1}
+  notCanMakeColor: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 0.5882353}
 --- !u!4 &311605421 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5115169195338269665, guid: 4375414bf33889748b8c732abe8b258d, type: 3}
@@ -24864,8 +24866,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nomalColor: {r: 0, g: 0, b: 0, a: 0.46666667}
   selectColor: {r: 1, g: 0, b: 0, a: 1}
+  notCanMakeColor: {r: 0, g: 0, b: 0, a: 0.27450982}
   recipeScript: {fileID: 1910984596}
   itemInfoRecipe: {fileID: 232426609}
+  sweetsDB: {fileID: 11400000, guid: e0ca94ceffe1439459fd67cd7dbd71ed, type: 2}
   rowNum: 2
 --- !u!1 &1704050875
 GameObject:
@@ -25641,6 +25645,8 @@ MonoBehaviour:
   ingredientsDB: {fileID: 11400000, guid: 89317c2866f8d824a88d23ec19f537e2, type: 2}
   sweetsDB: {fileID: 11400000, guid: e0ca94ceffe1439459fd67cd7dbd71ed, type: 2}
   recipeScript: {fileID: 1910984596}
+  canMakeColor: {r: 1, g: 1, b: 1, a: 1}
+  notCanMakeColor: {r: 1, g: 1, b: 1, a: 0.39215687}
 --- !u!1 &1776854142
 GameObject:
   m_ObjectHideFlags: 0

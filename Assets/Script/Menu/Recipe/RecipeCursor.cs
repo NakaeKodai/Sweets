@@ -10,6 +10,7 @@ public class RecipeCursor : MonoBehaviour
     private Image nowCursorImage;//画像
     public Color nomalColor;
     public Color selectColor;
+    public Color notCanMakeColor;
     int[,] menuList = new int[3,2];
     private int nowListNumber = 0;
     private bool isLongPushUp;
@@ -20,6 +21,8 @@ public class RecipeCursor : MonoBehaviour
     private float downTime = 0f;
     public Recipe recipeScript;
     public ItemInfoRecipe itemInfoRecipe;
+    public SweetsDB sweetsDB;
+    int menuPage;
 
     public int rowNum = 10; //持ち物の横のアイコンの数
     // Start is called before the first frame update
@@ -44,7 +47,15 @@ public class RecipeCursor : MonoBehaviour
                 isLongPushRight = true;
                 nowCursor = gameObject.transform.GetChild(nowListNumber).gameObject;
                 nowCursorImage = nowCursor.GetComponent<Image>();
-                nowCursorImage.color = nomalColor;
+                if(menuList[(nowListNumber/2), (nowListNumber%2)] != -1){
+                    if(sweetsDB.sweetsList[menuList[(nowListNumber/2), (nowListNumber%2)]].canMake){
+                        nowCursorImage.color = nomalColor;
+                    }else{
+                        nowCursorImage.color = notCanMakeColor;
+                    }
+                }else{
+                    nowCursorImage.color = notCanMakeColor;
+                }
                 nowListNumber ++;
                 if(nowListNumber >= menuList.Length) nowListNumber = 0;
                 itemInfoRecipe.SetItemInfo(menuList[(nowListNumber/2), (nowListNumber%2)]);
@@ -55,7 +66,15 @@ public class RecipeCursor : MonoBehaviour
                 {
                     nowCursor = gameObject.transform.GetChild(nowListNumber).gameObject;
                     nowCursorImage = nowCursor.GetComponent<Image>();
-                    nowCursorImage.color = nomalColor;
+                    if(menuList[(nowListNumber/2), (nowListNumber%2)] != -1){
+                        if(sweetsDB.sweetsList[menuList[(nowListNumber/2), (nowListNumber%2)]].canMake){
+                            nowCursorImage.color = nomalColor;
+                        }else{
+                            nowCursorImage.color = notCanMakeColor;
+                        }
+                    }else{
+                        nowCursorImage.color = notCanMakeColor;
+                    }
                     nowListNumber ++;
                     if(nowListNumber >= menuList.Length) nowListNumber = 0;
                     itemInfoRecipe.SetItemInfo(menuList[(nowListNumber/2), (nowListNumber%2)]);
@@ -75,7 +94,16 @@ public class RecipeCursor : MonoBehaviour
                 isLongPushLeft = true;
                 nowCursor = gameObject.transform.GetChild(nowListNumber).gameObject;
                 nowCursorImage = nowCursor.GetComponent<Image>();
-                nowCursorImage.color = nomalColor;
+                if(menuList[(nowListNumber/2), (nowListNumber%2)] != -1){
+                    if(sweetsDB.sweetsList[menuList[(nowListNumber/2), (nowListNumber%2)]].canMake){
+                        nowCursorImage.color = nomalColor;
+                    }else{
+                        nowCursorImage.color = notCanMakeColor;
+                    }
+                    
+                }else{
+                    nowCursorImage.color = notCanMakeColor;
+                }
                 nowListNumber --;
                 if(nowListNumber < 0) nowListNumber =  menuList.Length - 1;
                 itemInfoRecipe.SetItemInfo(menuList[(nowListNumber/2), (nowListNumber%2)]);
@@ -86,7 +114,16 @@ public class RecipeCursor : MonoBehaviour
                 {
                     nowCursor = gameObject.transform.GetChild(nowListNumber).gameObject;
                     nowCursorImage = nowCursor.GetComponent<Image>();
-                    nowCursorImage.color = nomalColor;
+                    if(menuList[(nowListNumber/2), (nowListNumber%2)] != -1){
+                        if(sweetsDB.sweetsList[menuList[(nowListNumber/2), (nowListNumber%2)]].canMake){
+                            nowCursorImage.color = nomalColor;
+                        }else{
+                            nowCursorImage.color = notCanMakeColor;
+                        }
+                    
+                    }else{
+                        nowCursorImage.color = notCanMakeColor;
+                    }
                     nowListNumber --;
                     if(nowListNumber < 0) nowListNumber =  menuList.Length - 1;
                     itemInfoRecipe.SetItemInfo(menuList[(nowListNumber/2), (nowListNumber%2)]);
@@ -106,7 +143,15 @@ public class RecipeCursor : MonoBehaviour
                 isLongPushUp = true;
                 nowCursor = gameObject.transform.GetChild(nowListNumber).gameObject;
                 nowCursorImage = nowCursor.GetComponent<Image>();
-                nowCursorImage.color = nomalColor;
+                if(menuList[(nowListNumber/2), (nowListNumber%2)] != -1){
+                    if(sweetsDB.sweetsList[menuList[(nowListNumber/2), (nowListNumber%2)]].canMake){
+                        nowCursorImage.color = nomalColor;
+                    }else{
+                        nowCursorImage.color = notCanMakeColor;
+                    }
+                }else{
+                    nowCursorImage.color = notCanMakeColor;
+                }
                 nowListNumber -= rowNum;
                 if(nowListNumber < 0) nowListNumber +=  menuList.Length;
                 itemInfoRecipe.SetItemInfo(menuList[(nowListNumber/2), (nowListNumber%2)]);
@@ -117,7 +162,15 @@ public class RecipeCursor : MonoBehaviour
                 {
                     nowCursor = gameObject.transform.GetChild(nowListNumber).gameObject;
                     nowCursorImage = nowCursor.GetComponent<Image>();
-                    nowCursorImage.color = nomalColor;
+                    if(menuList[(nowListNumber/2), (nowListNumber%2)] != -1){
+                        if(sweetsDB.sweetsList[menuList[(nowListNumber/2), (nowListNumber%2)]].canMake){
+                            nowCursorImage.color = nomalColor;
+                        }else{
+                            nowCursorImage.color = notCanMakeColor;
+                        }
+                    }else{
+                        nowCursorImage.color = notCanMakeColor;
+                    }
                     nowListNumber -= rowNum;
                     if(nowListNumber < 0) nowListNumber +=  menuList.Length;
                     itemInfoRecipe.SetItemInfo(menuList[(nowListNumber/2), (nowListNumber%2)]);
@@ -137,7 +190,15 @@ public class RecipeCursor : MonoBehaviour
                 isLongPushDown = true;
                 nowCursor = gameObject.transform.GetChild(nowListNumber).gameObject;
                 nowCursorImage = nowCursor.GetComponent<Image>();
-                nowCursorImage.color = nomalColor;
+                if(menuList[(nowListNumber/2), (nowListNumber%2)] != -1){
+                    if(sweetsDB.sweetsList[menuList[(nowListNumber/2), (nowListNumber%2)]].canMake){
+                        nowCursorImage.color = nomalColor;
+                    }else{
+                        nowCursorImage.color = notCanMakeColor;
+                    }
+                }else{
+                    nowCursorImage.color = notCanMakeColor;
+                }
                 nowListNumber += rowNum;
                 if(nowListNumber >= menuList.Length) nowListNumber -= menuList.Length;
                 itemInfoRecipe.SetItemInfo(menuList[(nowListNumber/2), (nowListNumber%2)]);
@@ -148,7 +209,15 @@ public class RecipeCursor : MonoBehaviour
                 {
                     nowCursor = gameObject.transform.GetChild(nowListNumber).gameObject;
                     nowCursorImage = nowCursor.GetComponent<Image>();
-                    nowCursorImage.color = nomalColor;
+                    if(menuList[(nowListNumber/2), (nowListNumber%2)] != -1){
+                        if(sweetsDB.sweetsList[menuList[(nowListNumber/2), (nowListNumber%2)]].canMake){
+                            nowCursorImage.color = nomalColor;
+                        }else{
+                            nowCursorImage.color = notCanMakeColor;
+                        }
+                    }else{
+                        nowCursorImage.color = notCanMakeColor;
+                    }
                     nowListNumber += rowNum;
                     if(nowListNumber >= menuList.Length) nowListNumber -= menuList.Length;
                     itemInfoRecipe.SetItemInfo(menuList[(nowListNumber/2), (nowListNumber%2)]);
@@ -164,17 +233,25 @@ public class RecipeCursor : MonoBehaviour
     }
 
     public void SetmenuSelect(List<int> RecipeList){
-        int menuPage = recipeScript.menuPage;
+        menuPage = recipeScript.menuPage;
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 2; j++){
-                // menuList[i,j] = j+8*i;
+                GameObject menuBackground;// 背景色の設定用
+                Image menuBackgroundImage;
+                menuBackground = gameObject.transform.GetChild(j+2*i).gameObject;
+                menuBackgroundImage = menuBackground.GetComponent<Image>();
                 if(RecipeList.Count > (j+2*i + menuPage*6)){
                     menuList[i,j] = RecipeList[j+2*i + menuPage*6];
-                    // Debug.Log("menuList["+i+","+j+"]に"+RecipeList[j+2*i + menuPage*6]+"をいれた");
+                    if(sweetsDB.sweetsList[menuList[i, j]].canMake){
+                        menuBackgroundImage.color = nomalColor;
+                    }else{
+                        menuBackgroundImage.color = notCanMakeColor;
+                    }
+                    
                 }
                 else{
                     menuList[i,j] = -1;
-                    // Debug.Log("menuList["+i+","+j+"]に-1をいれた");
+                    menuBackgroundImage.color = notCanMakeColor;
                 }
             }
         }

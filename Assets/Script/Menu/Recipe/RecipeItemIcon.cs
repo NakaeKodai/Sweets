@@ -11,6 +11,9 @@ public class RecipeItemIcon : MonoBehaviour
     private Image image;//画像
     private GameObject icon;
     public Recipe recipeScript;
+
+    public Color canMakeColor;
+    public Color notCanMakeColor;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +37,11 @@ public class RecipeItemIcon : MonoBehaviour
             image = icon.GetComponent<Image>();
             image.sprite = sweetsDB.sweetsList[RecipeList[i+menuPage*6]].image;
             var c = image.color;
-            image.color = new Color(c.r, c.g, c.b, 255f);
+            if(sweetsDB.sweetsList[RecipeList[i]].canMake){
+                        image.color = canMakeColor;
+                    }else{
+                        image.color = notCanMakeColor;
+                    }
         }
         //空白は透明度を0にする
         for(int i = RecipePageItem; i < 6; i++){

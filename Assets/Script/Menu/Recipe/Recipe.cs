@@ -184,7 +184,11 @@ public class Recipe : MonoBehaviour
 
                 if(allMaterialsOk){
                     dataList[i].canMake = true;
-                }else dataList[i].canMake = false;
+                    sweetsDB.sweetsList[dataList[i].ID].canMake = true;
+                }else{
+                    dataList[i].canMake = false;
+                    sweetsDB.sweetsList[dataList[i].ID].canMake = false;
+                } 
 
                 //デバッグ
                 if(dataList[i].canMake){
