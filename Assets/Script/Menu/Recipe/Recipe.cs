@@ -17,7 +17,7 @@ public class Recipe : MonoBehaviour
 
     private PlayerInputAction playerInputAction;
 
-    string sortState = "ID";//ID順ならID,名前順はname,所字数順はquantity
+    string sortState = "ID";//ID順ならID,名前順はname,作成可能順はcanMake
     List<int> RecipeList = new List<int>();//所持アイテムだけのリスト（IDだけ）
     
     public int menuPage = 0;//ページ数-1で打ってほしい(プログラムのため)
@@ -56,13 +56,13 @@ public class Recipe : MonoBehaviour
                     sortState = "name";
                     ListSort();
                 }else if(sortState == "name"){
+                    sortState = "canMake";
+                    ListSort();
+                }
+                else if(sortState == "canMake"){
                     sortState = "ID";
                     ListSort();
                 }
-                // else if(sortState == "quantity"){
-                //     sortState = "ID";
-                //     ListSort();
-                // }
             }
             else if(playerInputAction.UI.MenuPageRight.triggered){
                 TurnMenuPage(1);
@@ -80,11 +80,13 @@ public class Recipe : MonoBehaviour
                 AutoSetDataList();
             // }
 
+            CanMakeSet();
+
              RecipeList.Clear();
             for(int i = 0; i < dataList.Count; i++){
-                    if(dataList[i].canMake){//アイテムの所字数が0じゃなければBackpackListに追加する
+                    // if(dataList[i].canMake){
                         RecipeList.Add(dataList[i].ID);
-                    }
+                    // }
                 }
 
             recipeItemIcon.RecipeIconSetting(RecipeList);
@@ -98,12 +100,10 @@ public class Recipe : MonoBehaviour
         if(sortState == "ID"){
             dataList.Sort((a,b) => a.ID - b.ID);
             RecipeList.Clear();
-            int j = 0;//インベントリのリスト用
             for(int i = 0; i < dataList.Count; i++){
-                if(dataList[i].canMake){//アイテムの所字数が0じゃなければBackpackListに追加する
+                // if(dataList[i].canMake){
                     RecipeList.Add(dataList[i].ID);
-                    j++;
-                }
+                // }
             }
             //アイコンの代入を行うスクリプトにBackpackListを投げたのち、UIを表示させる
             recipeItemIcon.RecipeIconSetting(RecipeList);
@@ -113,33 +113,44 @@ public class Recipe : MonoBehaviour
         }else if(sortState == "name"){
             dataList.Sort((a,b) => string.Compare(a.name, b.name));
             RecipeList.Clear();
-            int j = 0;//インベントリのリスト用
             for(int i = 0; i < dataList.Count; i++){
-                if(dataList[i].canMake){//アイテムの所字数が0じゃなければBackpackListに追加する
+                // if(dataList[i].canMake){
                     RecipeList.Add(dataList[i].ID);
-                    j++;
-                }
+                // }
             }
             //アイコンの代入を行うスクリプトにBackpackListを投げたのち、UIを表示させる
             recipeItemIcon.RecipeIconSetting(RecipeList);
             recipeItemName.RecipeNameSetting(RecipeList);
             recipeCursor.SetmenuSelect(RecipeList);
         }
-        // else if(sortState == "quantity"){
-        //     BackpackList.Clear();
-        //     dataList.Sort((a,b) => b.quantity - a.quantity);
-        //     int j = 0;//インベントリのリスト用
-        //     for(int i = 0; i < dataList.Count; i++){
-        //         if(dataList[i].quantity != 0){//アイテムの所字数が0じゃなければBackpackListに追加する
-        //             BackpackList.Add(dataList[i].ID);
-        //             j++;
-        //         }
-        //     }
-        //     //アイコンの代入を行うスクリプトにBackpackListを投げたのち、UIを表示させる
-        //     backpackItemIcon.ItemIconSetting(BackpackList);
-        //     backpackItemQuantity.ItemQuantitySetting(BackpackList);
-        //     backpackCursor.SetmenuSelect(BackpackList);
-        // }
+        else if(sortState == "canMake"){
+            // 作成可能なスイーツと作成不可能なスイーツを分けてマージする。
+            List<int> canMakeData = new List<int>();
+            List<int> notCanMakeData = new List<int>();
+            if(dataList.Count != 0){
+                for(int i = 0; i < dataList.Count; i++){
+                    if(dataList[i].canMake) canMakeData.Add(dataList[i].ID);
+                    else notCanMakeData.Add(dataList[i].ID);
+                }
+            }
+
+            // それぞれのリストをID順に並び替える
+            canMakeData.Sort((a,b) => a-b);
+            notCanMakeData.Sort((a,b) => a-b);
+
+            // 合体
+            RecipeList.Clear();
+            for(int i = 0; i < canMakeData.Count; i++){
+                RecipeList.Add(canMakeData[i]);
+            }
+            for(int i = 0; i < notCanMakeData.Count; i++){
+                RecipeList.Add(notCanMakeData[i]);
+            }
+            //アイコンの代入を行うスクリプトにBackpackListを投げたのち、UIを表示させる
+            recipeItemIcon.RecipeIconSetting(RecipeList);
+            recipeItemName.RecipeNameSetting(RecipeList);
+            recipeCursor.SetmenuSelect(RecipeList);
+        }
     }
 
     public void TurnMenuPage(int TurnPage){//右にいくなら1,左なら-1
@@ -160,20 +171,46 @@ public class Recipe : MonoBehaviour
          dataList.Add(new ItemData(i, n, c));
     }
 
+    // 作成可能かを調べる
+    public void CanMakeSet(){
+        if(dataList.Count != 0){
+            for(int i = 0; i < dataList.Count; i++){
+                bool allMaterialsOk = true;//これがtrueのままなら全部の素材がそろっている
+                for(int j = 0; j < sweetsDB.sweetsList[dataList[i].ID].materialsList.Count; j++){
+                    if(ingredientsDB.ingredientsList[dataList[i].ID].quantity < sweetsDB.sweetsList[dataList[i].ID].materialsList[j].個数){
+                        allMaterialsOk = false;
+                    }
+                }
+
+                if(allMaterialsOk){
+                    dataList[i].canMake = true;
+                }else dataList[i].canMake = false;
+
+                //デバッグ
+                if(dataList[i].canMake){
+                    Debug.Log(sweetsDB.sweetsList[dataList[i].ID].name + "は作成可能");
+                }else{
+                    Debug.Log(sweetsDB.sweetsList[dataList[i].ID].name + "は作成不可能");
+                }
+
+            }
+        }
+    }
+
     public void AutoSetDataList(){
         dataList.Clear();
         int j = 0;//インベントリのリスト用
                 for(int i = 0; i < sweetsDB.sweetsList.Count; i++){
-                    if(sweetsDB.sweetsList[i].canMake){//アイテムの所字数が0じゃなければBackpackListに追加する
+                    // if(sweetsDB.sweetsList[i].canMake){
                         dataList.Add(new ItemData(sweetsDB.sweetsList[i].ID, sweetsDB.sweetsList[i].name, sweetsDB.sweetsList[i].canMake));
                         j++;
-                    }
+                    // }
                 }
                 for(int i = 0; i < dataList.Count; i++){
-                    if(dataList[i].canMake){//アイテムの所字数が0じゃなければBackpackListに追加する
+                    // if(dataList[i].canMake){
                         RecipeList.Add(dataList[i].ID);
                         j++;
-                    }
+                    // }
                 }
     }
 }

@@ -170,11 +170,11 @@ public class RecipeCursor : MonoBehaviour
                 // menuList[i,j] = j+8*i;
                 if(RecipeList.Count > (j+2*i + menuPage*6)){
                     menuList[i,j] = RecipeList[j+2*i + menuPage*6];
-                    Debug.Log("menuList["+i+","+j+"]に"+RecipeList[j+2*i + menuPage*6]+"をいれた");
+                    // Debug.Log("menuList["+i+","+j+"]に"+RecipeList[j+2*i + menuPage*6]+"をいれた");
                 }
                 else{
                     menuList[i,j] = -1;
-                    Debug.Log("menuList["+i+","+j+"]に-1をいれた");
+                    // Debug.Log("menuList["+i+","+j+"]に-1をいれた");
                 }
             }
         }

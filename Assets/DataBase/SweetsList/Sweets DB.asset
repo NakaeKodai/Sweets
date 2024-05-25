@@ -21,7 +21,7 @@ MonoBehaviour:
     infomation: "\u3042\u3093\u3053"
     materialsList:
     - ID: 0
-      "\u500B\u6570": 3
+      "\u500B\u6570": 2710
     - ID: 1
       "\u500B\u6570": 2
     - ID: 2
@@ -36,7 +36,7 @@ MonoBehaviour:
     - ID: 0
       "\u500B\u6570": 3
     - ID: 1
-      "\u500B\u6570": 2
+      "\u500B\u6570": 2710
     - ID: 2
       "\u500B\u6570": 1
   - ID: 2
