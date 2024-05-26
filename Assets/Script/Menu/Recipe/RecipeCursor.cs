@@ -25,6 +25,8 @@ public class RecipeCursor : MonoBehaviour
     int menuPage;
 
     public int rowNum = 10; //持ち物の横のアイコンの数
+
+    public WishListManager wishListManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -229,6 +231,14 @@ public class RecipeCursor : MonoBehaviour
                 isLongPushDown = false;
                 pushDuration = 0.3f;
             };
+
+            if(playerInputAction.UI.MenuSelect.triggered && (menuList[(nowListNumber/2), (nowListNumber%2)] != -1)){
+                int selectID = menuList[(nowListNumber/2), (nowListNumber%2)];
+                if(!sweetsDB.sweetsList[selectID].wishList){
+                    wishListManager.AddWishList(selectID);
+                    Debug.Log(sweetsDB.sweetsList[selectID].name+"をウィッシュリストに追加した。");
+                }
+            }
         }
     }
 
