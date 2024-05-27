@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class WishListManager : MonoBehaviour
 {
-    private List<int> wishList = new List<int>();
+    public List<int> wishList = new List<int>();
     public SweetsDB sweetsDB;
+    [Header("ウィッシュリストの最大数")]
+    public int wishListMax;
 
     // Start is called before the first frame update
     void Start()
@@ -21,8 +23,11 @@ public class WishListManager : MonoBehaviour
 
     // 指定したIDをウィッシュリストに追加
     public void AddWishList(int ID){
-        wishList.Add(ID);
-        sweetsDB.sweetsList[ID].wishList = true;
+        if(wishList.Count < wishListMax){
+            wishList.Add(ID);
+            sweetsDB.sweetsList[ID].wishList = true;
+            Debug.Log(sweetsDB.sweetsList[ID].name+"をウィッシュリストに追加した。");
+        }
     }
 
     // 指定したIDと一致する要素を削除

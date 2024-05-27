@@ -10,6 +10,7 @@ public class Recipe : MonoBehaviour
     public SweetsDB sweetsDB;
     public GameObject RecipeMenuObjekt;//メニューUIの表示
     public GameObject RecipeInfoObject;//説明メニューのUI
+    public GameObject WishListObject;//ウィッシュリストのオブジェクト
     public RecipeItemIcon recipeItemIcon;//アイコン設定のスクリプト
     public RecipeItemName recipeItemName;//名前設定のスクリプト
     public RecipeCursor recipeCursor;//カーソル移動のスクリプト
@@ -50,6 +51,7 @@ public class Recipe : MonoBehaviour
             if(playerInputAction.UI.OpenMenu.triggered || playerInputAction.UI.Cancel.triggered){
                 RecipeMenuObjekt.SetActive(false);
                 RecipeInfoObject.SetActive(false);
+                WishListObject.SetActive(false);
                 opening = false;
             }else if(playerInputAction.UI.Sort.triggered){
                 if(sortState == "ID"){
@@ -93,6 +95,7 @@ public class Recipe : MonoBehaviour
             recipeItemName.RecipeNameSetting(RecipeList);
             recipeCursor.SetmenuSelect(RecipeList);
             RecipeMenuObjekt.SetActive(true);
+            WishListObject.SetActive(true);
         }
     }
 

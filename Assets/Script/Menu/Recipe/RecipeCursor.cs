@@ -21,6 +21,7 @@ public class RecipeCursor : MonoBehaviour
     private float downTime = 0f;
     public Recipe recipeScript;
     public ItemInfoRecipe itemInfoRecipe;
+    public WishListIcon wishListIcon;
     public SweetsDB sweetsDB;
     int menuPage;
 
@@ -236,7 +237,7 @@ public class RecipeCursor : MonoBehaviour
                 int selectID = menuList[(nowListNumber/2), (nowListNumber%2)];
                 if(!sweetsDB.sweetsList[selectID].wishList){
                     wishListManager.AddWishList(selectID);
-                    Debug.Log(sweetsDB.sweetsList[selectID].name+"をウィッシュリストに追加した。");
+                    wishListIcon.SetWishListIcon();
                 }
             }
         }
