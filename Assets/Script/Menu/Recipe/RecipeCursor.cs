@@ -11,7 +11,8 @@ public class RecipeCursor : MonoBehaviour
     public Color nomalColor;
     public Color selectColor;
     public Color notCanMakeColor;
-    int[,] menuList = new int[3,2];
+    // int[,] menuList = new int[3,2];
+    int[] menuList = new int[6];
     private int nowListNumber = 0;
     private bool isLongPushUp;
     private bool isLongPushDown;
@@ -46,98 +47,98 @@ public class RecipeCursor : MonoBehaviour
 
             //右移動
             if(playerInputAction.UI.CursorMoveRight.triggered){
-                downTime = Time.realtimeSinceStartup;
-                isLongPushRight = true;
-                nowCursor = gameObject.transform.GetChild(nowListNumber).gameObject;
-                nowCursorImage = nowCursor.GetComponent<Image>();
-                if(menuList[(nowListNumber/2), (nowListNumber%2)] != -1){
-                    if(sweetsDB.sweetsList[menuList[(nowListNumber/2), (nowListNumber%2)]].canMake){
-                        nowCursorImage.color = nomalColor;
-                    }else{
-                        nowCursorImage.color = notCanMakeColor;
-                    }
-                }else{
-                    nowCursorImage.color = notCanMakeColor;
-                }
-                nowListNumber ++;
-                if(nowListNumber >= menuList.Length) nowListNumber = 0;
-                itemInfoRecipe.SetItemInfo(menuList[(nowListNumber/2), (nowListNumber%2)]);
+                // downTime = Time.realtimeSinceStartup;
+                // isLongPushRight = true;
+                // nowCursor = gameObject.transform.GetChild(nowListNumber).gameObject;
+                // nowCursorImage = nowCursor.GetComponent<Image>();
+                // if(menuList[(nowListNumber/2), (nowListNumber%2)] != -1){
+                //     if(sweetsDB.sweetsList[menuList[(nowListNumber/2), (nowListNumber%2)]].canMake){
+                //         nowCursorImage.color = nomalColor;
+                //     }else{
+                //         nowCursorImage.color = notCanMakeColor;
+                //     }
+                // }else{
+                //     nowCursorImage.color = notCanMakeColor;
+                // }
+                // nowListNumber ++;
+                // if(nowListNumber >= menuList.Length) nowListNumber = 0;
+                // itemInfoRecipe.SetItemInfo(menuList[(nowListNumber/2), (nowListNumber%2)]);
             }
             if(isLongPushRight)
             {
-                if(Time.realtimeSinceStartup - downTime >=  pushDuration)
-                {
-                    nowCursor = gameObject.transform.GetChild(nowListNumber).gameObject;
-                    nowCursorImage = nowCursor.GetComponent<Image>();
-                    if(menuList[(nowListNumber/2), (nowListNumber%2)] != -1){
-                        if(sweetsDB.sweetsList[menuList[(nowListNumber/2), (nowListNumber%2)]].canMake){
-                            nowCursorImage.color = nomalColor;
-                        }else{
-                            nowCursorImage.color = notCanMakeColor;
-                        }
-                    }else{
-                        nowCursorImage.color = notCanMakeColor;
-                    }
-                    nowListNumber ++;
-                    if(nowListNumber >= menuList.Length) nowListNumber = 0;
-                    itemInfoRecipe.SetItemInfo(menuList[(nowListNumber/2), (nowListNumber%2)]);
-                    pushDuration = 0.1f;
-                    downTime = Time.realtimeSinceStartup;
-                }
-            }
-            playerInputAction.UI.CursorMoveRight.canceled += ctx => {
-                isLongPushRight = false;
-                pushDuration = 0.3f;
+                // if(Time.realtimeSinceStartup - downTime >=  pushDuration)
+                // {
+                //     nowCursor = gameObject.transform.GetChild(nowListNumber).gameObject;
+                //     nowCursorImage = nowCursor.GetComponent<Image>();
+                //     if(menuList[(nowListNumber/2), (nowListNumber%2)] != -1){
+                //         if(sweetsDB.sweetsList[menuList[(nowListNumber/2), (nowListNumber%2)]].canMake){
+                //             nowCursorImage.color = nomalColor;
+                //         }else{
+                //             nowCursorImage.color = notCanMakeColor;
+                //         }
+                //     }else{
+                //         nowCursorImage.color = notCanMakeColor;
+                //     }
+                //     nowListNumber ++;
+                //     if(nowListNumber >= menuList.Length) nowListNumber = 0;
+                //     itemInfoRecipe.SetItemInfo(menuList[(nowListNumber/2), (nowListNumber%2)]);
+                //     pushDuration = 0.1f;
+                //     downTime = Time.realtimeSinceStartup;
+                // }
+            // }
+            // playerInputAction.UI.CursorMoveRight.canceled += ctx => {
+            //     isLongPushRight = false;
+            //     pushDuration = 0.3f;
             };
 
 
             //左移動
-            if(playerInputAction.UI.CursorMoveLeft.triggered){
-                downTime = Time.realtimeSinceStartup;
-                isLongPushLeft = true;
-                nowCursor = gameObject.transform.GetChild(nowListNumber).gameObject;
-                nowCursorImage = nowCursor.GetComponent<Image>();
-                if(menuList[(nowListNumber/2), (nowListNumber%2)] != -1){
-                    if(sweetsDB.sweetsList[menuList[(nowListNumber/2), (nowListNumber%2)]].canMake){
-                        nowCursorImage.color = nomalColor;
-                    }else{
-                        nowCursorImage.color = notCanMakeColor;
-                    }
+            // if(playerInputAction.UI.CursorMoveLeft.triggered){
+            //     downTime = Time.realtimeSinceStartup;
+            //     isLongPushLeft = true;
+            //     nowCursor = gameObject.transform.GetChild(nowListNumber).gameObject;
+            //     nowCursorImage = nowCursor.GetComponent<Image>();
+            //     if(menuList[(nowListNumber/2), (nowListNumber%2)] != -1){
+            //         if(sweetsDB.sweetsList[menuList[(nowListNumber/2), (nowListNumber%2)]].canMake){
+            //             nowCursorImage.color = nomalColor;
+            //         }else{
+            //             nowCursorImage.color = notCanMakeColor;
+            //         }
                     
-                }else{
-                    nowCursorImage.color = notCanMakeColor;
-                }
-                nowListNumber --;
-                if(nowListNumber < 0) nowListNumber =  menuList.Length - 1;
-                itemInfoRecipe.SetItemInfo(menuList[(nowListNumber/2), (nowListNumber%2)]);
-            }
-            if(isLongPushLeft)
-            {
-                if(Time.realtimeSinceStartup - downTime >=  pushDuration)
-                {
-                    nowCursor = gameObject.transform.GetChild(nowListNumber).gameObject;
-                    nowCursorImage = nowCursor.GetComponent<Image>();
-                    if(menuList[(nowListNumber/2), (nowListNumber%2)] != -1){
-                        if(sweetsDB.sweetsList[menuList[(nowListNumber/2), (nowListNumber%2)]].canMake){
-                            nowCursorImage.color = nomalColor;
-                        }else{
-                            nowCursorImage.color = notCanMakeColor;
-                        }
+            //     }else{
+            //         nowCursorImage.color = notCanMakeColor;
+            //     }
+            //     nowListNumber --;
+            //     if(nowListNumber < 0) nowListNumber =  menuList.Length - 1;
+            //     itemInfoRecipe.SetItemInfo(menuList[(nowListNumber/2), (nowListNumber%2)]);
+            // }
+            // if(isLongPushLeft)
+            // {
+            //     if(Time.realtimeSinceStartup - downTime >=  pushDuration)
+            //     {
+            //         nowCursor = gameObject.transform.GetChild(nowListNumber).gameObject;
+            //         nowCursorImage = nowCursor.GetComponent<Image>();
+            //         if(menuList[(nowListNumber/2), (nowListNumber%2)] != -1){
+            //             if(sweetsDB.sweetsList[menuList[(nowListNumber/2), (nowListNumber%2)]].canMake){
+            //                 nowCursorImage.color = nomalColor;
+            //             }else{
+            //                 nowCursorImage.color = notCanMakeColor;
+            //             }
                     
-                    }else{
-                        nowCursorImage.color = notCanMakeColor;
-                    }
-                    nowListNumber --;
-                    if(nowListNumber < 0) nowListNumber =  menuList.Length - 1;
-                    itemInfoRecipe.SetItemInfo(menuList[(nowListNumber/2), (nowListNumber%2)]);
-                    pushDuration = 0.1f;
-                    downTime = Time.realtimeSinceStartup;
-                }
-            }
-            playerInputAction.UI.CursorMoveLeft.canceled += ctx => {
-                isLongPushLeft = false;
-                pushDuration = 0.3f;
-            };
+            //         }else{
+            //             nowCursorImage.color = notCanMakeColor;
+            //         }
+            //         nowListNumber --;
+            //         if(nowListNumber < 0) nowListNumber =  menuList.Length - 1;
+            //         itemInfoRecipe.SetItemInfo(menuList[(nowListNumber/2), (nowListNumber%2)]);
+            //         pushDuration = 0.1f;
+            //         downTime = Time.realtimeSinceStartup;
+            //     }
+            // }
+            // playerInputAction.UI.CursorMoveLeft.canceled += ctx => {
+            //     isLongPushLeft = false;
+            //     pushDuration = 0.3f;
+            // };
 
 
             //上移動
@@ -146,8 +147,23 @@ public class RecipeCursor : MonoBehaviour
                 isLongPushUp = true;
                 nowCursor = gameObject.transform.GetChild(nowListNumber).gameObject;
                 nowCursorImage = nowCursor.GetComponent<Image>();
-                if(menuList[(nowListNumber/2), (nowListNumber%2)] != -1){
-                    if(sweetsDB.sweetsList[menuList[(nowListNumber/2), (nowListNumber%2)]].canMake){
+                // 二次元配列用
+                // if(menuList[(nowListNumber/2), (nowListNumber%2)] != -1){
+                //     if(sweetsDB.sweetsList[menuList[(nowListNumber/2), (nowListNumber%2)]].canMake){
+                //         nowCursorImage.color = nomalColor;
+                //     }else{
+                //         nowCursorImage.color = notCanMakeColor;
+                //     }
+                // }else{
+                //     nowCursorImage.color = notCanMakeColor;
+                // }
+                // nowListNumber -= rowNum;
+                // if(nowListNumber < 0) nowListNumber +=  menuList.Length;
+                // itemInfoRecipe.SetItemInfo(menuList[(nowListNumber/2), (nowListNumber%2)]);
+
+                // 一次元配列用
+                if(menuList[nowListNumber] != -1){
+                    if(sweetsDB.sweetsList[menuList[nowListNumber]].canMake){
                         nowCursorImage.color = nomalColor;
                     }else{
                         nowCursorImage.color = notCanMakeColor;
@@ -155,9 +171,9 @@ public class RecipeCursor : MonoBehaviour
                 }else{
                     nowCursorImage.color = notCanMakeColor;
                 }
-                nowListNumber -= rowNum;
+                nowListNumber --;
                 if(nowListNumber < 0) nowListNumber +=  menuList.Length;
-                itemInfoRecipe.SetItemInfo(menuList[(nowListNumber/2), (nowListNumber%2)]);
+                itemInfoRecipe.SetItemInfo(menuList[nowListNumber]);
             }
             if(isLongPushUp)
             {
@@ -165,8 +181,23 @@ public class RecipeCursor : MonoBehaviour
                 {
                     nowCursor = gameObject.transform.GetChild(nowListNumber).gameObject;
                     nowCursorImage = nowCursor.GetComponent<Image>();
-                    if(menuList[(nowListNumber/2), (nowListNumber%2)] != -1){
-                        if(sweetsDB.sweetsList[menuList[(nowListNumber/2), (nowListNumber%2)]].canMake){
+                    // 二次元配列用
+                    // if(menuList[(nowListNumber/2), (nowListNumber%2)] != -1){
+                    //     if(sweetsDB.sweetsList[menuList[(nowListNumber/2), (nowListNumber%2)]].canMake){
+                    //         nowCursorImage.color = nomalColor;
+                    //     }else{
+                    //         nowCursorImage.color = notCanMakeColor;
+                    //     }
+                    // }else{
+                    //     nowCursorImage.color = notCanMakeColor;
+                    // }
+                    // nowListNumber -= rowNum;
+                    // if(nowListNumber < 0) nowListNumber +=  menuList.Length;
+                    // itemInfoRecipe.SetItemInfo(menuList[(nowListNumber/2), (nowListNumber%2)]);
+
+                    // 一次元配列用
+                    if(menuList[nowListNumber] != -1){
+                        if(sweetsDB.sweetsList[menuList[nowListNumber]].canMake){
                             nowCursorImage.color = nomalColor;
                         }else{
                             nowCursorImage.color = notCanMakeColor;
@@ -174,9 +205,10 @@ public class RecipeCursor : MonoBehaviour
                     }else{
                         nowCursorImage.color = notCanMakeColor;
                     }
-                    nowListNumber -= rowNum;
+                    nowListNumber --;
                     if(nowListNumber < 0) nowListNumber +=  menuList.Length;
-                    itemInfoRecipe.SetItemInfo(menuList[(nowListNumber/2), (nowListNumber%2)]);
+                    itemInfoRecipe.SetItemInfo(menuList[nowListNumber]);
+
                     pushDuration = 0.1f;
                     downTime = Time.realtimeSinceStartup;
                 }
@@ -193,8 +225,23 @@ public class RecipeCursor : MonoBehaviour
                 isLongPushDown = true;
                 nowCursor = gameObject.transform.GetChild(nowListNumber).gameObject;
                 nowCursorImage = nowCursor.GetComponent<Image>();
-                if(menuList[(nowListNumber/2), (nowListNumber%2)] != -1){
-                    if(sweetsDB.sweetsList[menuList[(nowListNumber/2), (nowListNumber%2)]].canMake){
+                // 二次元配列
+                // if(menuList[(nowListNumber/2), (nowListNumber%2)] != -1){
+                //     if(sweetsDB.sweetsList[menuList[(nowListNumber/2), (nowListNumber%2)]].canMake){
+                //         nowCursorImage.color = nomalColor;
+                //     }else{
+                //         nowCursorImage.color = notCanMakeColor;
+                //     }
+                // }else{
+                //     nowCursorImage.color = notCanMakeColor;
+                // }
+                // nowListNumber += rowNum;
+                // if(nowListNumber >= menuList.Length) nowListNumber -= menuList.Length;
+                // itemInfoRecipe.SetItemInfo(menuList[(nowListNumber/2), (nowListNumber%2)]);
+
+                // 一次元配列
+                if(menuList[nowListNumber] != -1){
+                    if(sweetsDB.sweetsList[menuList[nowListNumber]].canMake){
                         nowCursorImage.color = nomalColor;
                     }else{
                         nowCursorImage.color = notCanMakeColor;
@@ -202,9 +249,9 @@ public class RecipeCursor : MonoBehaviour
                 }else{
                     nowCursorImage.color = notCanMakeColor;
                 }
-                nowListNumber += rowNum;
+                nowListNumber ++;
                 if(nowListNumber >= menuList.Length) nowListNumber -= menuList.Length;
-                itemInfoRecipe.SetItemInfo(menuList[(nowListNumber/2), (nowListNumber%2)]);
+                itemInfoRecipe.SetItemInfo(menuList[nowListNumber]);
             }
             if(isLongPushDown)
             {
@@ -212,8 +259,23 @@ public class RecipeCursor : MonoBehaviour
                 {
                     nowCursor = gameObject.transform.GetChild(nowListNumber).gameObject;
                     nowCursorImage = nowCursor.GetComponent<Image>();
-                    if(menuList[(nowListNumber/2), (nowListNumber%2)] != -1){
-                        if(sweetsDB.sweetsList[menuList[(nowListNumber/2), (nowListNumber%2)]].canMake){
+                    // 二次元配列
+                    // if(menuList[(nowListNumber/2), (nowListNumber%2)] != -1){
+                    //     if(sweetsDB.sweetsList[menuList[(nowListNumber/2), (nowListNumber%2)]].canMake){
+                    //         nowCursorImage.color = nomalColor;
+                    //     }else{
+                    //         nowCursorImage.color = notCanMakeColor;
+                    //     }
+                    // }else{
+                    //     nowCursorImage.color = notCanMakeColor;
+                    // }
+                    // nowListNumber += rowNum;
+                    // if(nowListNumber >= menuList.Length) nowListNumber -= menuList.Length;
+                    // itemInfoRecipe.SetItemInfo(menuList[(nowListNumber/2), (nowListNumber%2)]);
+
+                    // 一次元配列
+                    if(menuList[nowListNumber] != -1){
+                        if(sweetsDB.sweetsList[menuList[nowListNumber]].canMake){
                             nowCursorImage.color = nomalColor;
                         }else{
                             nowCursorImage.color = notCanMakeColor;
@@ -221,9 +283,10 @@ public class RecipeCursor : MonoBehaviour
                     }else{
                         nowCursorImage.color = notCanMakeColor;
                     }
-                    nowListNumber += rowNum;
+                    nowListNumber ++;
                     if(nowListNumber >= menuList.Length) nowListNumber -= menuList.Length;
-                    itemInfoRecipe.SetItemInfo(menuList[(nowListNumber/2), (nowListNumber%2)]);
+                    itemInfoRecipe.SetItemInfo(menuList[nowListNumber]);
+
                     pushDuration = 0.1f;
                     downTime = Time.realtimeSinceStartup;
                 }
@@ -233,8 +296,18 @@ public class RecipeCursor : MonoBehaviour
                 pushDuration = 0.3f;
             };
 
-            if(playerInputAction.UI.MenuSelect.triggered && (menuList[(nowListNumber/2), (nowListNumber%2)] != -1)){
-                int selectID = menuList[(nowListNumber/2), (nowListNumber%2)];
+            // 二次元配列
+            // if(playerInputAction.UI.MenuSelect.triggered && (menuList[(nowListNumber/2), (nowListNumber%2)] != -1)){
+            //     int selectID = menuList[(nowListNumber/2), (nowListNumber%2)];
+            //     if(!sweetsDB.sweetsList[selectID].wishList){
+            //         wishListManager.AddWishList(selectID);
+            //         wishListIcon.SetWishListIcon();
+            //     }
+            // }
+
+            // 一次元配列
+            if(playerInputAction.UI.MenuSelect.triggered && (menuList[nowListNumber] != -1)){
+                int selectID = menuList[nowListNumber];
                 if(!sweetsDB.sweetsList[selectID].wishList){
                     wishListManager.AddWishList(selectID);
                     wishListIcon.SetWishListIcon();
@@ -245,15 +318,39 @@ public class RecipeCursor : MonoBehaviour
 
     public void SetmenuSelect(List<int> RecipeList){
         menuPage = recipeScript.menuPage;
-        for(int i = 0; i < 3; i++){
-            for(int j = 0; j < 2; j++){
-                GameObject menuBackground;// 背景色の設定用
-                Image menuBackgroundImage;
-                menuBackground = gameObject.transform.GetChild(j+2*i).gameObject;
-                menuBackgroundImage = menuBackground.GetComponent<Image>();
-                if(RecipeList.Count > (j+2*i + menuPage*6)){
-                    menuList[i,j] = RecipeList[j+2*i + menuPage*6];
-                    if(sweetsDB.sweetsList[menuList[i, j]].canMake){
+        // 二次元配列用のプログラム
+        // for(int i = 0; i < 3; i++){
+        //     for(int j = 0; j < 2; j++){
+        //         GameObject menuBackground;// 背景色の設定用
+        //         Image menuBackgroundImage;
+        //         menuBackground = gameObject.transform.GetChild(j+2*i).gameObject;
+        //         menuBackgroundImage = menuBackground.GetComponent<Image>();
+                // if(RecipeList.Count > (j+2*i + menuPage*6)){
+                //     menuList[i,j] = RecipeList[j+2*i + menuPage*6];
+                //     if(sweetsDB.sweetsList[menuList[i, j]].canMake){
+                //         menuBackgroundImage.color = nomalColor;
+                //     }else{
+                //         menuBackgroundImage.color = notCanMakeColor;
+                //     }
+                    
+                // }
+                // else{
+                //     menuList[i,j] = -1;
+                //     menuBackgroundImage.color = notCanMakeColor;
+                // }
+        //     }
+        // }
+        // itemInfoRecipe.SetItemInfo(menuList[(nowListNumber/2), (nowListNumber%2)]);
+
+        // 一次元配列用
+        for(int i = 0; i < 6; i++){
+            GameObject menuBackground;// 背景色の設定用
+            Image menuBackgroundImage;
+            menuBackground = gameObject.transform.GetChild(i).gameObject;
+            menuBackgroundImage = menuBackground.GetComponent<Image>();
+            if(RecipeList.Count > (i + menuPage*6)){
+                    menuList[i] = RecipeList[i + menuPage*6];
+                    if(sweetsDB.sweetsList[menuList[i]].canMake){
                         menuBackgroundImage.color = nomalColor;
                     }else{
                         menuBackgroundImage.color = notCanMakeColor;
@@ -261,11 +358,10 @@ public class RecipeCursor : MonoBehaviour
                     
                 }
                 else{
-                    menuList[i,j] = -1;
+                    menuList[i] = -1;
                     menuBackgroundImage.color = notCanMakeColor;
                 }
-            }
         }
-        itemInfoRecipe.SetItemInfo(menuList[(nowListNumber/2), (nowListNumber%2)]);
+        itemInfoRecipe.SetItemInfo(menuList[nowListNumber]);
     }
 }
