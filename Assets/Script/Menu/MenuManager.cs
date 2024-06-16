@@ -13,12 +13,13 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject menuWindow;
     [SerializeField] private Button[] menuList;//メニューウィンドウのボタンを格納しているリスト
     private int selectBottuonNum;//選択中のボタンのリスト番号
+    private int beforeCursorNum = -1;
     private Button selectBottuon;//今選択中のボタン
     private Image buttonImage;
     public bool selectMenuNow;//メニュー項目が選択されているかを判別
     private bool isLongPushUp;
     private bool isLongPushDown;
-    private  float pushDuration = 0.3f;
+    private float pushDuration = 0.3f;
     private float downTime = 0f;
 
     public Color nomalColor;
@@ -36,58 +37,64 @@ public class MenuManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!gameManager.pause && playerInputAction.UI.OpenMenu.triggered){
+        if (!gameManager.pause && playerInputAction.UI.OpenMenu.triggered)
+        {
             menuWindow.SetActive(true);
             Time.timeScale = 0;
             gameManager.pause = true;
             isMenu = true;
-            selectBottuonNum = 0;
+            // selectBottuonNum = 0;
             Debug.Log("ザ・ワールド！");
         }
-        else if((gameManager.pause && playerInputAction.UI.OpenMenu.triggered) || (gameManager.pause && playerInputAction.UI.Cancel.triggered && !selectMenuNow)){
-                menuWindow.SetActive(false);
-                Time.timeScale = 1;
-                gameManager.pause = false;
-                isMenu = false;
-                selectBottuon = menuList[selectBottuonNum];
-                Image buttonImage = selectBottuon.GetComponent<Image>();
-                buttonImage.color = nomalColor;
-                selectMenuNow = false;
-                Debug.Log("そして時は動き出す");
-        } 
-        
-
-        if(isMenu && !selectMenuNow)
+        else if ((gameManager.pause && playerInputAction.UI.OpenMenu.triggered) || (gameManager.pause && playerInputAction.UI.Cancel.triggered && !selectMenuNow))
         {
-            selectBottuon = menuList[selectBottuonNum];
-            buttonImage = selectBottuon.GetComponent<Image>();
-            buttonImage.color = selectColor;
-            
+            menuWindow.SetActive(false);
+            Time.timeScale = 1;
+            gameManager.pause = false;
+            isMenu = false;
+            // selectBottuon = menuList[selectBottuonNum];
+            // Image buttonImage = selectBottuon.GetComponent<Image>();
+            // buttonImage.color = nomalColor;
+            selectMenuNow = false;
+            Debug.Log("そして時は動き出す");
+        }
+
+
+        if (isMenu && !selectMenuNow)
+        {
+            if (beforeCursorNum != selectBottuonNum)
+            {
+                selectBottuon = menuList[selectBottuonNum];
+                buttonImage = selectBottuon.GetComponent<Image>();
+                beforeCursorNum = selectBottuonNum;
+                buttonImage.color = selectColor;
+            }
+
 
 
             //上ボタン
-            if(playerInputAction.UI.CursorMoveUp.triggered)
+            if (playerInputAction.UI.CursorMoveUp.triggered)
             {
                 downTime = Time.realtimeSinceStartup;
                 isLongPushUp = true;
                 selectBottuon = menuList[selectBottuonNum];
                 buttonImage = selectBottuon.GetComponent<Image>();
                 buttonImage.color = nomalColor;
-                selectBottuonNum --;
-                if(selectBottuonNum < 0)
+                selectBottuonNum--;
+                if (selectBottuonNum < 0)
                 {
                     selectBottuonNum = menuList.Length - 1;
-                } 
+                }
             }
-            if(isLongPushUp)
+            if (isLongPushUp)
             {
-                if(Time.realtimeSinceStartup - downTime >=  pushDuration)
+                if (Time.realtimeSinceStartup - downTime >= pushDuration)
                 {
                     selectBottuon = menuList[selectBottuonNum];
                     buttonImage = selectBottuon.GetComponent<Image>();
                     buttonImage.color = nomalColor;
-                    selectBottuonNum --;
-                    if(selectBottuonNum < 0)
+                    selectBottuonNum--;
+                    if (selectBottuonNum < 0)
                     {
                         selectBottuonNum = menuList.Length - 1;
                     }
@@ -95,34 +102,35 @@ public class MenuManager : MonoBehaviour
                     downTime = Time.realtimeSinceStartup;
                 }
             }
-            playerInputAction.UI.CursorMoveUp.canceled += ctx => {
+            playerInputAction.UI.CursorMoveUp.canceled += ctx =>
+            {
                 isLongPushUp = false;
                 pushDuration = 0.3f;
             };
-            
+
             //下ボタン
-            if(playerInputAction.UI.CursorMoveDown.triggered)
+            if (playerInputAction.UI.CursorMoveDown.triggered)
             {
                 downTime = Time.realtimeSinceStartup;
                 isLongPushDown = true;
                 selectBottuon = menuList[selectBottuonNum];
                 buttonImage = selectBottuon.GetComponent<Image>();
                 buttonImage.color = nomalColor;
-                selectBottuonNum ++;
-                if(selectBottuonNum >= menuList.Length)
+                selectBottuonNum++;
+                if (selectBottuonNum >= menuList.Length)
                 {
                     selectBottuonNum = 0;
                 }
             }
-            if(isLongPushDown)
+            if (isLongPushDown)
             {
-                if(Time.realtimeSinceStartup - downTime >=  pushDuration)
+                if (Time.realtimeSinceStartup - downTime >= pushDuration)
                 {
                     selectBottuon = menuList[selectBottuonNum];
                     buttonImage = selectBottuon.GetComponent<Image>();
                     buttonImage.color = nomalColor;
-                    selectBottuonNum ++;
-                    if(selectBottuonNum >= menuList.Length)
+                    selectBottuonNum++;
+                    if (selectBottuonNum >= menuList.Length)
                     {
                         selectBottuonNum = 0;
                     }
@@ -130,27 +138,59 @@ public class MenuManager : MonoBehaviour
                     downTime = Time.realtimeSinceStartup;
                 }
             }
-            playerInputAction.UI.CursorMoveDown.canceled += ctx => {
+            playerInputAction.UI.CursorMoveDown.canceled += ctx =>
+            {
                 isLongPushDown = false;
                 pushDuration = 0.3f;
             };
 
 
             // アイテムを開く項目
-            if(selectBottuonNum == 0 && playerInputAction.UI.MenuSelect.triggered){
-                selectMenuNow = true;
-                menuWindow.SetActive(false);
-                Debug.Log("アイテム開く");
-                backpackScript.OpenBackpack();
+            if (playerInputAction.UI.MenuSelect.triggered)
+            {
+                switch (selectBottuonNum)
+                {
+                    case 0:
+                        selectMenuNow = true;
+                        menuWindow.SetActive(false);
+                        Debug.Log("アイテム開く");
+                        backpackScript.OpenBackpack();
+                        break;
+                    case 1:
+                        selectMenuNow = true;
+                        menuWindow.SetActive(false);
+                        recipeScript.OpenRecipe();
+                        break;
+                    case 2:
+                        Debug.Log("依頼一覧");
+                        break;
+                    case 3:
+                        Debug.Log("設定");
+                        break;
+                    case 4:
+                        Debug.Log("セーブ");
+                        gameManager.Save();
+                        break;
+                }
             }
-            else if(selectBottuonNum == 1 && playerInputAction.UI.MenuSelect.triggered){
-                selectMenuNow = true;
-                menuWindow.SetActive(false);
-                recipeScript.OpenRecipe();
-            }
+            // if (selectBottuonNum == 0 && playerInputAction.UI.MenuSelect.triggered)
+            // {
+            //     selectMenuNow = true;
+            //     menuWindow.SetActive(false);
+            //     Debug.Log("アイテム開く");
+            //     backpackScript.OpenBackpack();
+            // }
+            // else if (selectBottuonNum == 1 && playerInputAction.UI.MenuSelect.triggered)
+            // {
+            //     selectMenuNow = true;
+            //     menuWindow.SetActive(false);
+            //     recipeScript.OpenRecipe();
+            // }
         }
-        else if(isMenu && selectMenuNow){//メニュー項目を開いてるときになんか使えそうだから現在放置
-            if(playerInputAction.UI.OpenMenu.triggered || playerInputAction.UI.Cancel.triggered){
+        else if (isMenu && selectMenuNow)
+        {//メニュー項目を開いてるときになんか使えそうだから現在放置
+            if (playerInputAction.UI.OpenMenu.triggered || playerInputAction.UI.Cancel.triggered)
+            {
                 selectMenuNow = false;
                 menuWindow.SetActive(true);
             }
