@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 [System.Serializable]
 public class SaveData
@@ -11,13 +12,31 @@ public class SaveData
 public class GameManager : MonoBehaviour
 {
 
+    [SerializeField] private Transform player;
+    public bool pause = false;
+
     void Start()
     {
         Load();
     }
 
-    [SerializeField] private Transform player;
-    public bool pause = false;
+    void Update()
+    {
+        //後に消す
+        if(Input.GetKeyDown(KeyCode.K))
+        {
+            Save();
+        }
+        if(Input.GetKeyDown(KeyCode.L))
+        {
+            Load();
+        }
+    }
+
+    private string GetFilePath()
+    {
+        return Path.Combine(Application.persistentDataPath, "SaveData.json");
+    }
 
     public void Save()
     {
@@ -28,16 +47,18 @@ public class GameManager : MonoBehaviour
 
         string json = JsonUtility.ToJson(data,true);
         Debug.Log(json);
+        File.WriteAllText(GetFilePath(),json);
 
-        PlayerPrefs.SetString("SaveData", json);
-        PlayerPrefs.Save();
+        // PlayerPrefs.SetString("SaveData", json);
+        // PlayerPrefs.Save();
     }
 
     public void Load()
     {
-        if(PlayerPrefs.HasKey("SaveData"))
+        string path = GetFilePath();
+        if(File.Exists(path))
         {
-            string json = PlayerPrefs.GetString("SaveData");
+            string json = File.ReadAllText(path);
             SaveData data = JsonUtility.FromJson<SaveData>(json);
             player.position = data.position;
         }
@@ -45,5 +66,20 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("SaveDataが存在しません");
         }
+        // if(PlayerPrefs.HasKey("SaveData"))
+        // {
+        //     string json = PlayerPrefs.GetString("SaveData");
+        //     SaveData data = JsonUtility.FromJson<SaveData>(json);
+        //     player.position = data.position;
+        // }
+        // else
+        // {
+        //     Debug.Log("SaveDataが存在しません");
+        // }
+    }
+
+    private void OnApplicationQuit()
+    {
+        Save();
     }
 }
