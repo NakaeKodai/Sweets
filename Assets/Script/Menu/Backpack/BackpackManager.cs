@@ -115,7 +115,7 @@ public class BackpackManager : MonoBehaviour
 
             ItemSetting(BackpackList);
             // ItemQuantitySetting(BackpackList);
-            // SetmenuSelect(BackpackList);
+            SetmenuSelect(BackpackList);
             gameObject.SetActive(true);
         }
     }
@@ -144,8 +144,8 @@ public class BackpackManager : MonoBehaviour
             }
             //アイコンの代入を行うスクリプトにBackpackListを投げたのち、UIを表示させる
         }else if(sortState == "quantity"){
-            BackpackList.Clear();
             dataList.Sort((a,b) => b.quantity - a.quantity);
+            BackpackList.Clear();
             int j = 0;//インベントリのリスト用
             for(int i = 0; i < dataList.Count; i++){
                 if(dataList[i].quantity != 0){//アイテムの所字数が0じゃなければBackpackListに追加する
@@ -217,7 +217,7 @@ public class BackpackManager : MonoBehaviour
             // image.sprite = ingredientsDB.ingredientsList[0].image;
             icon = backGround.transform.GetChild(1).gameObject;
             text = icon.GetComponent<TextMeshProUGUI>();
-            text.text = ingredientsDB.ingredientsList[BackpackList[i]+menuPage*40].quantity.ToString();
+            text.text = ingredientsDB.ingredientsList[BackpackList[i+menuPage*40]].quantity.ToString();
             var c = image.color;
             image.color = new Color(c.r, c.g, c.b, 255f);
             c = text.color;
