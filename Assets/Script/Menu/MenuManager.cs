@@ -28,6 +28,7 @@ public class MenuManager : MonoBehaviour
     public Backpack backpackScript;
     public BackpackManager backpackManager;
     public Recipe recipeScript;
+    public RecipeManager recipeMAnager;
 
     void Start()
     {
@@ -161,7 +162,8 @@ public class MenuManager : MonoBehaviour
                     case 1:
                         selectMenuNow = true;
                         menuWindow.SetActive(false);
-                        recipeScript.OpenRecipe();
+                        recipeMAnager.OpenRecipe();
+                        // recipeScript.OpenRecipe();
                         break;
                     case 2:
                         Debug.Log("依頼一覧");
