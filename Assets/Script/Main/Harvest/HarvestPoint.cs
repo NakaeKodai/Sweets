@@ -12,6 +12,7 @@ public class HarvestPoint : MonoBehaviour
     bool HarvestPointKiller = false;
     public int harvestCount;//採取する回数
     public Backpack backpackScript;
+    public BackpackManager backpackManager;
 
 
     // Start is called before the first frame update
@@ -30,20 +31,20 @@ public class HarvestPoint : MonoBehaviour
     public void Harvesting(){
         // 取得できるアイテムの乱数設定
         int selectItemId = HarvestList[0].Id;
-            int[] itemPercent = new int[1000];
-            int listNumber = 0;
-            int listPercentNum = 0;
-            // itemPercentにListのpercent*10の分の要素にIDを入れることで乱数をやりやすくしている
-            for(int l = 0; l < 1000; l++){
-                if(listNumber < HarvestList.Count){
-                    itemPercent[l] = HarvestList[listNumber].Id;
-                    if(l == (int)(HarvestList[listNumber].percent * 10) + listPercentNum - 1){
-                    listPercentNum += (int)(HarvestList[listNumber].percent * 10);
-                    listNumber++;
+        int[] itemPercent = new int[1000];
+        int listNumber = 0;
+        int listPercentNum = 0;
+        // itemPercentにListのpercent*10の分の要素にIDを入れることで乱数をやりやすくしている
+        for(int l = 0; l < 1000; l++){
+            if(listNumber < HarvestList.Count){
+                itemPercent[l] = HarvestList[listNumber].Id;
+                if(l == (int)(HarvestList[listNumber].percent * 10) + listPercentNum - 1){
+                listPercentNum += (int)(HarvestList[listNumber].percent * 10);
+                listNumber++;
                 }
-                } 
-                else itemPercent[l] = -1;
-            }
+            } 
+            else itemPercent[l] = -1;
+        }
 
         // アイテム採取の乱数決定
         for(int i = 0; i < harvestCount; i++){
@@ -75,7 +76,8 @@ public class HarvestPoint : MonoBehaviour
             
             // 所持していないアイテムを取得したときに持ち物欄に加える
             if(ingredientsDB.ingredientsList[selectItemId].quantity == 0){
-                backpackScript.AddDataList(ingredientsDB.ingredientsList[selectItemId].ID, ingredientsDB.ingredientsList[selectItemId].name, amount);
+                // backpackScript.AddDataList(ingredientsDB.ingredientsList[selectItemId].ID, ingredientsDB.ingredientsList[selectItemId].name, amount);
+                backpackManager.AddDataList(ingredientsDB.ingredientsList[selectItemId].ID, ingredientsDB.ingredientsList[selectItemId].name, amount);
             }
 
             ingredientsDB.ingredientsList[selectItemId].quantity += amount;//採取した個数分をアイテムの個数に追加

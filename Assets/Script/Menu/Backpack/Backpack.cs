@@ -179,17 +179,17 @@ public class Backpack : MonoBehaviour
     public void AutoSetDataList(){
         dataList.Clear();
         int j = 0;//インベントリのリスト用
-                for(int i = 0; i < ingredientsDB.ingredientsList.Count; i++){
-                    if(ingredientsDB.ingredientsList[i].quantity != 0){//アイテムの所字数が0じゃなければBackpackListに追加する
-                        dataList.Add(new ItemData(ingredientsDB.ingredientsList[i].ID, ingredientsDB.ingredientsList[i].name, ingredientsDB.ingredientsList[i].quantity));
-                        j++;
-                    }
-                }
-                for(int i = 0; i < dataList.Count; i++){
-                    if(dataList[i].quantity != 0){//アイテムの所字数が0じゃなければBackpackListに追加する
-                        BackpackList.Add(dataList[i].ID);
-                        j++;
-                    }
-                }
+        for(int i = 0; i < ingredientsDB.ingredientsList.Count; i++){
+            if(ingredientsDB.ingredientsList[i].quantity != 0){//アイテムの所字数が0じゃなければBackpackListに追加する
+                dataList.Add(new ItemData(ingredientsDB.ingredientsList[i].ID, ingredientsDB.ingredientsList[i].name, ingredientsDB.ingredientsList[i].quantity));
+                j++;
+            }
+        }
+        for(int i = 0; i < dataList.Count; i++){
+            if(dataList[i].quantity != 0){//アイテムの所字数が0じゃなければBackpackListに追加する
+                BackpackList.Add(dataList[i].ID);
+                j++;
+            }
+        }
     }
 }
