@@ -49,10 +49,7 @@ public class WishListManager : MonoBehaviour
         return wishList[number];
     }
 
-    public void OpenWithListInRecipe(){
-        SetWishListIcon();
-    }
-
+    // レシピのとこ用のアイコンだけ表示
     public void SetWishListIcon(){
         // 見やすくするために別スクリプトの物を置いておく
         // int wishListMax = wishListMax;
