@@ -104,6 +104,7 @@ public class RecipeManager : MonoBehaviour
         MoveCursor();
     }
 
+    //レシピのメニューを開いたときに起動する
     public void OpenRecipe()
     {
         if (!opening)
@@ -132,6 +133,7 @@ public class RecipeManager : MonoBehaviour
     }
 
 
+    // メニュー項目のレシピをリストから取り出す
     public void RecipeSetting(List<int> RecipeList)
     {
         int RecipePageItem = RecipeList.Count - 6 * menuPage;
@@ -174,6 +176,7 @@ public class RecipeManager : MonoBehaviour
         }
     }
 
+    // レシピのリストをソートする
     public void ListSort()
     {
         if (sortState == "ID")
@@ -242,6 +245,7 @@ public class RecipeManager : MonoBehaviour
         }
     }
 
+    // ページ遷移が行われたときに項目を切り替える
     public void TurnMenuPage(int TurnPage)
     {//右にいくなら1,左なら-1
         menuPage += TurnPage;
@@ -264,6 +268,7 @@ public class RecipeManager : MonoBehaviour
         dataList.Add(new ItemData(i, n, c));
     }
 
+    // そのスイーツが作成可能かを設定する
     public void CanMakeSet()
     {
         if (dataList.Count != 0)
@@ -304,6 +309,7 @@ public class RecipeManager : MonoBehaviour
         }
     }
 
+    // 自動的にレシピを追加する(デバッグ用)
     public void AutoSetDataList()
     {
         dataList.Clear();
@@ -324,7 +330,7 @@ public class RecipeManager : MonoBehaviour
         }
     }
 
-
+    // メニューのカーソルを移動する
     void MoveCursor()
     {
         if (beforeListNum != nowListNumber)
@@ -541,6 +547,7 @@ public class RecipeManager : MonoBehaviour
         }
     }
 
+    // レシピのIDの配列を作成する
     public void SetmenuSelect(List<int> RecipeList){
         // 二次元配列用のプログラム
         // for(int i = 0; i < 3; i++){
