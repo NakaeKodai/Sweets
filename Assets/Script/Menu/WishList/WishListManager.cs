@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WishListManager : MonoBehaviour
 {
@@ -8,6 +9,13 @@ public class WishListManager : MonoBehaviour
     public SweetsDB sweetsDB;
     [Header("ウィッシュリストの最大数")]
     public int wishListMax;
+
+    public GameObject background;
+    private GameObject frame;
+    private Image image;//画像
+    private GameObject icon;
+
+    public Sprite nomalIcon;
 
     // Start is called before the first frame update
     void Start()
@@ -39,5 +47,30 @@ public class WishListManager : MonoBehaviour
     // 指定した数字の要素を取得する。
     public int GiveWithList(int number){
         return wishList[number];
+    }
+
+    public void OpenWithListInRecipe(){
+        SetWishListIcon();
+    }
+
+    public void SetWishListIcon(){
+        // 見やすくするために別スクリプトの物を置いておく
+        // int wishListMax = wishListMax;
+        for(int i = 0; i < wishListMax; i++){
+            if(i < wishList.Count){
+                // icon = gameObject.transform.GetChild(i).gameObject;
+                frame = background.transform.GetChild(i).gameObject;
+                icon = frame.transform.GetChild(0).gameObject;
+                image = icon.GetComponent<Image>();
+                image.sprite = sweetsDB.sweetsList[wishList[i]].image;
+            }
+            else{
+                // icon = gameObject.transform.GetChild(i).gameObject;
+                frame = background.transform.GetChild(i).gameObject;
+                icon = frame.transform.GetChild(0).gameObject;
+                image = icon.GetComponent<Image>();
+                image.sprite = nomalIcon;
+            }
+        }
     }
 }

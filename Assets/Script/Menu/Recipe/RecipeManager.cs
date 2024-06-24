@@ -56,7 +56,7 @@ public class RecipeManager : MonoBehaviour
     //ウィッシュリスト
     public GameObject WishListObject;
     public WishListManager wishListManager;
-    public WishListIcon wishListIcon;
+    // public WishListIcon wishListIcon;
 
 
     void Start()
@@ -127,6 +127,7 @@ public class RecipeManager : MonoBehaviour
             RecipeSetting(RecipeList);
             // recipeItemName.RecipeNameSetting(RecipeList);
             SetmenuSelect(RecipeList);
+            wishListManager.SetWishListIcon();
             gameObject.SetActive(true);
             WishListObject.SetActive(true);
         }
@@ -542,7 +543,7 @@ public class RecipeManager : MonoBehaviour
             if (!sweetsDB.sweetsList[selectID].wishList)
             {
                 wishListManager.AddWishList(selectID);
-                wishListIcon.SetWishListIcon();
+                wishListManager.SetWishListIcon();
             }
         }
     }
