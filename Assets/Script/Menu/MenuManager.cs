@@ -166,12 +166,18 @@ public class MenuManager : MonoBehaviour
                         // recipeScript.OpenRecipe();
                         break;
                     case 2:
-                        Debug.Log("依頼一覧");
+                        Debug.Log("ウィッシュリスト");
                         break;
                     case 3:
-                        Debug.Log("設定");
+                        Debug.Log("図鑑");
                         break;
                     case 4:
+                        Debug.Log("依頼一覧");
+                        break;
+                    case 5:
+                        Debug.Log("設定");
+                        break;
+                    case 6:
                         Debug.Log("セーブ");
                         gameManager.Save();
                         break;
