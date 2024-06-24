@@ -147,7 +147,7 @@ public class RecipeManager : MonoBehaviour
             image.sprite = sweetsDB.sweetsList[RecipeList[i+menuPage*6]].image;
             icon = frame.transform.GetChild(1).gameObject;
             text = icon.GetComponent<TextMeshProUGUI>();
-            text.text = sweetsDB.sweetsList[RecipeList[i] + menuPage * 6].name;
+            text.text = sweetsDB.sweetsList[RecipeList[i+menuPage*6]].name;
 
             var c = text.color;
             if (sweetsDB.sweetsList[RecipeList[i]].canMake)
