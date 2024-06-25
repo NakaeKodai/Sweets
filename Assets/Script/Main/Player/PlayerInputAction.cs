@@ -691,6 +691,17 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""2e546f81-b31e-4894-90a5-b997486b39aa"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Sort"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""308ea634-185f-40ae-ac85-251019ce6c7f"",
                     ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",

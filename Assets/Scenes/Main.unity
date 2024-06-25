@@ -16842,6 +16842,9 @@ MonoBehaviour:
   wishListMax: 4
   background: {fileID: 0}
   nomalIcon: {fileID: 0}
+  nomalColor: {r: 0, g: 0, b: 0, a: 0}
+  canMakeColor: {r: 0, g: 0, b: 0, a: 0}
+  notCanMakeColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &468165848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27621,6 +27624,7 @@ MonoBehaviour:
   itemInfoRecipe: {fileID: 1901428800}
   WishListObject: {fileID: 1833533027}
   wishListManager: {fileID: 1833533029}
+  autoWishListRemove: 1
 --- !u!1 &914323646
 GameObject:
   m_ObjectHideFlags: 0
@@ -34452,6 +34456,9 @@ MonoBehaviour:
   wishListMax: 4
   background: {fileID: 0}
   nomalIcon: {fileID: 0}
+  nomalColor: {r: 0, g: 0, b: 0, a: 0}
+  canMakeColor: {r: 0, g: 0, b: 0, a: 0}
+  notCanMakeColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1247767405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42057,7 +42064,7 @@ GameObject:
   - component: {fileID: 1534853642}
   - component: {fileID: 1534853641}
   m_Layer: 5
-  m_Name: Illustrated Book
+  m_Name: Library
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48463,7 +48470,7 @@ GameObject:
   - component: {fileID: 1833533030}
   - component: {fileID: 1833533029}
   m_Layer: 5
-  m_Name: WishList(1)
+  m_Name: WishListInRecipe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48508,6 +48515,9 @@ MonoBehaviour:
   wishListMax: 4
   background: {fileID: 1573597150}
   nomalIcon: {fileID: 21300000, guid: 6458106f4c7b2ff45aff5cd231631adf, type: 3}
+  nomalColor: {r: 0, g: 0, b: 0, a: 0.46666667}
+  canMakeColor: {r: 1, g: 1, b: 1, a: 1}
+  notCanMakeColor: {r: 0.21960784, g: 0.21960784, b: 0.21960784, a: 0.27450982}
 --- !u!114 &1833533030
 MonoBehaviour:
   m_ObjectHideFlags: 0

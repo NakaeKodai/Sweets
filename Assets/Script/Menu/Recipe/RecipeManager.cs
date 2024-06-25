@@ -57,12 +57,15 @@ public class RecipeManager : MonoBehaviour
     public GameObject WishListObject;
     public WishListManager wishListManager;
     // public WishListIcon wishListIcon;
+    [Header("ウィッシュリストから自動的に削除（デバッグ用）")]
+    public bool autoWishListRemove;
 
 
     void Start()
     {
         playerInputAction = new PlayerInputAction();
         playerInputAction.Enable();
+        if(autoWishListRemove)AutoWishListRemove();
     }
 
     // Update is called once per frame
@@ -307,27 +310,6 @@ public class RecipeManager : MonoBehaviour
                 }
 
             }
-        }
-    }
-
-    // 自動的にレシピを追加する(デバッグ用)
-    public void AutoSetDataList()
-    {
-        dataList.Clear();
-        int j = 0;//インベントリのリスト用
-        for (int i = 0; i < sweetsDB.sweetsList.Count; i++)
-        {
-            // if(sweetsDB.sweetsList[i].canMake){
-            dataList.Add(new ItemData(sweetsDB.sweetsList[i].ID, sweetsDB.sweetsList[i].name, sweetsDB.sweetsList[i].canMake));
-            j++;
-            // }
-        }
-        for (int i = 0; i < dataList.Count; i++)
-        {
-            // if(dataList[i].canMake){
-            RecipeList.Add(dataList[i].ID);
-            j++;
-            // }
         }
     }
 
@@ -595,6 +577,34 @@ public class RecipeManager : MonoBehaviour
                 }
         }
         itemInfoRecipe.SetItemInfo(menuList[nowListNumber]);
+    }
+
+        // 自動的にレシピを追加する(デバッグ用)
+    public void AutoSetDataList()
+    {
+        dataList.Clear();
+        int j = 0;//インベントリのリスト用
+        for (int i = 0; i < sweetsDB.sweetsList.Count; i++)
+        {
+            // if(sweetsDB.sweetsList[i].canMake){
+            dataList.Add(new ItemData(sweetsDB.sweetsList[i].ID, sweetsDB.sweetsList[i].name, sweetsDB.sweetsList[i].canMake));
+            j++;
+            // }
+        }
+        for (int i = 0; i < dataList.Count; i++)
+        {
+            // if(dataList[i].canMake){
+            RecipeList.Add(dataList[i].ID);
+            j++;
+            // }
+        }
+    }
+
+    // 自動的にウィッシュリストから削除する（デバッグ用）
+    public void AutoWishListRemove(){
+        for(int i = 0; i < sweetsDB.sweetsList.Count; i++){
+            sweetsDB.sweetsList[i].wishList = false;
+        }
     }
 }
 

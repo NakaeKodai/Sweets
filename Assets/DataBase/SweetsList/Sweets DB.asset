@@ -19,7 +19,7 @@ MonoBehaviour:
     quantity: 1
     canMake: 0
     infomation: "\u3042\u3093\u3053"
-    wishList: 0
+    wishList: 1
     materialsList:
     - ID: 0
       "\u500B\u6570": 2710
@@ -33,7 +33,7 @@ MonoBehaviour:
     quantity: 1
     canMake: 0
     infomation: "\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA\u30ED\u30EA"
-    wishList: 0
+    wishList: 1
     materialsList:
     - ID: 0
       "\u500B\u6570": 3
@@ -47,7 +47,7 @@ MonoBehaviour:
     quantity: 1
     canMake: 1
     infomation: "\u30E8\u30AF\u30CA\u30A4\u30CD\u30A4\u30CC"
-    wishList: 0
+    wishList: 1
     materialsList:
     - ID: 0
       "\u500B\u6570": 3
