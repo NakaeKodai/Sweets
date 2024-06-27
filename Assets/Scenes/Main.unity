@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.63057953, g: 0.867575, b: 0.99038166, a: 1}
+  m_IndirectSpecularColor: {r: 0.63061225, g: 0.867598, b: 0.9903818, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -19568,7 +19568,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -109.78459, y: 10}
+  m_AnchoredPosition: {x: -120, y: 17}
   m_SizeDelta: {x: 187.5627, y: 42.35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &517405957
@@ -19654,7 +19654,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -175.81833, w: 0}
+  m_margin: {x: 12.537079, y: 0, z: -168.68234, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -22797,15 +22797,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 70
+    m_Left: 80
     m_Right: 0
-    m_Top: 65
+    m_Top: 78
     m_Bottom: 0
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 1
-  m_CellSize: {x: 320, y: 55}
-  m_Spacing: {x: 20, y: 15}
+  m_CellSize: {x: 300, y: 55}
+  m_Spacing: {x: 20, y: 20}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!114 &650653166
@@ -22866,8 +22866,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -35, y: -139.96284}
-  m_SizeDelta: {x: 460.2819, y: 343.5811}
+  m_AnchoredPosition: {x: -30, y: -139.96284}
+  m_SizeDelta: {x: 460, y: 380}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &651538986
 GameObject:
