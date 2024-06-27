@@ -3,7 +3,13 @@ guid: cb8b465a1dee90249953cae00a106eeb
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - ingredientsDB: {fileID: 11400000, guid: 89317c2866f8d824a88d23ec19f537e2, type: 2}
+  - sweetsDB: {fileID: 11400000, guid: e0ca94ceffe1439459fd67cd7dbd71ed, type: 2}
+  - background: {instanceID: 0}
+  - itemInfoRecipe: {instanceID: 0}
+  - WishListObject: {instanceID: 0}
+  - wishListManager: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

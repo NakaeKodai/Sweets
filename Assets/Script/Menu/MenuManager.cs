@@ -29,6 +29,7 @@ public class MenuManager : MonoBehaviour
     public BackpackManager backpackManager;
     public Recipe recipeScript;
     public RecipeManager recipeMAnager;
+    public WishListManager wishListManager;
 
     void Start()
     {
@@ -167,6 +168,9 @@ public class MenuManager : MonoBehaviour
                         break;
                     case 2:
                         Debug.Log("ウィッシュリスト");
+                        selectMenuNow = true;
+                        menuWindow.SetActive(false);
+                        wishListManager.OpenWishList();
                         break;
                     case 3:
                         Debug.Log("図鑑");

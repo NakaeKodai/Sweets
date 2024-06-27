@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform player;
     public bool pause = false;
 
+    public List<int> wishList = new List<int>();//ウィッシュリスト
+
     void Start()
     {
         Load();
@@ -81,5 +83,10 @@ public class GameManager : MonoBehaviour
     private void OnApplicationQuit()
     {
         Save();
+    }
+
+    // ウィッシュリストの同期
+    public List<int> WishListSetting(){
+        return wishList;
     }
 }
