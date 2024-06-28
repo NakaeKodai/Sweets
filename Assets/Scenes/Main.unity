@@ -51093,6 +51093,11 @@ MonoBehaviour:
   selectColor: {r: 1, g: 0, b: 0, a: 1}
   itemInfoBackpack: {fileID: 1458520786}
   rowNum: 8
+  ItemName: {fileID: 1924459551}
+  ItemIcon: {fileID: 1837015181}
+  ItemInfomation: {fileID: 1382722487}
+  itemNum: {fileID: 481324223}
+  ItemInfoObject: {fileID: 1458520782}
 --- !u!114 &1754861271
 MonoBehaviour:
   m_ObjectHideFlags: 0

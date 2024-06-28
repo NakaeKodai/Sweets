@@ -52,6 +52,14 @@ public class BackpackManager : MonoBehaviour
     public ItemInfoBackpack itemInfoBackpack;
 
     public int rowNum = 10; //持ち物の横のアイコンの数
+
+    [Header("説明欄")]
+    public TextMeshProUGUI ItemName;//名前
+    public Image ItemIcon;//アイコン
+    public TextMeshProUGUI ItemInfomation;//説明文
+    public TextMeshProUGUI itemNum;
+    public GameObject ItemInfoObject;
+
     
     void Start()
     {
@@ -252,7 +260,7 @@ public class BackpackManager : MonoBehaviour
                 }
             }
         }
-        itemInfoBackpack.SetItemInfo(menuList[(nowListNumber/8), (nowListNumber%8)]);
+        SetItemInfo(menuList[(nowListNumber/8), (nowListNumber%8)]);
     }
 
 
@@ -275,7 +283,7 @@ public class BackpackManager : MonoBehaviour
             nowCursorImage.color = nomalColor;
             nowListNumber ++;
             if(nowListNumber >= menuList.Length) nowListNumber = 0;
-            itemInfoBackpack.SetItemInfo(menuList[(nowListNumber/8), (nowListNumber%8)]);
+            SetItemInfo(menuList[(nowListNumber/8), (nowListNumber%8)]);
         }
         if(isLongPushRight)
         {
@@ -286,7 +294,7 @@ public class BackpackManager : MonoBehaviour
                 nowCursorImage.color = nomalColor;
                 nowListNumber ++;
                 if(nowListNumber >= menuList.Length) nowListNumber = 0;
-                itemInfoBackpack.SetItemInfo(menuList[(nowListNumber/8), (nowListNumber%8)]);
+                SetItemInfo(menuList[(nowListNumber/8), (nowListNumber%8)]);
                 pushDuration = 0.1f;
                 downTime = Time.realtimeSinceStartup;
             }
@@ -306,7 +314,7 @@ public class BackpackManager : MonoBehaviour
             nowCursorImage.color = nomalColor;
             nowListNumber --;
             if(nowListNumber < 0) nowListNumber =  menuList.Length - 1;
-            itemInfoBackpack.SetItemInfo(menuList[(nowListNumber/8), (nowListNumber%8)]);
+            SetItemInfo(menuList[(nowListNumber/8), (nowListNumber%8)]);
         }
         if(isLongPushLeft)
         {
@@ -317,7 +325,7 @@ public class BackpackManager : MonoBehaviour
                 nowCursorImage.color = nomalColor;
                 nowListNumber --;
                 if(nowListNumber < 0) nowListNumber =  menuList.Length - 1;
-                itemInfoBackpack.SetItemInfo(menuList[(nowListNumber/8), (nowListNumber%8)]);
+                SetItemInfo(menuList[(nowListNumber/8), (nowListNumber%8)]);
                 pushDuration = 0.1f;
                 downTime = Time.realtimeSinceStartup;
             }
@@ -337,7 +345,7 @@ public class BackpackManager : MonoBehaviour
             nowCursorImage.color = nomalColor;
             nowListNumber -= rowNum;
             if(nowListNumber < 0) nowListNumber +=  menuList.Length;
-            itemInfoBackpack.SetItemInfo(menuList[(nowListNumber/8), (nowListNumber%8)]);
+            SetItemInfo(menuList[(nowListNumber/8), (nowListNumber%8)]);
         }
         if(isLongPushUp)
         {
@@ -348,7 +356,7 @@ public class BackpackManager : MonoBehaviour
                 nowCursorImage.color = nomalColor;
                 nowListNumber -= rowNum;
                 if(nowListNumber < 0) nowListNumber +=  menuList.Length;
-                itemInfoBackpack.SetItemInfo(menuList[(nowListNumber/8), (nowListNumber%8)]);
+                SetItemInfo(menuList[(nowListNumber/8), (nowListNumber%8)]);
                 pushDuration = 0.1f;
                 downTime = Time.realtimeSinceStartup;
             }
@@ -368,7 +376,7 @@ public class BackpackManager : MonoBehaviour
             nowCursorImage.color = nomalColor;
             nowListNumber += rowNum;
             if(nowListNumber >= menuList.Length) nowListNumber -= menuList.Length;
-            itemInfoBackpack.SetItemInfo(menuList[(nowListNumber/8), (nowListNumber%8)]);
+            SetItemInfo(menuList[(nowListNumber/8), (nowListNumber%8)]);
         }
         if(isLongPushDown)
         {
@@ -379,7 +387,7 @@ public class BackpackManager : MonoBehaviour
                 nowCursorImage.color = nomalColor;
                 nowListNumber += rowNum;
                 if(nowListNumber >= menuList.Length) nowListNumber -= menuList.Length;
-                itemInfoBackpack.SetItemInfo(menuList[(nowListNumber/8), (nowListNumber%8)]);
+                SetItemInfo(menuList[(nowListNumber/8), (nowListNumber%8)]);
                 pushDuration = 0.1f;
                 downTime = Time.realtimeSinceStartup;
             }
@@ -388,5 +396,19 @@ public class BackpackManager : MonoBehaviour
             isLongPushDown = false;
             pushDuration = 0.3f;
         };
+    }
+
+    // 説明欄に書き込むやーつ
+    public void SetItemInfo(int ItemID){
+        if(ItemID != -1){//アイテムがある場合
+            ItemName.text = ingredientsDB.ingredientsList[ItemID].name;
+            ItemIcon.sprite = ingredientsDB.ingredientsList[ItemID].image;
+            ItemInfomation.text = ingredientsDB.ingredientsList[ItemID].infomation;
+            itemNum.text = "所持数　" + ingredientsDB.ingredientsList[ItemID].quantity + "";
+            ItemInfoObject.SetActive(true);
+        }else{//アイテムがない場合
+            ItemInfoObject.SetActive(false);
+        }
+        
     }
 }
