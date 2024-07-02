@@ -2,23 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.Rendering;
 
 [System.Serializable]
 public class SaveData
 {
     public Vector3 position; //プレイヤーの位置
+    public float[] scrolbarValue; //現在　0はLight 1はAudio
 }
 
 public class GameManager : MonoBehaviour
 {
+    public PlayerInputAction playerInputAction;
 
     [SerializeField] private Transform player;
+    [SerializeField] SettingManager SettingManager;
     public bool pause = false;
 
     public List<int> wishList = new List<int>();//ウィッシュリスト
 
     void Start()
     {
+        playerInputAction = new PlayerInputAction();
+        playerInputAction.Enable();
         Load();
     }
 
@@ -44,8 +50,14 @@ public class GameManager : MonoBehaviour
     {
         SaveData data = new SaveData()
         {
-            position = player.position
+            position = player.position,
+            scrolbarValue = new float[SettingManager.scrollbar.Count]
         };
+
+        for(int i = 0;i < data.scrolbarValue.Length; i++)
+        {
+            data.scrolbarValue[i] = SettingManager.scrollbar[i].value;
+        }
 
         string json = JsonUtility.ToJson(data,true);
         Debug.Log(json);
@@ -63,6 +75,16 @@ public class GameManager : MonoBehaviour
             string json = File.ReadAllText(path);
             SaveData data = JsonUtility.FromJson<SaveData>(json);
             player.position = data.position;
+            for(int i = 0;i < data.scrolbarValue.Length; i++)
+            {
+                SettingManager.scrollbar[i].value = data.scrolbarValue[i];
+                switch(i)
+                {
+                    case 0:
+                    RenderSettings.ambientIntensity = SettingManager.scrollbar[i].value;
+                    break;
+                }
+            }
         }
         else
         {
