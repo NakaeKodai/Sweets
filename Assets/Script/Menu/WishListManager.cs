@@ -52,6 +52,23 @@ public class WishListManager : MonoBehaviour
     public TextMeshProUGUI ItemInfomation;//説明文
     public GameObject infoMaterials;
 
+    //ウィッシュリストの素材の最大数
+    // [Header("最大数関連")]
+    // public GameObject SumObject;
+    // // private int[] displayList = new int[6];//画面に表示させる配列
+    // private int SumCursor=0;
+    // private int stackPointer=0;//素材のリストをぶち込んだ時の現在位置の場所
+
+    public class MaterialSumList{
+        public int ID;//素材のID
+        public int quantity;//素材の必要個数(合計)
+        public MaterialSumList(int i, int q){
+            ID = i;
+            quantity = q;
+        }
+    }
+    private List<MaterialSumList>  materialSumList = new List<MaterialSumList>();//必要素材をぶち込むリスト
+
     // Start is called before the first frame update
     void Start()
     {
@@ -241,21 +258,7 @@ public class WishListManager : MonoBehaviour
             if (Time.realtimeSinceStartup - downTime >= pushDuration)
             {
                 nowCursor = background.transform.GetChild(nowListNumber).gameObject;
-                //nowCursor = nowImage.transform.GetChild(0).gameObject;
                 nowCursorImage = nowCursor.GetComponent<Image>();
-                // 二次元配列用
-                // if(menuList[(nowListNumber/2), (nowListNumber%2)] != -1){
-                //     if(sweetsDB.sweetsList[menuList[(nowListNumber/2), (nowListNumber%2)]].canMake){
-                //         nowCursorImage.color = nomalColor;
-                //     }else{
-                //         nowCursorImage.color = notCanMakeColor;
-                //     }
-                // }else{
-                //     nowCursorImage.color = notCanMakeColor;
-                // }
-                // nowListNumber -= rowNum;
-                // if(nowListNumber < 0) nowListNumber +=  menuList.Length;
-                // itemInfoRecipe.SetItemInfo(menuList[(nowListNumber/2), (nowListNumber%2)]);
 
                 // 一次元配列用
                 if (wishList[nowListNumber] != -1)
@@ -294,21 +297,7 @@ public class WishListManager : MonoBehaviour
             downTime = Time.realtimeSinceStartup;
             isLongPushDown = true;
             nowCursor = background.transform.GetChild(nowListNumber).gameObject;
-            //nowCursor = nowImage.transform.GetChild(0).gameObject;
             nowCursorImage = nowCursor.GetComponent<Image>();
-            // 二次元配列
-            // if(menuList[(nowListNumber/2), (nowListNumber%2)] != -1){
-            //     if(sweetsDB.sweetsList[menuList[(nowListNumber/2), (nowListNumber%2)]].canMake){
-            //         nowCursorImage.color = nomalColor;
-            //     }else{
-            //         nowCursorImage.color = notCanMakeColor;
-            //     }
-            // }else{
-            //     nowCursorImage.color = notCanMakeColor;
-            // }
-            // nowListNumber += rowNum;
-            // if(nowListNumber >= menuList.Length) nowListNumber -= menuList.Length;
-            // itemInfoRecipe.SetItemInfo(menuList[(nowListNumber/2), (nowListNumber%2)]);
 
             // 一次元配列
             if (wishList[nowListNumber] != -1)
@@ -335,21 +324,7 @@ public class WishListManager : MonoBehaviour
             if (Time.realtimeSinceStartup - downTime >= pushDuration)
             {
                 nowCursor = background.transform.GetChild(nowListNumber).gameObject;
-                //nowCursor = nowImage.transform.GetChild(0).gameObject;
                 nowCursorImage = nowCursor.GetComponent<Image>();
-                // 二次元配列
-                // if(menuList[(nowListNumber/2), (nowListNumber%2)] != -1){
-                //     if(sweetsDB.sweetsList[menuList[(nowListNumber/2), (nowListNumber%2)]].canMake){
-                //         nowCursorImage.color = nomalColor;
-                //     }else{
-                //         nowCursorImage.color = notCanMakeColor;
-                //     }
-                // }else{
-                //     nowCursorImage.color = notCanMakeColor;
-                // }
-                // nowListNumber += rowNum;
-                // if(nowListNumber >= menuList.Length) nowListNumber -= menuList.Length;
-                // itemInfoRecipe.SetItemInfo(menuList[(nowListNumber/2), (nowListNumber%2)]);
 
                 // 一次元配列
                 if (wishList[nowListNumber] != -1)
@@ -454,5 +429,27 @@ public class WishListManager : MonoBehaviour
             InfoObject.SetActive(false);
         }
         
+    }
+
+    // ウィッシュリストの素材の数を入れたリストを作る
+    public void SetWishListSum(){
+        for(int i = 0; i < wishList.Count; i++){
+            for(int j = 0; j < sweetsDB.sweetsList[wishList[i]].materialsList.Count; j++){
+                bool match = false;
+                for(int l = 0; l < materialSumList.Count; l++){
+                    if(materialSumList[l].ID == sweetsDB.sweetsList[wishList[i]].materialsList[j].ID){
+                        match = true;
+                    }
+                }
+
+                if(!match){
+                    materialSumList.Add(new MaterialSumList(sweetsDB.sweetsList[wishList[i]].materialsList[j].ID,sweetsDB.sweetsList[wishList[i]].materialsList[j].個数));
+                }else{
+                    materialSumList[sweetsDB.sweetsList[wishList[i]].materialsList[j].ID].quantity += sweetsDB.sweetsList[wishList[i]].materialsList[j].個数;
+                }
+            }
+        }
+
+
     }
 }
