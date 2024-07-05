@@ -10,6 +10,7 @@ public class SettingManager : MonoBehaviour
     [SerializeField] private MenuManager menuManager;
     [SerializeField] GameObject menuWindow;
     public Light directionalLight;
+    [SerializeField]private Image lightImage;
     public List<Scrollbar> scrollbar;
     
     public Color normalColor,selectColor;
@@ -25,19 +26,23 @@ public class SettingManager : MonoBehaviour
     {
         if(gameManager.playerInputAction.UI.CursorMoveRight.triggered)
         {
-            scrollbar[selectBarNum].value += 0.1f;
+            if(scrollbar[selectBarNum].value <= 1.0f) scrollbar[selectBarNum].value += 0.1f;
         }
         if(gameManager.playerInputAction.UI.CursorMoveLeft.triggered)
         {
-            scrollbar[selectBarNum].value -= 0.1f;
+            if(scrollbar[selectBarNum].value >= 0.01f) scrollbar[selectBarNum].value -= 0.1f;
         }
 
         switch(selectBarNum)
         {
             case 0:
+                Color color = lightImage.color;
+                color.a = scrollbar[selectBarNum].value;
+                if(color.a >= 0.96f) color.a = 0.95f;
+                lightImage.color = color;
                 // directionalLight.intensity = 0.08f + 0.08f * (scrollbar[selectBarNum].value * 10);
-                RenderSettings.ambientIntensity = scrollbar[selectBarNum].value;
-                break;
+                //RenderSettings.ambientIntensity = scrollbar[selectBarNum].value;
+            break;
         }
 
         if(gameManager.playerInputAction.UI.OpenMenu.triggered || gameManager.playerInputAction.UI.Cancel.triggered)

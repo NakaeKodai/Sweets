@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.IO;
 using UnityEngine.Rendering;
 
@@ -16,7 +17,8 @@ public class GameManager : MonoBehaviour
     public PlayerInputAction playerInputAction;
 
     [SerializeField] private Transform player;
-    [SerializeField] SettingManager SettingManager;
+    [SerializeField] SettingManager settingManager;
+    [SerializeField] Image lightImage;
     public bool pause = false;
 
     public List<int> wishList = new List<int>();//ウィッシュリスト
@@ -51,12 +53,12 @@ public class GameManager : MonoBehaviour
         SaveData data = new SaveData()
         {
             position = player.position,
-            scrolbarValue = new float[SettingManager.scrollbar.Count]
+            scrolbarValue = new float[settingManager.scrollbar.Count]
         };
 
         for(int i = 0;i < data.scrolbarValue.Length; i++)
         {
-            data.scrolbarValue[i] = SettingManager.scrollbar[i].value;
+            data.scrolbarValue[i] = settingManager.scrollbar[i].value;
         }
 
         string json = JsonUtility.ToJson(data,true);
@@ -77,11 +79,15 @@ public class GameManager : MonoBehaviour
             player.position = data.position;
             for(int i = 0;i < data.scrolbarValue.Length; i++)
             {
-                SettingManager.scrollbar[i].value = data.scrolbarValue[i];
+                settingManager.scrollbar[i].value = data.scrolbarValue[i];
                 switch(i)
                 {
                     case 0:
-                    RenderSettings.ambientIntensity = SettingManager.scrollbar[i].value;
+                    Color color = lightImage.color;
+                    color.a = settingManager.scrollbar[i].value;
+                    if(color.a >= 0.96f) color.a = 0.95f;
+                    lightImage.color = color;
+                    //RenderSettings.ambientIntensity = SettingManager.scrollbar[i].value;
                     break;
                 }
             }
