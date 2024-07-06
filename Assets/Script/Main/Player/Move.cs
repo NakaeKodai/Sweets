@@ -74,25 +74,25 @@ public class Move : MonoBehaviour
         RaycastHit hitForward;
         if (Physics.Raycast(transform.position, Vector3.forward, out hitForward, rayDistance, WallLayer))
         {
-            Debug.Log("上かべぇ");
+            // Debug.Log("上かべぇ");
            if(playerDirection.y > 0) playerDirection.y = 0;
         }
         RaycastHit hitBack;
         if (Physics.Raycast(transform.position, Vector3.back, out hitBack, rayDistance, WallLayer))
         {
-            Debug.Log("下かべぇ");
+            // Debug.Log("下かべぇ");
            if(playerDirection.y < 0) playerDirection.y = 0;
         }
         RaycastHit hitRight;
         if (Physics.Raycast(transform.position, Vector3.right, out hitRight, rayDistance, WallLayer))
         {
-            Debug.Log("右かべぇ");
+            // Debug.Log("右かべぇ");
            if(playerDirection.x > 0) playerDirection.x = 0;
         }
         RaycastHit hitLeft;
         if (Physics.Raycast(transform.position, Vector3.left, out hitLeft, rayDistance, WallLayer))
         {
-            Debug.Log("左かべぇ");
+            // Debug.Log("左かべぇ");
            if(playerDirection.x < 0) playerDirection.x = 0;
         }
         //if(!Physics.Raycast(ray, out wallHit, 1.0f, WallLayer)){//プレイヤーの方向の少し先にレイヤーの「Wall」がないかを判別する

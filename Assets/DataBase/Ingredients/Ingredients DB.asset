@@ -28,3 +28,33 @@ MonoBehaviour:
     image: {fileID: 21300000, guid: 8fdcf49cd0bac774c96ef3dbb05d9284, type: 3}
     quantity: 3
     infomation: "\u3055\u3057\u3059\u305B\u305D"
+  - ID: 3
+    name: "\uFF52\uFF47\uFF53\uFF48\uFF54"
+    image: {fileID: 21300000, guid: 4879f0a88aef8a64ca2196242552f6c1, type: 3}
+    quantity: 3
+    infomation: "\u3055\u3057\u3059\u305B\u305D"
+  - ID: 4
+    name: "\u3042\uFF53\uFF53"
+    image: {fileID: 21300000, guid: f1d24a2b224b89d42851125cdbce29ed, type: 3}
+    quantity: 3
+    infomation: "\u3055\u3057\u3059\u305B\u305D"
+  - ID: 5
+    name: srdgszg
+    image: {fileID: 21300000, guid: def8d4549ba96ae4d9366f4f709eea86, type: 3}
+    quantity: 3
+    infomation: "\u3055\u3057\u3059\u305B\u305D"
+  - ID: 6
+    name: "\u304D\u306E\u3053\u306E\u307B\u3046\u3057"
+    image: {fileID: 21300000, guid: c849129b2be34df469619b0cd6f12121, type: 3}
+    quantity: 3
+    infomation: "\u3055\u3057\u3059\u305B\u305D"
+  - ID: 7
+    name: "\u3055\u3044\u304D\u3087\u3046"
+    image: {fileID: 21300000, guid: 66c100d3cefe0fe4a913bb7c1bfce4a1, type: 3}
+    quantity: 3
+    infomation: "\u3055\u3057\u3059\u305B\u305D"
+  - ID: 8
+    name: "\u306F\u306F\u306F\u306F"
+    image: {fileID: 21300000, guid: ea1ace8de9f1d974486153cad9d86b2d, type: 3}
+    quantity: 3
+    infomation: "\u3055\u3057\u3059\u305B\u305D"

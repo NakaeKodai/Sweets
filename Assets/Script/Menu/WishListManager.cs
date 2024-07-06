@@ -53,11 +53,18 @@ public class WishListManager : MonoBehaviour
     public GameObject infoMaterials;
 
     //ウィッシュリストの素材の最大数
-    // [Header("最大数関連")]
-    // public GameObject SumObject;
-    // // private int[] displayList = new int[6];//画面に表示させる配列
+    [Header("最大数関連")]
+    public GameObject SumObject;
+    // private int[] displayList = new int[6];//画面に表示させる配列
     // private int SumCursor=0;
-    // private int stackPointer=0;//素材のリストをぶち込んだ時の現在位置の場所
+    private int stackPointer=0;//素材のリストをぶち込んだ時の現在位置の場所
+    public int SumCursorNumber=6;//アイコンの個数
+    public GameObject sumBackground;
+    private TextMeshProUGUI countText;
+    private Color color;
+    public Color countTextNomalColor;
+    public Color countTextLackColor;
+    
 
     public class MaterialSumList{
         public int ID;//素材のID
@@ -68,6 +75,10 @@ public class WishListManager : MonoBehaviour
         }
     }
     private List<MaterialSumList>  materialSumList = new List<MaterialSumList>();//必要素材をぶち込むリスト
+
+    //0:ウィッシュリストに登録されたレシピを見る
+    //1:ウィッシュリストに登録されているレシピの素材を見る
+    private int wishListMode = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -82,18 +93,44 @@ public class WishListManager : MonoBehaviour
         if (playerInputAction.UI.OpenMenu.triggered || playerInputAction.UI.Cancel.triggered)
         {
             gameObject.SetActive(false);
+            SumObject.SetActive(false);
             opening = false;
             wishListMenuOpening = false;
         }
-        if(wishListMenuOpening){
-            MoveCursor();
+        if(wishListMode == 0){
+            if(wishListMenuOpening){
+                MoveCursor();
+            }
+            if(playerInputAction.UI.MenuPageRight.triggered || playerInputAction.UI.MenuPageLeft.triggered){
+                SetWishListSum();
+                SetWishListSumIcon();
+                // gameObject.SetActive(false);
+                InfoObject.SetActive(false);
+                SumObject.SetActive(true);
+                wishListMode = 1;
+                nowListNumber = 0;
+            }
         }
+        else if(wishListMode == 1){
+            if(wishListMenuOpening){
+                SumMoveCursor();
+            }
+            if(playerInputAction.UI.MenuPageRight.triggered || playerInputAction.UI.MenuPageLeft.triggered){
+                // gameObject.SetActive(true);
+                InfoObject.SetActive(true);
+                SumObject.SetActive(false);
+                wishListMode = 0;
+                nowListNumber = 0;
+            }
+        }
+        
     }
 
     public void OpenWishList(){
         opening = true;
         SetWishList();
         gameObject.SetActive(true);
+        InfoObject.SetActive(true);
     }
 
     // 指定したIDをウィッシュリストに追加
@@ -194,6 +231,7 @@ public class WishListManager : MonoBehaviour
         }
         if(wishList.Count != 0){
             SetItemInfo(wishList[nowListNumber]);
+            // InfoObject.SetActive(true);
         }
         else{
             InfoObject.SetActive(false);
@@ -378,6 +416,191 @@ public class WishListManager : MonoBehaviour
         }
     }
 
+    // 最大数のカーソル
+    void SumMoveCursor(){
+        if(wishList.Count != 0){
+        if (beforeListNum != nowListNumber)
+        {
+            nowCursor = sumBackground.transform.GetChild(nowListNumber).gameObject;
+            //nowCursor = nowImage.transform.GetChild(0).gameObject;
+            nowCursorImage = nowCursor.GetComponent<Image>();
+            nowCursorImage.color = selectColor;
+        }
+        if (playerInputAction.UI.CursorMoveUp.triggered)
+        {
+            downTime = Time.realtimeSinceStartup;
+            isLongPushUp = true;
+            nowCursor = sumBackground.transform.GetChild(nowListNumber).gameObject;
+            nowCursorImage = nowCursor.GetComponent<Image>();
+
+            // 一次元配列用
+                if (materialSumList[nowListNumber+stackPointer].quantity <= ingredientsDB.ingredientsList[materialSumList[nowListNumber+stackPointer].ID].quantity)
+                {
+                    nowCursorImage.color = nomalColor;
+                }
+                else
+                {
+                    nowCursorImage.color = notCanMakeColor;
+                }
+            
+            nowListNumber--;
+
+            if(nowListNumber < 0){
+                if (stackPointer == 0){
+                    nowListNumber += SumCursorNumber;
+                    stackPointer = materialSumList.Count-SumCursorNumber;
+                }else{
+                    stackPointer--;
+                    nowListNumber++;
+                }
+                SetWishListSumIcon();
+            }
+            // SetItemInfo(wishList[nowListNumber]);
+        }
+        if (isLongPushUp)
+        {
+            if (Time.realtimeSinceStartup - downTime >= pushDuration)
+            {
+                nowCursor = sumBackground.transform.GetChild(nowListNumber).gameObject;
+                nowCursorImage = nowCursor.GetComponent<Image>();
+
+                // 一次元配列用
+                    if (materialSumList[nowListNumber+stackPointer].quantity <= ingredientsDB.ingredientsList[materialSumList[nowListNumber+stackPointer].ID].quantity)
+                    {
+                        nowCursorImage.color = nomalColor;
+                    }
+                    else
+                    {
+                        nowCursorImage.color = notCanMakeColor;
+                    }
+                
+                nowListNumber--;
+
+                if(nowListNumber < 0){
+                if (stackPointer == 0){
+                    nowListNumber += SumCursorNumber;
+                    stackPointer = materialSumList.Count-SumCursorNumber;
+                }else{
+                    stackPointer--;
+                    nowListNumber++;
+                }
+                SetWishListSumIcon();
+            }
+            //     if (nowListNumber < 0){
+            //     nowListNumber += SumCursorNumber;
+            //     stackPointer = materialSumList.Count-SumCursorNumber;
+            //     SetWishListSumIcon();
+            // }
+                // SetItemInfo(wishList[nowListNumber]);
+
+                pushDuration = 0.1f;
+                downTime = Time.realtimeSinceStartup;
+            }
+        }
+        playerInputAction.UI.CursorMoveUp.canceled += ctx =>
+        {
+            isLongPushUp = false;
+            pushDuration = 0.3f;
+        };
+
+
+        //下移動
+        if (playerInputAction.UI.CursorMoveDown.triggered)
+        {
+            downTime = Time.realtimeSinceStartup;
+            isLongPushDown = true;
+            nowCursor = sumBackground.transform.GetChild(nowListNumber).gameObject;
+            nowCursorImage = nowCursor.GetComponent<Image>();
+
+            // 一次元配列
+            
+                if (materialSumList[nowListNumber+stackPointer].quantity <= ingredientsDB.ingredientsList[materialSumList[nowListNumber+stackPointer].ID].quantity)
+                {
+                    nowCursorImage.color = nomalColor;
+                }
+                else
+                {
+                    nowCursorImage.color = notCanMakeColor;
+                }
+            
+            nowListNumber++;
+
+            if(nowListNumber >= SumCursorNumber){
+                if (nowListNumber + stackPointer >= materialSumList.Count){
+                    nowListNumber = 0;
+                    stackPointer = 0;
+                }else{
+                    stackPointer++;
+                    nowListNumber--;
+                }
+                SetWishListSumIcon();
+            }
+            // SetItemInfo(wishList[nowListNumber]);
+        }
+        if (isLongPushDown)
+        {
+            if (Time.realtimeSinceStartup - downTime >= pushDuration)
+            {
+                nowCursor = sumBackground.transform.GetChild(nowListNumber).gameObject;
+                nowCursorImage = nowCursor.GetComponent<Image>();
+
+                // 一次元配列
+                
+                    if (materialSumList[nowListNumber+stackPointer].quantity <= ingredientsDB.ingredientsList[materialSumList[nowListNumber+stackPointer].ID].quantity)
+                    {
+                        nowCursorImage.color = nomalColor;
+                    }
+                    else
+                    {
+                        nowCursorImage.color = notCanMakeColor;
+                    }
+                
+                nowListNumber++;
+                
+                if(nowListNumber >= SumCursorNumber){
+                if (nowListNumber + stackPointer >= materialSumList.Count){
+                    nowListNumber = 0;
+                    stackPointer = 0;
+                }else{
+                    stackPointer++;
+                    nowListNumber--;
+                }
+                SetWishListSumIcon();
+            }
+                // SetItemInfo(wishList[nowListNumber]);
+
+                pushDuration = 0.1f;
+                downTime = Time.realtimeSinceStartup;
+            }
+        }
+        playerInputAction.UI.CursorMoveDown.canceled += ctx =>
+        {
+            isLongPushDown = false;
+            pushDuration = 0.3f;
+        };
+
+        // 二次元配列
+        // if(playerInputAction.UI.MenuSelect.triggered && (menuList[(nowListNumber/2), (nowListNumber%2)] != -1)){
+        //     int selectID = menuList[(nowListNumber/2), (nowListNumber%2)];
+        //     if(!sweetsDB.sweetsList[selectID].wishList){
+        //         wishListManager.AddWishList(selectID);
+        //         wishListIcon.SetWishListIcon();
+        //     }
+        // }
+
+        // 一次元配列
+        // if (playerInputAction.UI.MenuSelect.triggered && (menuList[nowListNumber] != -1))
+        // {
+        //     int selectID = menuList[nowListNumber];
+        //     if (!sweetsDB.sweetsList[selectID].wishList)
+        //     {
+        //         wishListManager.AddWishList(selectID);
+        //         wishListManager.SetWishListIcon();
+        //     }
+        // }
+        }
+    }
+
     // アイテムの説明欄
     public void SetItemInfo(int ItemID){
         if(ItemID != -1){//アイテムがある場合
@@ -436,20 +659,71 @@ public class WishListManager : MonoBehaviour
         for(int i = 0; i < wishList.Count; i++){
             for(int j = 0; j < sweetsDB.sweetsList[wishList[i]].materialsList.Count; j++){
                 bool match = false;
+                int matchL = 0;
                 for(int l = 0; l < materialSumList.Count; l++){
                     if(materialSumList[l].ID == sweetsDB.sweetsList[wishList[i]].materialsList[j].ID){
                         match = true;
+                        matchL = l;
+                        break;
                     }
                 }
 
                 if(!match){
                     materialSumList.Add(new MaterialSumList(sweetsDB.sweetsList[wishList[i]].materialsList[j].ID,sweetsDB.sweetsList[wishList[i]].materialsList[j].個数));
                 }else{
-                    materialSumList[sweetsDB.sweetsList[wishList[i]].materialsList[j].ID].quantity += sweetsDB.sweetsList[wishList[i]].materialsList[j].個数;
+                    materialSumList[matchL].quantity += sweetsDB.sweetsList[wishList[i]].materialsList[j].個数;
                 }
             }
         }
 
 
+    }
+
+    // ウィッシュリストの素材の最大数のアイコンを設定する
+    public void SetWishListSumIcon(){
+        for(int i = 0; i < SumCursorNumber; i++){
+            if(i < materialSumList.Count){
+                frame = sumBackground.transform.GetChild(i).gameObject;
+                icon = frame.transform.GetChild(0).gameObject;
+                image = icon.GetComponent<Image>();
+                image.sprite = ingredientsDB.ingredientsList[materialSumList[i+stackPointer].ID].image;
+                if(materialSumList[i+stackPointer].quantity <= ingredientsDB.ingredientsList[materialSumList[i+stackPointer].ID].quantity){
+                    // アイコンから色を指定
+                    image.color = canMakeColor;
+                    image = frame.GetComponent<Image>();
+                    image.color = nomalColor;
+                    color = countTextNomalColor;
+                }
+                else{
+                    image.color = notCanMakeColor;
+                    image = frame.GetComponent<Image>();
+                    image.color = notCanMakeColor;
+                    color = countTextLackColor;
+                }
+                icon = frame.transform.GetChild(1).gameObject;
+                text = icon.GetComponent<TextMeshProUGUI>();
+                text.text = ingredientsDB.ingredientsList[materialSumList[i+stackPointer].ID].name;
+                text.color = color;
+                icon = frame.transform.GetChild(2).gameObject;
+                countText = icon.GetComponent<TextMeshProUGUI>();
+                countText.text = ingredientsDB.ingredientsList[materialSumList[i+stackPointer].ID].quantity+"/"+materialSumList[i+stackPointer].quantity;
+                countText.color = color;
+            }
+            else{
+                frame = sumBackground.transform.GetChild(i).gameObject;
+                image = frame.GetComponent<Image>();
+                image.color = notCanMakeColor;
+                icon = frame.transform.GetChild(0).gameObject;
+                image = icon.GetComponent<Image>();
+                image.sprite = nomalIcon;
+                image.color = canMakeColor;
+                icon = frame.transform.GetChild(1).gameObject;
+                text = icon.GetComponent<TextMeshProUGUI>();
+                text.text = "";
+                icon = frame.transform.GetChild(2).gameObject;
+                countText = icon.GetComponent<TextMeshProUGUI>();
+                countText.text = "";
+            }
+        }
     }
 }
