@@ -14,6 +14,9 @@ public class Move : MonoBehaviour
 
     private bool isWalk;
     public bool isDush;
+    private bool canMove = true;
+
+    public float timer = 0.0f;//タイマー
 
     public float rayDistance = 2;
 
@@ -35,79 +38,96 @@ public class Move : MonoBehaviour
 
     void Update()
     {
-        if(!gameManager.pause){
+        if(!gameManager.pause && canMove)
+        {
             // playerInputAction.Player.Dash.performed += ctx => speed = maxSpeed;
-        // playerInputAction.Player.Dash.canceled += ctx => speed = normalSpeed;
-        playerInputAction.Player.Dash.performed += ctx => {
-            speed = maxSpeed;
-            isDush = true;
-        };
-        
-        playerInputAction.Player.Dash.canceled += ctx => {
-            speed = normalSpeed;
-            isDush = false;
-        };
+            // playerInputAction.Player.Dash.canceled += ctx => speed = normalSpeed;
+            playerInputAction.Player.Dash.performed += ctx => {
+                speed = maxSpeed;
+                isDush = true;
+            };
+            
+            playerInputAction.Player.Dash.canceled += ctx => {
+                speed = normalSpeed;
+                isDush = false;
+            };
 
-        playerDirection = playerInputAction.Player.Move.ReadValue<Vector2>();
+            playerDirection = playerInputAction.Player.Move.ReadValue<Vector2>();
 
-        if(playerDirection.x != 0 || playerDirection.y != 0)
-        {
-            isWalk = true;
-            animator.SetFloat("InputX",playerDirection.x);
-            animator.SetFloat("InputY",playerDirection.y);
-        }else
-        {
-            isWalk = false;
-        }
-        animator.SetBool("IsDush",isDush);
-        animator.SetBool("IsWalk",isWalk);
-        }
-        
+            if(playerDirection.x != 0 || playerDirection.y != 0)
+            {
+                isWalk = true;
+                animator.SetFloat("InputX",playerDirection.x);
+                animator.SetFloat("InputY",playerDirection.y);
+            }else
+            {
+                isWalk = false;
+            }
 
-        // if(playerDirection.x != 0 || playerDirection.y != 0)
-
-        // 以下Raycastを利用した壁の判定
-        // Vector3 playerPosition = transform.position;//プレイヤーの位置を取得
-        // Vector3 rayDirection = new Vector3(playerDirection.x, 0, playerDirection.y);//プレイヤーの向きを取得
-        // Ray ray = new Ray(playerPosition, rayDirection);//プライヤーの向きにあるものを判別するものを飛ばす
-        // RaycastHit wallHit;
-        RaycastHit hitForward;
-        if (Physics.Raycast(transform.position, Vector3.forward, out hitForward, rayDistance, WallLayer))
-        {
-            // Debug.Log("上かべぇ");
-           if(playerDirection.y > 0) playerDirection.y = 0;
-        }
-        RaycastHit hitBack;
-        if (Physics.Raycast(transform.position, Vector3.back, out hitBack, rayDistance, WallLayer))
-        {
-            // Debug.Log("下かべぇ");
-           if(playerDirection.y < 0) playerDirection.y = 0;
-        }
-        RaycastHit hitRight;
-        if (Physics.Raycast(transform.position, Vector3.right, out hitRight, rayDistance, WallLayer))
-        {
-            // Debug.Log("右かべぇ");
-           if(playerDirection.x > 0) playerDirection.x = 0;
-        }
-        RaycastHit hitLeft;
-        if (Physics.Raycast(transform.position, Vector3.left, out hitLeft, rayDistance, WallLayer))
-        {
-            // Debug.Log("左かべぇ");
-           if(playerDirection.x < 0) playerDirection.x = 0;
-        }
-        //if(!Physics.Raycast(ray, out wallHit, 1.0f, WallLayer)){//プレイヤーの方向の少し先にレイヤーの「Wall」がないかを判別する
+            // 以下Raycastを利用した壁の判定
+            // Vector3 playerPosition = transform.position;//プレイヤーの位置を取得
+            // Vector3 rayDirection = new Vector3(playerDirection.x, 0, playerDirection.y);//プレイヤーの向きを取得
+            // Ray ray = new Ray(playerPosition, rayDirection);//プライヤーの向きにあるものを判別するものを飛ばす
+            RaycastHit hitForward;
+            if (Physics.Raycast(transform.position, Vector3.forward, out hitForward, rayDistance, WallLayer))
+            {
+                // Debug.Log("上かべぇ");
+                if(playerDirection.y > 0) playerDirection.y = 0;
+            }
+            RaycastHit hitBack;
+            if (Physics.Raycast(transform.position, Vector3.back, out hitBack, rayDistance, WallLayer))
+            {
+                // Debug.Log("下かべぇ");
+                if(playerDirection.y < 0) playerDirection.y = 0;
+            }
+            RaycastHit hitRight;
+            if (Physics.Raycast(transform.position, Vector3.right, out hitRight, rayDistance, WallLayer))
+            {
+                // Debug.Log("右かべぇ");
+                if(playerDirection.x > 0) playerDirection.x = 0;
+            }
+            RaycastHit hitLeft;
+                if (Physics.Raycast(transform.position, Vector3.left, out hitLeft, rayDistance, WallLayer))
+            {
+                // Debug.Log("左かべぇ");
+                if(playerDirection.x < 0) playerDirection.x = 0;
+            }
+            //if(!Physics.Raycast(ray, out wallHit, 1.0f, WallLayer)){//プレイヤーの方向の少し先にレイヤーの「Wall」がないかを判別する
             transform.Translate(
             playerDirection.x * speed * Time.deltaTime,
             0.0f,
             playerDirection.y * speed * Time.deltaTime);
-        //}
-        
+        }else if(!canMove)
+        {
+            if(timer <= 0.3f)
+            {
+                // Debug.Log("止まるぜ");
+                timer += Time.deltaTime;
+            }
+            else
+            {
+                // Debug.Log("動くぜ");
+                timer = 0.0f;
+                canMove = true;
+            }
+        }
 
-
+        animator.SetBool("IsDush",isDush);
+        animator.SetBool("IsWalk",isWalk);
     }
 
     void FixedUpdate(){
         
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Teleport"))
+        {
+            // Debug.Log("動かないぜ!");
+            isWalk = false;
+            canMove = false;
+        }
     }
 
 }
