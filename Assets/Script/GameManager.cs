@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        Save();
+        // Save();
     }
 
     // ウィッシュリストの同期
