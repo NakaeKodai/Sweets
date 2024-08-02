@@ -97,6 +97,11 @@ public class Move : MonoBehaviour
             playerDirection.x * speed * Time.deltaTime,
             0.0f,
             playerDirection.y * speed * Time.deltaTime);
+
+            //落下したときの救済
+            if(transform.position.y <= -200){
+                transform.position = new Vector3(63f,4.6f,15f);
+            }
         }else if(!canMove)
         {
             if(timer <= 0.3f)
