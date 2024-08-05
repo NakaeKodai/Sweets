@@ -714,7 +714,6 @@ public class WishListManager : MonoBehaviour
                 icon = frame.transform.GetChild(0).gameObject;
                 image = icon.GetComponent<Image>();
                 image.sprite = ingredientsDB.ingredientsList[materialSumList[i+stackPointer].ID].image;
-                haveQuantity.text = "所字数" + ingredientsDB.ingredientsList[materialSumList[i+stackPointer].ID].quantity;
                 if(materialSumList[i+stackPointer].quantity <= ingredientsDB.ingredientsList[materialSumList[i+stackPointer].ID].quantity){
                     // アイコンから色を指定
                     image.color = canMakeColor;
@@ -760,6 +759,7 @@ public class WishListManager : MonoBehaviour
         int infoItemID = materialSumList[itemPoint].ID;
         infoName.text = ingredientsDB.ingredientsList[infoItemID].name;
         infoIcon.sprite = ingredientsDB.ingredientsList[infoItemID].image;
+        haveQuantity.text = "所持数" + "：" + ingredientsDB.ingredientsList[infoItemID].quantity;
 
         // 素材がどのレシピに使うかを入れる処理
         int useListLength = 4;
