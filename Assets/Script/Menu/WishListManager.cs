@@ -14,7 +14,7 @@ public class WishListManager : MonoBehaviour
     [Header("ウィッシュリストの最大数")]
     public int wishListMax;
     private bool wishListMenuOpening;//ウィッシュリスト専用のメニュー開いたことを判別する
-
+    private int removedID;//削除に使う
     public GameManager gameManager;
 
     public GameObject background;
@@ -64,6 +64,15 @@ public class WishListManager : MonoBehaviour
     private Color color;
     public Color countTextNomalColor;
     public Color countTextLackColor;
+
+    // 素材の説明欄
+    [Header("素材の説明欄関連")]
+    public GameObject materialsInfo;//素材説明文
+    public TextMeshProUGUI infoName;
+    public Image infoIcon;
+    public TextMeshProUGUI haveQuantity;
+    public GameObject CollectionsPoints;//素材が取れる場所（現在未使用、のちのち追加したい）
+    public GameObject UseMaterials;//素材が何のレシピにつかうか
     
 
     public class MaterialSumList{
@@ -96,12 +105,21 @@ public class WishListManager : MonoBehaviour
             SumObject.SetActive(false);
             opening = false;
             wishListMenuOpening = false;
+            gameManager.wishList = wishList;
         }
-        if(wishListMode == 0){
+        if(wishListMode == 0 && wishListMenuOpening){
             if(wishListMenuOpening){
                 MoveCursor();
             }
-            if(playerInputAction.UI.MenuPageRight.triggered || playerInputAction.UI.MenuPageLeft.triggered){
+            if(playerInputAction.UI.MenuSelect.triggered && wishList.Count >= 1){
+                // 削除処理
+                sweetsDB.sweetsList[wishList[nowListNumber]].wishList = false;
+                wishList.RemoveAt(nowListNumber);
+                nowListNumber = 0;
+                SetWishList();
+                
+            }
+            if((playerInputAction.UI.MenuPageRight.triggered || playerInputAction.UI.MenuPageLeft.triggered) && (wishList.Count >= 1)){
                 SetWishListSum();
                 SetWishListSumIcon();
                 // gameObject.SetActive(false);
@@ -109,9 +127,10 @@ public class WishListManager : MonoBehaviour
                 SumObject.SetActive(true);
                 wishListMode = 1;
                 nowListNumber = 0;
+                SetMaterialsInfo();
             }
         }
-        else if(wishListMode == 1){
+        else if(wishListMode == 1 && wishListMenuOpening){
             if(wishListMenuOpening){
                 SumMoveCursor();
             }
@@ -130,7 +149,8 @@ public class WishListManager : MonoBehaviour
         opening = true;
         SetWishList();
         gameObject.SetActive(true);
-        InfoObject.SetActive(true);
+        // InfoObject.SetActive(true);
+        nowListNumber = 0;
     }
 
     // 指定したIDをウィッシュリストに追加
@@ -144,8 +164,9 @@ public class WishListManager : MonoBehaviour
 
     // 指定したIDと一致する要素を削除
     public void RemoveWishList(int ID){
-        gameManager.wishList.Remove(ID);
-        sweetsDB.sweetsList[ID].wishList = false;
+        sweetsDB.sweetsList[gameManager.wishList[ID]].wishList = false;
+        gameManager.wishList.RemoveAt(ID);
+        
     }
 
     // 指定した数字の要素を取得する。
@@ -185,6 +206,7 @@ public class WishListManager : MonoBehaviour
                 icon = frame.transform.GetChild(0).gameObject;
                 image = icon.GetComponent<Image>();
                 image.sprite = nomalIcon;
+                image.color = canMakeColor;
             }
         }
     }
@@ -224,6 +246,7 @@ public class WishListManager : MonoBehaviour
                 icon = frame.transform.GetChild(0).gameObject;
                 image = icon.GetComponent<Image>();
                 image.sprite = nomalIcon;
+                image.color = canMakeColor;
                 icon = frame.transform.GetChild(1).gameObject;
                 text = icon.GetComponent<TextMeshProUGUI>();
                 text.text = "";
@@ -456,6 +479,7 @@ public class WishListManager : MonoBehaviour
                 SetWishListSumIcon();
             }
             // SetItemInfo(wishList[nowListNumber]);
+            SetMaterialsInfo();
         }
         if (isLongPushUp)
         {
@@ -492,6 +516,7 @@ public class WishListManager : MonoBehaviour
             //     SetWishListSumIcon();
             // }
                 // SetItemInfo(wishList[nowListNumber]);
+                SetMaterialsInfo();
 
                 pushDuration = 0.1f;
                 downTime = Time.realtimeSinceStartup;
@@ -536,6 +561,7 @@ public class WishListManager : MonoBehaviour
                 SetWishListSumIcon();
             }
             // SetItemInfo(wishList[nowListNumber]);
+            SetMaterialsInfo();
         }
         if (isLongPushDown)
         {
@@ -568,6 +594,7 @@ public class WishListManager : MonoBehaviour
                 SetWishListSumIcon();
             }
                 // SetItemInfo(wishList[nowListNumber]);
+                SetMaterialsInfo();
 
                 pushDuration = 0.1f;
                 downTime = Time.realtimeSinceStartup;
@@ -687,6 +714,7 @@ public class WishListManager : MonoBehaviour
                 icon = frame.transform.GetChild(0).gameObject;
                 image = icon.GetComponent<Image>();
                 image.sprite = ingredientsDB.ingredientsList[materialSumList[i+stackPointer].ID].image;
+                haveQuantity.text = "所字数" + ingredientsDB.ingredientsList[materialSumList[i+stackPointer].ID].quantity;
                 if(materialSumList[i+stackPointer].quantity <= ingredientsDB.ingredientsList[materialSumList[i+stackPointer].ID].quantity){
                     // アイコンから色を指定
                     image.color = canMakeColor;
@@ -724,6 +752,53 @@ public class WishListManager : MonoBehaviour
                 countText = icon.GetComponent<TextMeshProUGUI>();
                 countText.text = "";
             }
+        }
+    }
+
+    public void SetMaterialsInfo(){
+        int itemPoint = nowListNumber+stackPointer;
+        int infoItemID = materialSumList[itemPoint].ID;
+        infoName.text = ingredientsDB.ingredientsList[infoItemID].name;
+        infoIcon.sprite = ingredientsDB.ingredientsList[infoItemID].image;
+
+        // 素材がどのレシピに使うかを入れる処理
+        int useListLength = 4;
+        int[,] useList = new int[useListLength,2];
+        // useList = new int[4][2]
+        int useListCount = 0;
+        for(int i = 0; i < wishList.Count; i++){
+            for(int j = 0; j < sweetsDB.sweetsList[wishList[i]].materialsList.Count; j++){
+                if(infoItemID == sweetsDB.sweetsList[wishList[i]].materialsList[j].ID){
+                    useList[useListCount,0] = sweetsDB.sweetsList[wishList[i]].ID;
+                    useList[useListCount,1] = sweetsDB.sweetsList[wishList[i]].materialsList[j].個数;
+                    useListCount++;
+                    break;
+                }
+            }
+        }
+        while(useListCount < useListLength){
+            useList[useListCount,0] = -1;
+            useListCount++;
+        }
+
+        //採取できる場所を設定するときここにいれてにゃ
+        // for(int i = 0; i < 4; i++){
+
+        // }
+
+        for(int i = 0; i < useListLength; i++){
+            icon = UseMaterials.transform.GetChild(i).gameObject;
+            text = icon.GetComponent<TextMeshProUGUI>();
+            if(useList[i,0] != -1){
+                icon.SetActive(true);
+                text.text = sweetsDB.sweetsList[useList[i,0]].name;
+                icon = icon.transform.GetChild(0).gameObject;
+                text = icon.GetComponent<TextMeshProUGUI>();
+                text.text = "" + useList[i,1];
+            }else{
+                icon.SetActive(false);
+            }
+            
         }
     }
 }
