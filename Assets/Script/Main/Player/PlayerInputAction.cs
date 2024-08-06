@@ -71,6 +71,15 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MoveSceneTest"",
+                    ""type"": ""Button"",
+                    ""id"": ""0d830079-a8ec-485a-ae97-1f3e344a3c77"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -357,6 +366,28 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2f5f75ab-8ca2-49a0-b527-dde315f711d8"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""MoveSceneTest"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0f2a0c76-cd1d-4cd2-88ad-9d8247e76344"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""MoveSceneTest"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -828,6 +859,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_MiniGameAction = m_Player.FindAction("MiniGameAction", throwIfNotFound: true);
+        m_Player_MoveSceneTest = m_Player.FindAction("MoveSceneTest", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_OpenMenu = m_UI.FindAction("OpenMenu", throwIfNotFound: true);
@@ -906,6 +938,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_MiniGameAction;
+    private readonly InputAction m_Player_MoveSceneTest;
     public struct PlayerActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -915,6 +948,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @MiniGameAction => m_Wrapper.m_Player_MiniGameAction;
+        public InputAction @MoveSceneTest => m_Wrapper.m_Player_MoveSceneTest;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -939,6 +973,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @MiniGameAction.started += instance.OnMiniGameAction;
             @MiniGameAction.performed += instance.OnMiniGameAction;
             @MiniGameAction.canceled += instance.OnMiniGameAction;
+            @MoveSceneTest.started += instance.OnMoveSceneTest;
+            @MoveSceneTest.performed += instance.OnMoveSceneTest;
+            @MoveSceneTest.canceled += instance.OnMoveSceneTest;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -958,6 +995,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @MiniGameAction.started -= instance.OnMiniGameAction;
             @MiniGameAction.performed -= instance.OnMiniGameAction;
             @MiniGameAction.canceled -= instance.OnMiniGameAction;
+            @MoveSceneTest.started -= instance.OnMoveSceneTest;
+            @MoveSceneTest.performed -= instance.OnMoveSceneTest;
+            @MoveSceneTest.canceled -= instance.OnMoveSceneTest;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1145,6 +1185,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnFire(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnMiniGameAction(InputAction.CallbackContext context);
+        void OnMoveSceneTest(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

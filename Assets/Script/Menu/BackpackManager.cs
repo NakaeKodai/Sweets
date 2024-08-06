@@ -18,7 +18,8 @@ public class BackpackManager : MonoBehaviour
             quantity = q;
         }
     }
-    public List<ItemData> dataList = new List<ItemData>();
+    public static List<ItemData> dataList = new List<ItemData>();
+    //dataListにAddとかしたい場合は、BackpackManager.dataList.Add(new BackpackManager.ItemData(i, n, q)) と書いてねㇵァㇳ
 
     [SerializeField] private IngredientsDB ingredientsDB;
     List<int> BackpackList = new List<int>();//所持アイテムだけのリスト（IDだけ）

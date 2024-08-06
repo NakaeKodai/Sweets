@@ -7386,6 +7386,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1949961797085256098, guid: 30d855ccd3f1a554493bc0a2fdb66fa6, type: 3}
   m_PrefabInstance: {fileID: 951493973}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &230621769
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 230621771}
+  - component: {fileID: 230621770}
+  m_Layer: 0
+  m_Name: SceneMoveTest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &230621770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 230621769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 772a8941976728b4eaba2a9e8aae2c29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &230621771
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 230621769}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &232426607
 GameObject:
   m_ObjectHideFlags: 0
@@ -73933,3 +73977,4 @@ SceneRoots:
   - {fileID: 1154263070}
   - {fileID: 849605302}
   - {fileID: 565515799}
+  - {fileID: 230621771}
