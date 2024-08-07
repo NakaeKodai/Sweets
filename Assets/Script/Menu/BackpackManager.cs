@@ -171,6 +171,7 @@ public class BackpackManager : MonoBehaviour
         SetmenuSelect(BackpackList);
     }
 
+    // ページ変えの処理
     public void TurnMenuPage(int TurnPage){//右にいくなら1,左なら-1
         menuPage += TurnPage;
         if(BackpackList.Count < 40*menuPage){
@@ -184,6 +185,7 @@ public class BackpackManager : MonoBehaviour
         // backpackItemQuantity.ItemQuantitySetting(BackpackList);
         SetmenuSelect(BackpackList);
     }
+    
     // アイテム使い切ったときに持ち物欄から削除する
     public void RemoveDataList(int ID){
         ItemData deleteItem;

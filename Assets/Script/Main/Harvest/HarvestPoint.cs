@@ -82,6 +82,8 @@ public class HarvestPoint : MonoBehaviour
 
             ingredientsDB.ingredientsList[selectItemId].quantity += amount;//採取した個数分をアイテムの個数に追加
 
+            if(!ingredientsDB.ingredientsList[selectItemId].got)ingredientsDB.ingredientsList[selectItemId].got = true;
+
             Debug.Log(ingredientsDB.ingredientsList[selectItemId].name+"を"+amount+"個手に入れた");
 
             int difference;//カンストしたときの入手できなかった分

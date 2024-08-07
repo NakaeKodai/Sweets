@@ -10,4 +10,5 @@ using System;
     public Sprite image;//アイテムの画像
     public int quantity;//アイテムの個数
     public string infomation;//アイテムの説明文
+    public bool got;//入手済みを判別する
 }

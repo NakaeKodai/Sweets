@@ -30,6 +30,7 @@ public class MenuManager : MonoBehaviour
     public Recipe recipeScript;
     public RecipeManager recipeMAnager;
     public WishListManager wishListManager;
+    public LibraryManager libraryManager;
     public GameObject setting;
 
     void Start()
@@ -175,6 +176,9 @@ public class MenuManager : MonoBehaviour
                         break;
                     case 3:
                         Debug.Log("図鑑");
+                        selectMenuNow = true;
+                        menuWindow.SetActive(false);
+                        libraryManager.OpenLibrary();
                         break;
                     case 4:
                         Debug.Log("依頼一覧");
