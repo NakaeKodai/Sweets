@@ -33,6 +33,8 @@ public class RecipeManager : MonoBehaviour
     public bool opening = false;
     public IngredientsDB ingredientsDB;
     public SweetsDB sweetsDB;
+    public GameManager gameManager;
+    public MenuManager menuManager;
 
     public GameObject background;
     private GameObject nowCursor;
@@ -71,6 +73,7 @@ public class RecipeManager : MonoBehaviour
 
     [Header("スイーツ作成関連")]
     public bool making = false;//スイーツを作るときのやつ
+    public MakeSweets makeSweets;
 
 
     void Start()
@@ -146,6 +149,10 @@ public class RecipeManager : MonoBehaviour
             if(useWishList){
                 wishListManager.SetWishListIcon();
                 WishListObject.SetActive(true);
+            }else{
+                making = true;
+                Time.timeScale = 0;
+                gameManager.pause = true;
             }
             gameObject.SetActive(true);
         }
@@ -297,7 +304,8 @@ public class RecipeManager : MonoBehaviour
                 bool allMaterialsOk = true;//これがtrueのままなら全部の素材がそろっている
                 for (int j = 0; j < sweetsDB.sweetsList[dataList[i].ID].materialsList.Count; j++)
                 {
-                    if (ingredientsDB.ingredientsList[dataList[i].ID].quantity < sweetsDB.sweetsList[dataList[i].ID].materialsList[j].個数)
+                    int itemID = sweetsDB.sweetsList[dataList[i].ID].materialsList[j].ID;
+                    if (ingredientsDB.ingredientsList[itemID].quantity < sweetsDB.sweetsList[dataList[i].ID].materialsList[j].個数)
                     {
                         allMaterialsOk = false;
                     }
@@ -543,9 +551,16 @@ public class RecipeManager : MonoBehaviour
                 wishListManager.SetWishListIcon();
             }
         }else if(playerInputAction.UI.MenuSelect.triggered && (menuList[nowListNumber] != -1) && making){
-            if(sweetsDB.sweetsList[menuList[nowListNumber]].canMake){
-
-            }
+            // if(sweetsDB.sweetsList[menuList[nowListNumber]].canMake){
+                if(makeSweets.Cook(menuList[nowListNumber])){
+                    gameObject.SetActive(false);
+                    opening = false;
+                    making = false;
+                    Time.timeScale = 1;
+                    gameManager.pause = false;
+                }
+                
+            // }
         }
     }
 

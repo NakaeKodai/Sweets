@@ -9,6 +9,7 @@ public class Cooking : MonoBehaviour
     MakeSweets makeSweets;
     public int sweetsID;//作るスイーツの指定
     public GameManager gameManager;
+    public RecipeManager recipeManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +23,8 @@ public class Cooking : MonoBehaviour
         if(playerInputAction.Player.Fire.triggered && isEnter && !gameManager.pause)
         {
             // クリックによってスイーツを作成
-            makeSweets.Cook(sweetsID);
+            // makeSweets.Cook(sweetsID);
+            recipeManager.OpenRecipe(false);
         }
     }
 

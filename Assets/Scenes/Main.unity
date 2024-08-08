@@ -35492,6 +35492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 565515798}
+  isMenu: 0
   menuWindow: {fileID: 243788595}
   menuList:
   - {fileID: 1994306783}
@@ -37371,6 +37372,8 @@ MonoBehaviour:
   opening: 0
   ingredientsDB: {fileID: 11400000, guid: 89317c2866f8d824a88d23ec19f537e2, type: 2}
   sweetsDB: {fileID: 11400000, guid: e0ca94ceffe1439459fd67cd7dbd71ed, type: 2}
+  gameManager: {fileID: 565515798}
+  menuManager: {fileID: 849605303}
   background: {fileID: 322686852}
   nomalColor: {r: 0, g: 0, b: 0, a: 0.46666667}
   selectColor: {r: 1, g: 0, b: 0, a: 1}
@@ -37386,6 +37389,7 @@ MonoBehaviour:
   ItemInfomation: {fileID: 1463847507}
   infoMaterials: {fileID: 580099544}
   making: 0
+  makeSweets: {fileID: 1154263066}
 --- !u!1 &908211111
 GameObject:
   m_ObjectHideFlags: 0
@@ -52681,6 +52685,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sweetsID: 0
   gameManager: {fileID: 565515798}
+  recipeManager: {fileID: 908171811}
 --- !u!1 &1427909644
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,7 +20,7 @@ public class MakeSweets : MonoBehaviour
         
     }
 
-    public void Cook(int sweetsID){
+    public bool Cook(int sweetsID){
         bool canCook = true;
         int materialID;//素材のID
         // List<int> materialIDList = new List<int>();
@@ -53,6 +53,9 @@ public class MakeSweets : MonoBehaviour
             }
             sweetsDB.sweetsList[sweetsID].quantity++;
             Debug.Log(sweetsDB.sweetsList[sweetsID].name+"を一つ作った。");
+            return true;
         }
+        
+        return false;
     }
 }

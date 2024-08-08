@@ -8,7 +8,7 @@ public class MenuManager : MonoBehaviour
 {
     public GameManager gameManager;
 
-    private bool isMenu;//メニューウィンドウが開いているか
+    public bool isMenu;//メニューウィンドウが開いているか
     private PlayerInputAction playerInputAction;
     [SerializeField] private GameObject menuWindow;
     [SerializeField] private Button[] menuList;//メニューウィンドウのボタンを格納しているリスト
