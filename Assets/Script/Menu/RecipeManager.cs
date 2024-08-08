@@ -69,6 +69,9 @@ public class RecipeManager : MonoBehaviour
     public TextMeshProUGUI ItemInfomation;//説明文
     public GameObject infoMaterials;
 
+    [Header("スイーツ作成関連")]
+    public bool making = false;//スイーツを作るときのやつ
+
 
     void Start()
     {
@@ -85,6 +88,7 @@ public class RecipeManager : MonoBehaviour
             gameObject.SetActive(false);
             WishListObject.SetActive(false);
             opening = false;
+            making = false;
         }
         if (playerInputAction.UI.Sort.triggered)
         {
@@ -117,7 +121,7 @@ public class RecipeManager : MonoBehaviour
     }
 
     //レシピのメニューを開いたときに起動する
-    public void OpenRecipe()
+    public void OpenRecipe(bool useWishList)//useWishListはウィッシュリストを使うならtrue
     {
         if (!opening)
         {
@@ -139,9 +143,11 @@ public class RecipeManager : MonoBehaviour
             RecipeSetting(RecipeList);
             // recipeItemName.RecipeNameSetting(RecipeList);
             SetmenuSelect(RecipeList);
-            wishListManager.SetWishListIcon();
+            if(useWishList){
+                wishListManager.SetWishListIcon();
+                WishListObject.SetActive(true);
+            }
             gameObject.SetActive(true);
-            WishListObject.SetActive(true);
         }
     }
 
@@ -528,13 +534,17 @@ public class RecipeManager : MonoBehaviour
         // }
 
         // 一次元配列
-        if (playerInputAction.UI.MenuSelect.triggered && (menuList[nowListNumber] != -1))
+        if (playerInputAction.UI.MenuSelect.triggered && (menuList[nowListNumber] != -1) && !making)
         {
             int selectID = menuList[nowListNumber];
             if (!sweetsDB.sweetsList[selectID].wishList)
             {
                 wishListManager.AddWishList(selectID);
                 wishListManager.SetWishListIcon();
+            }
+        }else if(playerInputAction.UI.MenuSelect.triggered && (menuList[nowListNumber] != -1) && making){
+            if(sweetsDB.sweetsList[menuList[nowListNumber]].canMake){
+
             }
         }
     }

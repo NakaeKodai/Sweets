@@ -457,7 +457,8 @@ public class WishListManager : MonoBehaviour
             nowCursorImage = nowCursor.GetComponent<Image>();
 
             // 一次元配列用
-                if (materialSumList[nowListNumber+stackPointer].quantity <= ingredientsDB.ingredientsList[materialSumList[nowListNumber+stackPointer].ID].quantity)
+                if(nowListNumber+stackPointer < materialSumList.Count){
+                if (materialSumList[nowListNumber+stackPointer].quantity < ingredientsDB.ingredientsList[materialSumList[nowListNumber+stackPointer].ID].quantity)
                 {
                     nowCursorImage.color = nomalColor;
                 }
@@ -465,6 +466,9 @@ public class WishListManager : MonoBehaviour
                 {
                     nowCursorImage.color = notCanMakeColor;
                 }
+            }else{
+                nowCursorImage.color = notCanMakeColor;
+            }
             
             nowListNumber--;
 
@@ -489,14 +493,18 @@ public class WishListManager : MonoBehaviour
                 nowCursorImage = nowCursor.GetComponent<Image>();
 
                 // 一次元配列用
-                    if (materialSumList[nowListNumber+stackPointer].quantity <= ingredientsDB.ingredientsList[materialSumList[nowListNumber+stackPointer].ID].quantity)
-                    {
-                        nowCursorImage.color = nomalColor;
-                    }
-                    else
-                    {
-                        nowCursorImage.color = notCanMakeColor;
-                    }
+                    if(nowListNumber+stackPointer < materialSumList.Count){
+                if (materialSumList[nowListNumber+stackPointer].quantity < ingredientsDB.ingredientsList[materialSumList[nowListNumber+stackPointer].ID].quantity)
+                {
+                    nowCursorImage.color = nomalColor;
+                }
+                else
+                {
+                    nowCursorImage.color = notCanMakeColor;
+                }
+            }else{
+                nowCursorImage.color = notCanMakeColor;
+            }
                 
                 nowListNumber--;
 
@@ -538,8 +546,8 @@ public class WishListManager : MonoBehaviour
             nowCursorImage = nowCursor.GetComponent<Image>();
 
             // 一次元配列
-            
-                if (materialSumList[nowListNumber+stackPointer].quantity <= ingredientsDB.ingredientsList[materialSumList[nowListNumber+stackPointer].ID].quantity)
+            if(nowListNumber+stackPointer < materialSumList.Count){
+                if (materialSumList[nowListNumber+stackPointer].quantity < ingredientsDB.ingredientsList[materialSumList[nowListNumber+stackPointer].ID].quantity)
                 {
                     nowCursorImage.color = nomalColor;
                 }
@@ -547,6 +555,10 @@ public class WishListManager : MonoBehaviour
                 {
                     nowCursorImage.color = notCanMakeColor;
                 }
+            }else{
+                nowCursorImage.color = notCanMakeColor;
+            }
+                
             
             nowListNumber++;
 
@@ -572,14 +584,18 @@ public class WishListManager : MonoBehaviour
 
                 // 一次元配列
                 
-                    if (materialSumList[nowListNumber+stackPointer].quantity <= ingredientsDB.ingredientsList[materialSumList[nowListNumber+stackPointer].ID].quantity)
-                    {
-                        nowCursorImage.color = nomalColor;
-                    }
-                    else
-                    {
-                        nowCursorImage.color = notCanMakeColor;
-                    }
+                    if(nowListNumber+stackPointer < materialSumList.Count){
+                if (materialSumList[nowListNumber+stackPointer].quantity < ingredientsDB.ingredientsList[materialSumList[nowListNumber+stackPointer].ID].quantity)
+                {
+                    nowCursorImage.color = nomalColor;
+                }
+                else
+                {
+                    nowCursorImage.color = notCanMakeColor;
+                }
+            }else{
+                nowCursorImage.color = notCanMakeColor;
+            }
                 
                 nowListNumber++;
                 
@@ -756,12 +772,13 @@ public class WishListManager : MonoBehaviour
 
     public void SetMaterialsInfo(){
         int itemPoint = nowListNumber+stackPointer;
-        int infoItemID = materialSumList[itemPoint].ID;
-        infoName.text = ingredientsDB.ingredientsList[infoItemID].name;
-        infoIcon.sprite = ingredientsDB.ingredientsList[infoItemID].image;
-        haveQuantity.text = "所持数" + "：" + ingredientsDB.ingredientsList[infoItemID].quantity;
+        if(itemPoint < materialSumList.Count){
+            int infoItemID = materialSumList[itemPoint].ID;
+            infoName.text = ingredientsDB.ingredientsList[infoItemID].name;
+            infoIcon.sprite = ingredientsDB.ingredientsList[infoItemID].image;
+            haveQuantity.text = "所持数" + "：" + ingredientsDB.ingredientsList[infoItemID].quantity;
 
-        // 素材がどのレシピに使うかを入れる処理
+            // 素材がどのレシピに使うかを入れる処理
         int useListLength = 4;
         int[,] useList = new int[useListLength,2];
         // useList = new int[4][2]
@@ -781,7 +798,7 @@ public class WishListManager : MonoBehaviour
             useListCount++;
         }
 
-        //採取できる場所を設定するときここにいれてにゃ
+            //採取できる場所を設定するときここにいれてにゃ
         // for(int i = 0; i < 4; i++){
 
         // }
@@ -800,5 +817,14 @@ public class WishListManager : MonoBehaviour
             }
             
         }
+            materialsInfo.SetActive(true);
+        }else{
+            materialsInfo.SetActive(false);
+        }
+        
+
+        
+
+        
     }
 }

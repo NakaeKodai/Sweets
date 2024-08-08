@@ -37385,6 +37385,7 @@ MonoBehaviour:
   ItemIcon: {fileID: 1162850427}
   ItemInfomation: {fileID: 1463847507}
   infoMaterials: {fileID: 580099544}
+  making: 0
 --- !u!1 &908211111
 GameObject:
   m_ObjectHideFlags: 0
@@ -65316,7 +65317,7 @@ MonoBehaviour:
   ItemIcon: {fileID: 0}
   ItemInfomation: {fileID: 0}
   infoMaterials: {fileID: 0}
-  SumObject: {fileID: 0}
+  SumObject: {fileID: 2022145470}
   SumCursorNumber: 6
   sumBackground: {fileID: 0}
   countTextNomalColor: {r: 0, g: 0, b: 0, a: 0}

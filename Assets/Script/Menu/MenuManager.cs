@@ -165,7 +165,7 @@ public class MenuManager : MonoBehaviour
                     case 1:
                         selectMenuNow = true;
                         menuWindow.SetActive(false);
-                        recipeMAnager.OpenRecipe();
+                        recipeMAnager.OpenRecipe(true);
                         // recipeScript.OpenRecipe();
                         break;
                     case 2:
