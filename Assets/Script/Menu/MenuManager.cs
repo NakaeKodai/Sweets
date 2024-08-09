@@ -42,7 +42,7 @@ public class MenuManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!gameManager.pause && playerInputAction.UI.OpenMenu.triggered)
+        if (!gameManager.pause && playerInputAction.UI.OpenMenu.triggered && !isMenu)
         {
             menuWindow.SetActive(true);
             Time.timeScale = 0;
@@ -51,7 +51,7 @@ public class MenuManager : MonoBehaviour
             // selectBottuonNum = 0;
             Debug.Log("ザ・ワールド！");
         }
-        else if ((gameManager.pause && playerInputAction.UI.OpenMenu.triggered) || (gameManager.pause && playerInputAction.UI.Cancel.triggered && !selectMenuNow))
+        else if (((gameManager.pause && playerInputAction.UI.OpenMenu.triggered) || (gameManager.pause && playerInputAction.UI.Cancel.triggered && !selectMenuNow)) && isMenu)
         {
             menuWindow.SetActive(false);
             Time.timeScale = 1;
