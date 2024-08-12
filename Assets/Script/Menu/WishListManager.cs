@@ -105,7 +105,7 @@ public class WishListManager : MonoBehaviour
             SumObject.SetActive(false);
             opening = false;
             wishListMenuOpening = false;
-            gameManager.wishList = wishList;
+            GameManager.wishList = wishList;
         }
         if(wishListMode == 0 && wishListMenuOpening){
             if(wishListMenuOpening){
@@ -156,7 +156,7 @@ public class WishListManager : MonoBehaviour
     // 指定したIDをウィッシュリストに追加
     public void AddWishList(int ID){
         if(wishList.Count < wishListMax){
-            gameManager.wishList.Add(ID);
+            GameManager.wishList.Add(ID);
             sweetsDB.sweetsList[ID].wishList = true;
             Debug.Log(sweetsDB.sweetsList[ID].name+"をウィッシュリストに追加した。");
         }
@@ -164,8 +164,8 @@ public class WishListManager : MonoBehaviour
 
     // 指定したIDと一致する要素を削除
     public void RemoveWishList(int ID){
-        sweetsDB.sweetsList[gameManager.wishList[ID]].wishList = false;
-        gameManager.wishList.RemoveAt(ID);
+        sweetsDB.sweetsList[GameManager.wishList[ID]].wishList = false;
+        GameManager.wishList.RemoveAt(ID);
         
     }
 
@@ -178,7 +178,7 @@ public class WishListManager : MonoBehaviour
     public void SetWishListIcon(){
         // 見やすくするために別スクリプトの物を置いておく
         // int wishListMax = wishListMax;
-        wishList = gameManager.wishList;
+        wishList = GameManager.wishList;
         for(int i = 0; i < wishListMax; i++){
             if(i < wishList.Count){
                 // icon = gameObject.transform.GetChild(i).gameObject;
@@ -213,7 +213,7 @@ public class WishListManager : MonoBehaviour
 
     // ウィッシュリスト専用のメニューでのアイコン設定（名前付き）
     public void SetWishList(){
-        wishList = gameManager.wishList;
+        wishList = GameManager.wishList;
         wishListMenuOpening = true;
         for(int i = 0; i < wishListMax; i++){
             if(i < wishList.Count){

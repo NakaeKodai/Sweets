@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Image lightImage;
     public bool pause = false;
 
-    public List<int> wishList = new List<int>();//ウィッシュリスト
+    public static List<int> wishList = new List<int>();//ウィッシュリスト
 
     void Start()
     {
