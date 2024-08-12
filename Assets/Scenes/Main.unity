@@ -1882,6 +1882,59 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 60992055}
   m_CullTransparentMesh: 1
+--- !u!1 &64595089
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 64595091}
+  - component: {fileID: 64595090}
+  m_Layer: 7
+  m_Name: TeleportMapSeane
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &64595090
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64595089}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 9.772915, y: 7.060135, z: 1}
+  m_Center: {x: -0.96951866, y: 3.0300674, z: 0}
+--- !u!4 &64595091
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64595089}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 65.55, y: 1.51, z: 6.29}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &64917870 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9977638d9a7fbc44dbba6639495e9011, type: 3}
@@ -52501,6 +52554,9 @@ MonoBehaviour:
   WallLayer:
     serializedVersion: 2
     m_Bits: 64
+  TeleportMapLayer:
+    serializedVersion: 2
+    m_Bits: 128
   gameManager: {fileID: 565515798}
 --- !u!54 &1427255699
 Rigidbody:
@@ -64385,6 +64441,7 @@ GameObject:
   - component: {fileID: 1805817034}
   - component: {fileID: 1805817033}
   - component: {fileID: 1805817032}
+  - component: {fileID: 1805817035}
   m_Layer: 6
   m_Name: Wall Flont
   m_TagString: Wall
@@ -64426,8 +64483,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.8643639, y: 0.99999994, z: 1}
-  m_Center: {x: -0.0020212326, y: 0, z: 0.0000037955676}
+  m_Size: {x: 0.9075878, y: 0.99999994, z: 1}
+  m_Center: {x: -0.48041052, y: 0, z: 0.0000037955676}
 --- !u!23 &1805817033
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -64477,6 +64534,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1805817030}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &1805817035
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805817030}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.98173267, y: 0.99999994, z: 1}
+  m_Center: {x: 0.5170704, y: 0, z: 0.0000037955676}
 --- !u!1001 &1809691160
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -81020,3 +81098,4 @@ SceneRoots:
   - {fileID: 849605302}
   - {fileID: 565515799}
   - {fileID: 230621771}
+  - {fileID: 64595091}

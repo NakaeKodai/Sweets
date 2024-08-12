@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 //プレイヤーの移動のスクリプト
 public class Move : MonoBehaviour
@@ -23,6 +24,7 @@ public class Move : MonoBehaviour
     Animator animator;//アニメーションの変数
     
     [SerializeField]LayerMask WallLayer;
+    [SerializeField]LayerMask TeleportMapLayer;//マップ移動のレイヤー   
 
     public GameManager gameManager;
     void Start()
@@ -97,6 +99,11 @@ public class Move : MonoBehaviour
             playerDirection.x * speed * Time.deltaTime,
             0.0f,
             playerDirection.y * speed * Time.deltaTime);
+
+            // 採取マップへの移動
+            if(Physics.Raycast(transform.position, Vector3.back, out hitBack, rayDistance, TeleportMapLayer)){
+                SceneManager.LoadScene("Field");
+            }
 
             //落下したときの救済
             if(transform.position.y <= -200){
