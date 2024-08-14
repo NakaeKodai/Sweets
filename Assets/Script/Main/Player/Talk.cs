@@ -9,7 +9,7 @@ public class Talk : MonoBehaviour
 {
     private PlayerInputAction playerInputAction;  //InputSystemを入れている変数 
     private bool isEnter;
-    private bool isTalking;
+    public bool isTalking;
     private bool interval = false;
     private byte talkPage;
     NPCState npcState;

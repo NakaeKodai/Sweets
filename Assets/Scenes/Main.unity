@@ -25677,7 +25677,6 @@ MonoBehaviour:
   settingManager: {fileID: 1864645686}
   lightImage: {fileID: 1153410835}
   pause: 0
-  wishList: 
 --- !u!4 &565515799
 Transform:
   m_ObjectHideFlags: 0
@@ -35565,6 +35564,7 @@ MonoBehaviour:
   wishListManager: {fileID: 1882993486}
   libraryManager: {fileID: 1434318953}
   setting: {fileID: 1864645684}
+  talkScript: {fileID: 1427255696}
 --- !u!1 &852332806
 GameObject:
   m_ObjectHideFlags: 0
@@ -52515,6 +52515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2a4a41227b54a14db7ac915c2495b13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTalking: 0
   gameManager: {fileID: 565515798}
   talkWindow: {fileID: 1271292292}
   textWindow: {fileID: 193505745}

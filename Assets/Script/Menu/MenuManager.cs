@@ -33,6 +33,8 @@ public class MenuManager : MonoBehaviour
     public LibraryManager libraryManager;
     public GameObject setting;
 
+    public Talk talkScript;
+
     void Start()
     {
         playerInputAction = new PlayerInputAction();
@@ -42,7 +44,7 @@ public class MenuManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!gameManager.pause && playerInputAction.UI.OpenMenu.triggered && !isMenu)
+        if (!gameManager.pause && playerInputAction.UI.OpenMenu.triggered && !isMenu && !talkScript.isTalking)
         {
             menuWindow.SetActive(true);
             Time.timeScale = 0;
