@@ -14,10 +14,13 @@ public class MapManager : MonoBehaviour
     bool opening = false;
 
     public GameObject mapObject;
+    public GameObject mapCursor;
     RectTransform mapTransform;
-    private float cursorSpeed = 3000.0f;
+    private float cursorSpeed = 250.0f;
 
     private Vector2 mapDirection;
+    float speedX = 0f;
+    float speedY = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +46,7 @@ public class MapManager : MonoBehaviour
             gameManager.pause = false;
             opening = false;
             mapObject.SetActive(false);
+            mapCursor.SetActive(false);
             Debug.Log("マップ閉じ");
         }
 
@@ -62,23 +66,43 @@ public class MapManager : MonoBehaviour
 
 
         mapObject.SetActive(true);
+        mapObject.SetActive(true);
     }
 
     void MoveMap(){
         // Transform mapTransform = mapObject.transform;
         Vector2 mapPos = mapTransform.position;
-        if(playerInputAction.Map.CursorMoveRight.triggered){
-            mapPos.x += -cursorSpeed * Time.deltaTime;
-            mapTransform.position = mapPos;
-            // mapTransform.position = new Vector2(-cursorSpeed,0f);
-            // transform.position = Vecter3.MoveTowards(transform.position, pos, -cursorSpeed*Time.deltaTime);
-            // mapTransform.Translate(-cursorSpeed*Time.deltaTime,0f,0f);
-        }else if(playerInputAction.Map.CursorMoveLeft.triggered){
-            mapPos.x += cursorSpeed * Time.deltaTime;
-            mapTransform.position = mapPos;
-            // mapTransform.position  = new Vector2(cursorSpeed * Time.deltaTime,0f);
-            // transform.position = Vecter3.MoveTowards(transform.position, pos, cursorSpeed*Time.deltaTime);
-            // mapTransform.Translate(cursorSpeed*Time.deltaTime,0f,0f);
-        }
+
+        playerInputAction.Map.CursorMoveRight.performed += ctx => {
+            speedX = -cursorSpeed * Time.deltaTime;
+        };
+        playerInputAction.Map.CursorMoveRight.canceled += ctx => {
+            speedX = 0;
+        };
+        playerInputAction.Map.CursorMoveLeft.performed += ctx => {
+            speedX = cursorSpeed * Time.deltaTime;
+        };
+        playerInputAction.Map.CursorMoveLeft.canceled += ctx => {
+            speedX = 0;
+        };
+        playerInputAction.Map.CursorMoveUp.performed += ctx => {
+            speedY = -cursorSpeed * Time.deltaTime;
+        };
+        playerInputAction.Map.CursorMoveUp.canceled += ctx => {
+            speedY = 0;
+        };
+        playerInputAction.Map.CursorMoveDown.performed += ctx => {
+            speedY = cursorSpeed * Time.deltaTime;
+        };
+        playerInputAction.Map.CursorMoveDown.canceled += ctx => {
+            speedY = 0;
+        };
+        mapPos.x += speedX;
+        mapPos.y += speedY;
+        mapTransform.position = mapPos;
+    }
+
+    public void KARI(){
+        Debug.Log("おっぱい");
     }
 }

@@ -912,6 +912,17 @@
                 },
                 {
                     "name": "",
+                    "id": "9972b6d8-0889-48ba-91e4-9e5f697b7324",
+                    "path": "<Gamepad>/leftStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "CursorMoveUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "69edd184-6d89-4191-b44f-a6b52069e382",
                     "path": "<Keyboard>/s",
                     "interactions": "",
@@ -936,6 +947,17 @@
                     "name": "",
                     "id": "3f7cf908-d086-4518-bdf1-082ff2731444",
                     "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "CursorMoveDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a3920d0d-6da8-4eba-9782-4a1abcc9dfb8",
+                    "path": "<Gamepad>/leftStick/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -978,6 +1000,17 @@
                 },
                 {
                     "name": "",
+                    "id": "6ba960ea-66b4-4f0e-994c-df3a23fe353e",
+                    "path": "<Gamepad>/leftStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "CursorMoveRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "7f168d98-213c-43e5-bdfd-bbaf66bb8bea",
                     "path": "<Keyboard>/a",
                     "interactions": "",
@@ -1002,6 +1035,17 @@
                     "name": "",
                     "id": "9dbd59ee-ced5-4686-a064-0721ea367029",
                     "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "CursorMoveLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "11743ad4-27c7-4695-8b5f-8c046e20a670",
+                    "path": "<Gamepad>/leftStick/left",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",

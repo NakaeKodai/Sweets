@@ -10,6 +10,7 @@ TagManager:
   - Wall
   - Cooking
   - Teleport
+  - Checkpoint
   layers:
   - Default
   - TransparentFX
