@@ -23,6 +23,7 @@ public class MapCursor : MonoBehaviour
         if (other.gameObject.CompareTag("Checkpoint"))
         {
             mapManager.KARI();
+            Debug.Log("あんこ");
         }
     }
 }

@@ -17,6 +17,7 @@ public class MapManager : MonoBehaviour
     public GameObject mapCursor;
     RectTransform mapTransform;
     private float cursorSpeed = 250.0f;
+    RectTransform cursorTransform;
 
     private Vector2 mapDirection;
     float speedX = 0f;
@@ -29,6 +30,7 @@ public class MapManager : MonoBehaviour
         playerInputAction.Enable();
 
         mapTransform = mapObject.GetComponent<RectTransform>();
+        cursorTransform = mapCursor.GetComponent<RectTransform>();
     }
 
     // Update is called once per frame
@@ -66,40 +68,69 @@ public class MapManager : MonoBehaviour
 
 
         mapObject.SetActive(true);
-        mapObject.SetActive(true);
+        mapCursor.SetActive(true);
     }
 
     void MoveMap(){
         // Transform mapTransform = mapObject.transform;
-        Vector2 mapPos = mapTransform.position;
+        // Vector2 mapPos = mapTransform.position;
+
+        // playerInputAction.Map.CursorMoveRight.performed += ctx => {
+        //     speedX = -cursorSpeed * Time.deltaTime;
+        // };
+        // playerInputAction.Map.CursorMoveRight.canceled += ctx => {
+        //     speedX = 0;
+        // };
+        // playerInputAction.Map.CursorMoveLeft.performed += ctx => {
+        //     speedX = cursorSpeed * Time.deltaTime;
+        // };
+        // playerInputAction.Map.CursorMoveLeft.canceled += ctx => {
+        //     speedX = 0;
+        // };
+        // playerInputAction.Map.CursorMoveUp.performed += ctx => {
+        //     speedY = -cursorSpeed * Time.deltaTime;
+        // };
+        // playerInputAction.Map.CursorMoveUp.canceled += ctx => {
+        //     speedY = 0;
+        // };
+        // playerInputAction.Map.CursorMoveDown.performed += ctx => {
+        //     speedY = cursorSpeed * Time.deltaTime;
+        // };
+        // playerInputAction.Map.CursorMoveDown.canceled += ctx => {
+        //     speedY = 0;
+        // };
+        // mapPos.x += speedX;
+        // mapPos.y += speedY;
+
+        Vector2 mapPos = cursorTransform.position;
 
         playerInputAction.Map.CursorMoveRight.performed += ctx => {
-            speedX = -cursorSpeed * Time.deltaTime;
+            speedX = cursorSpeed * Time.deltaTime;
         };
         playerInputAction.Map.CursorMoveRight.canceled += ctx => {
             speedX = 0;
         };
         playerInputAction.Map.CursorMoveLeft.performed += ctx => {
-            speedX = cursorSpeed * Time.deltaTime;
+            speedX = -cursorSpeed * Time.deltaTime;
         };
         playerInputAction.Map.CursorMoveLeft.canceled += ctx => {
             speedX = 0;
         };
         playerInputAction.Map.CursorMoveUp.performed += ctx => {
-            speedY = -cursorSpeed * Time.deltaTime;
+            speedY = cursorSpeed * Time.deltaTime;
         };
         playerInputAction.Map.CursorMoveUp.canceled += ctx => {
             speedY = 0;
         };
         playerInputAction.Map.CursorMoveDown.performed += ctx => {
-            speedY = cursorSpeed * Time.deltaTime;
+            speedY = -cursorSpeed * Time.deltaTime;
         };
         playerInputAction.Map.CursorMoveDown.canceled += ctx => {
             speedY = 0;
         };
         mapPos.x += speedX;
         mapPos.y += speedY;
-        mapTransform.position = mapPos;
+        cursorTransform.position = mapPos;
     }
 
     public void KARI(){
