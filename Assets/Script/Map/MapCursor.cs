@@ -18,9 +18,10 @@ public class MapCursor : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Checkpoint"))
+        // other.gameObject.CompareTag("Checkpoint")
+        if (other.gameObject.layer == LayerMask.NameToLayer("Checkpoint"))
         {
             mapManager.KARI();
             Debug.Log("あんこ");

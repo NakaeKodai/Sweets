@@ -23,6 +23,10 @@ public class MapManager : MonoBehaviour
     float speedX = 0f;
     float speedY = 0f;
 
+    Camera mainCamera;
+    Vector3 mainCameraPos;
+    public Camera mapCamera;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +35,8 @@ public class MapManager : MonoBehaviour
 
         mapTransform = mapObject.GetComponent<RectTransform>();
         cursorTransform = mapCursor.GetComponent<RectTransform>();
+
+        mainCamera = Camera.main;
     }
 
     // Update is called once per frame
@@ -41,12 +47,18 @@ public class MapManager : MonoBehaviour
             gameManager.pause = true;
             opening = true;
             MapCreate();
+            // mainCamera.enabled = false;
+            // mapCamera.enabled = true;
+            mainCameraPos = mainCamera.transform.position;
             // mapObject.SetActive(true);
             Debug.Log("マップ開いているよん");
         }else if((playerInputAction.Map.Cancel.triggered || playerInputAction.Player.OpenMap.triggered) && opening && gameManager.pause){
             Time.timeScale = 1;
             gameManager.pause = false;
             opening = false;
+            // mainCamera.enabled = true;
+            // mapCamera.enabled = false;
+            mainCamera.transform.position = mainCameraPos;
             mapObject.SetActive(false);
             mapCursor.SetActive(false);
             Debug.Log("マップ閉じ");
@@ -131,9 +143,15 @@ public class MapManager : MonoBehaviour
         mapPos.x += speedX;
         mapPos.y += speedY;
         cursorTransform.position = mapPos;
+        // mainCamera.transform.position = mapPos;
     }
 
     public void KARI(){
         Debug.Log("おっぱい");
     }
+
+    // void mapCameraSet(){
+    //     mainCameraPos = mainCamera.transform.position;
+
+    // }
 }
