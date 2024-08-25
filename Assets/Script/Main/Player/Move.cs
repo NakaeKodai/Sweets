@@ -24,7 +24,9 @@ public class Move : MonoBehaviour
     Animator animator;//アニメーションの変数
     
     [SerializeField]LayerMask WallLayer;
-    [SerializeField]LayerMask TeleportMapLayer;//マップ移動のレイヤー   
+    [SerializeField]LayerMask TeleportMapLayer;//マップ移動のレイヤー
+
+    public Vector3 ResurrectionPoint;//復活地点   
 
     public GameManager gameManager;
     void Start()
@@ -107,7 +109,8 @@ public class Move : MonoBehaviour
 
             //落下したときの救済
             if(transform.position.y <= -200){
-                transform.position = new Vector3(63f,4.6f,15f);
+                // transform.position = new Vector3(63f,4.6f,15f);
+                transform.position = ResurrectionPoint;
             }
         }else if(!canMove)
         {

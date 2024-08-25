@@ -52558,6 +52558,7 @@ MonoBehaviour:
   TeleportMapLayer:
     serializedVersion: 2
     m_Bits: 128
+  ResurrectionPoint: {x: 63, y: 5, z: 15}
   gameManager: {fileID: 565515798}
 --- !u!54 &1427255699
 Rigidbody:
