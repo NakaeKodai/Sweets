@@ -34,6 +34,16 @@ public class MapManager : MonoBehaviour
     [SerializeField]private GameObject playerPosition;//プレイヤーの位置
     Vector2 playerPositionXZ;//二次元
 
+    // [Header("マップ隠し関連")]
+    [SerializeField]public class hideMass{
+        public int left;
+        public int right;
+        public int top;
+        public int under;
+        public string opened;
+    }
+    public List<hideMass> hideMassList = new List<hideMass>();
+
 
     // Start is called before the first frame update
     void Start()
