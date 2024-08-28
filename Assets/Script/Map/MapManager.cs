@@ -34,15 +34,17 @@ public class MapManager : MonoBehaviour
     [SerializeField]private GameObject playerPosition;//プレイヤーの位置
     Vector2 playerPositionXZ;//二次元
 
-    // [Header("マップ隠し関連")]
-    [SerializeField]public class hideMass{
-        public int left;
-        public int right;
-        public int top;
-        public int under;
-        public string opened;
+    [Header("マップ隠し関連")]
+    [SerializeField]private GameObject hiddenMap;
+
+    [System.Serializable]public class hideMass{
+        [SerializeField] public int left;
+        [SerializeField] public int right;
+        [SerializeField] public int top;
+        [SerializeField] public int under;
+        [SerializeField] public bool opened;
     }
-    public List<hideMass> hideMassList = new List<hideMass>();
+    [SerializeField]public List<hideMass> hideMassList = new List<hideMass>();
 
 
     // Start is called before the first frame update
@@ -109,9 +111,17 @@ public class MapManager : MonoBehaviour
         playerMarkTransform.position = MarkPos;
         // playerMark.transform.x = playerPositionXZ.x-playerPoint.x;
         // playerMark.transform.y = playerPositionXZ.y-playerPoint.y;
-
+        HideMap();
         mapObject.SetActive(true);
         mapCursor.SetActive(true);
+    }
+
+    void HideMap(){
+        GameObject mass;
+        for(int i = 0; i < hideMassList.Count; i++){
+            mass = hiddenMap.transform.GetChild(i).gameObject;
+            if(hideMassList[i].opened) mass.SetActive(false);
+        }
     }
 
     void MoveMap(){

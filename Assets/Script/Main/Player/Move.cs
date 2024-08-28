@@ -26,7 +26,11 @@ public class Move : MonoBehaviour
     [SerializeField]LayerMask WallLayer;
     [SerializeField]LayerMask TeleportMapLayer;//マップ移動のレイヤー
 
-    public Vector3 ResurrectionPoint;//復活地点   
+    public Vector3 ResurrectionPoint;//復活地点  
+
+    public string nowGameMode;//village:村の中 field:採取マップ
+    public MapManager mapManager;
+    // public bool allOpened = false;//マップの空白が全部空いたらtrue
 
     public GameManager gameManager;
     void Start()
@@ -105,6 +109,22 @@ public class Move : MonoBehaviour
             // 採取マップへの移動
             if(Physics.Raycast(transform.position, Vector3.back, out hitBack, rayDistance, TeleportMapLayer)){
                 SceneManager.LoadScene("Field");
+            }
+
+            // 地図の隠してるやつを消す
+            if(nowGameMode == "field"){
+                // bool allopen = true;
+                for(int i = 0; i < mapManager.hideMassList.Count; i++){
+                    if(transform.position.x > mapManager.hideMassList[i].left && transform.position.x < mapManager.hideMassList[i].right){
+                        if(transform.position.z > mapManager.hideMassList[i].under && transform.position.z < mapManager.hideMassList[i].top){
+                            mapManager.hideMassList[i].opened = true;
+                            // allopen = false;
+                        }
+                    }
+                }
+                // if(allopen){
+                //     allOpened = true;
+                // }
             }
 
             //落下したときの救済
