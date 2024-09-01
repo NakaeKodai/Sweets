@@ -27,6 +27,8 @@ public class MapManager : MonoBehaviour
     Vector3 mainCameraPos;
     public Camera mapCamera;
 
+    public float expantion = 1f;//拡大したときにいじる数値（１がデフォ、大きいほど拡大？）
+
     [Header("主人公の場所関連")]
     [SerializeField]private GameObject playerMark;
     private RectTransform playerMarkTransform;
@@ -101,16 +103,18 @@ public class MapManager : MonoBehaviour
     void MapCreate(){
         playerPositionXZ.x = playerPosition.transform.position.x;
         playerPositionXZ.y = playerPosition.transform.position.z;
-        Debug.Log(playerPositionXZ.x+":"+playerPositionXZ.y);
+        // Debug.Log(playerPositionXZ.x+":"+playerPositionXZ.y);
 
         // playerMark.RectTransform = new Vector2(playerPositionXZ.x, playerPositionXZ.y);
         // Debug.Log(playerMark.transform.position.x+":"+playerMark.transform.position.y);
         Vector2 MarkPos = playerMarkTransform.position;
-        MarkPos = new Vector2(playerPositionXZ.x+160, playerPositionXZ.y+130);
-        Debug.Log(MarkPos.x+":"+MarkPos.y);
+        MarkPos = new Vector2(playerPositionXZ.x*expantion +160, playerPositionXZ.y*expantion +120);
+        // Debug.Log(MarkPos.x+":"+MarkPos.y);
+        mapTransform.anchoredPosition = new Vector2(546,263);
         playerMarkTransform.position = MarkPos;
         // playerMark.transform.x = playerPositionXZ.x-playerPoint.x;
         // playerMark.transform.y = playerPositionXZ.y-playerPoint.y;
+        mapTransform.anchoredPosition = new Vector2(-MarkPos.x,-MarkPos.y);
         HideMap();
         mapObject.SetActive(true);
         mapCursor.SetActive(true);
