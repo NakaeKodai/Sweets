@@ -18,6 +18,8 @@ public class MapManager : MonoBehaviour
     RectTransform mapTransform;
     private float cursorSpeed = 250.0f;
     RectTransform cursorTransform;
+    public GameObject kyanpuKarsor;
+    RectTransform kyanpuTransform;
 
     private Vector2 mapDirection;
     float speedX = 0f;
@@ -59,6 +61,8 @@ public class MapManager : MonoBehaviour
         cursorTransform = mapCursor.GetComponent<RectTransform>();
 
         playerMarkTransform = playerMark.GetComponent<RectTransform>();
+
+        kyanpuTransform = kyanpuKarsor.GetComponent<RectTransform>();
 
         mainCamera = Camera.main;
     }
@@ -108,13 +112,18 @@ public class MapManager : MonoBehaviour
         // playerMark.RectTransform = new Vector2(playerPositionXZ.x, playerPositionXZ.y);
         // Debug.Log(playerMark.transform.position.x+":"+playerMark.transform.position.y);
         Vector2 MarkPos = playerMarkTransform.position;
-        MarkPos = new Vector2(playerPositionXZ.x*expantion +160, playerPositionXZ.y*expantion +120);
+        // MarkPos = new Vector2(playerPositionXZ.x*expantion +160, playerPositionXZ.y*expantion +120);
+        MarkPos = new Vector2(playerPositionXZ.x*expantion -800, playerPositionXZ.y*expantion -400);
         // Debug.Log(MarkPos.x+":"+MarkPos.y);
         mapTransform.anchoredPosition = new Vector2(546,263);
-        playerMarkTransform.position = MarkPos;
+        // playerMarkTransform.position = MarkPos;
+        playerMarkTransform.anchoredPosition = MarkPos;
         // playerMark.transform.x = playerPositionXZ.x-playerPoint.x;
         // playerMark.transform.y = playerPositionXZ.y-playerPoint.y;
-        mapTransform.anchoredPosition = new Vector2(-MarkPos.x,-MarkPos.y);
+        // mapTransform.anchoredPosition = new Vector2(-MarkPos.x+500,-MarkPos.y+250);
+
+        kyanpuTransform.anchoredPosition = new Vector3(kyanpuTransform.anchoredPosition.x,kyanpuTransform.anchoredPosition.y,0f);
+        playerMarkTransform.anchoredPosition = new Vector3(playerMarkTransform.anchoredPosition.x,playerMarkTransform.anchoredPosition.y,0f);
         HideMap();
         mapObject.SetActive(true);
         mapCursor.SetActive(true);
@@ -129,65 +138,66 @@ public class MapManager : MonoBehaviour
     }
 
     void MoveMap(){
-        // Transform mapTransform = mapObject.transform;
-        // Vector2 mapPos = mapTransform.position;
-
-        // playerInputAction.Map.CursorMoveRight.performed += ctx => {
-        //     speedX = -cursorSpeed * Time.deltaTime;
-        // };
-        // playerInputAction.Map.CursorMoveRight.canceled += ctx => {
-        //     speedX = 0;
-        // };
-        // playerInputAction.Map.CursorMoveLeft.performed += ctx => {
-        //     speedX = cursorSpeed * Time.deltaTime;
-        // };
-        // playerInputAction.Map.CursorMoveLeft.canceled += ctx => {
-        //     speedX = 0;
-        // };
-        // playerInputAction.Map.CursorMoveUp.performed += ctx => {
-        //     speedY = -cursorSpeed * Time.deltaTime;
-        // };
-        // playerInputAction.Map.CursorMoveUp.canceled += ctx => {
-        //     speedY = 0;
-        // };
-        // playerInputAction.Map.CursorMoveDown.performed += ctx => {
-        //     speedY = cursorSpeed * Time.deltaTime;
-        // };
-        // playerInputAction.Map.CursorMoveDown.canceled += ctx => {
-        //     speedY = 0;
-        // };
-        // mapPos.x += speedX;
-        // mapPos.y += speedY;
-
-        Vector2 mapPos = cursorTransform.position;
+        Transform mapTransform = mapObject.transform;
+        Vector2 mapPos = mapTransform.position;
 
         playerInputAction.Map.CursorMoveRight.performed += ctx => {
-            speedX = cursorSpeed * Time.deltaTime;
+            speedX = -cursorSpeed * Time.deltaTime;
         };
         playerInputAction.Map.CursorMoveRight.canceled += ctx => {
             speedX = 0;
         };
         playerInputAction.Map.CursorMoveLeft.performed += ctx => {
-            speedX = -cursorSpeed * Time.deltaTime;
+            speedX = cursorSpeed * Time.deltaTime;
         };
         playerInputAction.Map.CursorMoveLeft.canceled += ctx => {
             speedX = 0;
         };
         playerInputAction.Map.CursorMoveUp.performed += ctx => {
-            speedY = cursorSpeed * Time.deltaTime;
+            speedY = -cursorSpeed * Time.deltaTime;
         };
         playerInputAction.Map.CursorMoveUp.canceled += ctx => {
             speedY = 0;
         };
         playerInputAction.Map.CursorMoveDown.performed += ctx => {
-            speedY = -cursorSpeed * Time.deltaTime;
+            speedY = cursorSpeed * Time.deltaTime;
         };
         playerInputAction.Map.CursorMoveDown.canceled += ctx => {
             speedY = 0;
         };
         mapPos.x += speedX;
         mapPos.y += speedY;
-        cursorTransform.position = mapPos;
+        mapTransform.position = mapPos;
+
+        // Vector2 mapPos = cursorTransform.position;
+
+        // playerInputAction.Map.CursorMoveRight.performed += ctx => {
+        //     speedX = cursorSpeed * Time.deltaTime;
+        // };
+        // playerInputAction.Map.CursorMoveRight.canceled += ctx => {
+        //     speedX = 0;
+        // };
+        // playerInputAction.Map.CursorMoveLeft.performed += ctx => {
+        //     speedX = -cursorSpeed * Time.deltaTime;
+        // };
+        // playerInputAction.Map.CursorMoveLeft.canceled += ctx => {
+        //     speedX = 0;
+        // };
+        // playerInputAction.Map.CursorMoveUp.performed += ctx => {
+        //     speedY = cursorSpeed * Time.deltaTime;
+        // };
+        // playerInputAction.Map.CursorMoveUp.canceled += ctx => {
+        //     speedY = 0;
+        // };
+        // playerInputAction.Map.CursorMoveDown.performed += ctx => {
+        //     speedY = -cursorSpeed * Time.deltaTime;
+        // };
+        // playerInputAction.Map.CursorMoveDown.canceled += ctx => {
+        //     speedY = 0;
+        // };
+        // mapPos.x += speedX;
+        // mapPos.y += speedY;
+        // cursorTransform.position = mapPos;
         // mainCamera.transform.position = mapPos;
     }
 
