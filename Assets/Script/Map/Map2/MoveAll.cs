@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovePlayerIcon : MonoBehaviour
+public class MoveAll : MonoBehaviour
 {
     private PlayerInputAction playerInputAction; 
     private Vector2 playerDirection; //プレイヤーの向き
@@ -12,8 +12,8 @@ public class MovePlayerIcon : MonoBehaviour
 
     private bool isWalk;
     public bool isDush;
-    public GameManager gameManager;
-    // Start is called before the first frame update
+    [SerializeField] private MiniMapManager miniMapManager;
+    
     void Start()
     {
         playerInputAction = new PlayerInputAction();
@@ -23,7 +23,7 @@ public class MovePlayerIcon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!gameManager.pause)
+        if(!miniMapManager.isOpenMap)
         {
             playerInputAction.Player.Dash.performed += ctx => {
                 speed = maxSpeed;
@@ -35,16 +35,6 @@ public class MovePlayerIcon : MonoBehaviour
                 isDush = false;
             };
             playerDirection = playerInputAction.Player.Move.ReadValue<Vector2>();
-
-            if (playerDirection != Vector2.zero)
-            {
-                // Vector2から角度を計算（ラジアンをデグリーに変換）
-                float angle = Mathf.Atan2(playerDirection.y, playerDirection.x) * Mathf.Rad2Deg - 90;
-                
-                transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-
-                // transform.rotation = Quaternion.Euler(new Vector3(0, angle, 0));
-            }
 
             transform.Translate(
             playerDirection.x * speed * Time.deltaTime,

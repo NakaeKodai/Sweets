@@ -51,6 +51,10 @@ public class MapManager : MonoBehaviour
     [SerializeField]public List<hideMass> hideMassList = new List<hideMass>();
 
 
+    [Header("別カメラ関連")]
+    public Camera miniMapCamera;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -70,38 +74,52 @@ public class MapManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(playerInputAction.Player.OpenMap.triggered && !opening && !gameManager.pause && !talkScript.isTalking){
-            // Time.timeScale = 0;
-            gameManager.pause = true;
-            opening = true;
-            MapCreate();
-            // mainCamera.enabled = false;
-            // mapCamera.enabled = true;
-            mainCameraPos = mainCamera.transform.position;
-            // mapObject.SetActive(true);
-            Debug.Log("マップ開いているよん");
-        }else if((playerInputAction.Map.Cancel.triggered || playerInputAction.Player.OpenMap.triggered) && opening && gameManager.pause){
-            Time.timeScale = 1;
-            gameManager.pause = false;
-            opening = false;
-            // mainCamera.enabled = true;
-            // mapCamera.enabled = false;
-            mainCamera.transform.position = mainCameraPos;
-            mapObject.SetActive(false);
-            mapCursor.SetActive(false);
-            Debug.Log("マップ閉じ");
-        }
+        // if(playerInputAction.Player.OpenMap.triggered && !opening && !gameManager.pause && !talkScript.isTalking){
+        //     // Time.timeScale = 0;
+        //     gameManager.pause = true;
+        //     opening = true;
+        //     MapCreate();
+        //     // mainCamera.enabled = false;
+        //     // mapCamera.enabled = true;
+        //     mainCameraPos = mainCamera.transform.position;
+        //     // mapObject.SetActive(true);
 
-        if(opening){
+        //     Debug.Log("マップ開いているよん");
+        // }else if((playerInputAction.Map.Cancel.triggered || playerInputAction.Player.OpenMap.triggered) && opening && gameManager.pause){
+        //     Time.timeScale = 1;
+        //     gameManager.pause = false;
+        //     opening = false;
+        //     // mainCamera.enabled = true;
+        //     // mapCamera.enabled = false;
+        //     mainCamera.transform.position = mainCameraPos;
+        //     mapObject.SetActive(false);
+        //     mapCursor.SetActive(false);
 
-            // mapDirection = playerInputAction.Map.Move.ReadValue<Vector2>();
-            // mapTransform.RectTranslate(
-            // mapDirection.x * -cursorSpeed * Time.deltaTime,
-            // 0.0f,
-            // mapDirection.y * -cursorSpeed * Time.deltaTime);
+        //     Debug.Log("マップ閉じ");
+        // }
 
-            MoveMap();
-        }
+        // if(opening){
+
+        //     // mapDirection = playerInputAction.Map.Move.ReadValue<Vector2>();
+        //     // mapTransform.RectTranslate(
+        //     // mapDirection.x * -cursorSpeed * Time.deltaTime,
+        //     // 0.0f,
+        //     // mapDirection.y * -cursorSpeed * Time.deltaTime);
+
+        //     MoveMap();
+        // }
+
+        // //ミニマップのカメラテスト
+        // if(Input.GetKeyDown(KeyCode.F2))
+        // {
+        //     miniMapCamera.rect = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
+        // }
+
+        // if(Input.GetKeyDown(KeyCode.F3))
+        // {
+        //     miniMapCamera.rect = new Rect(0.04f, 0.04f, 0.2f, 0.2f);
+        // }
+        
     }
 
     void MapCreate(){
