@@ -8,6 +8,8 @@ public class MiniMapManager : MonoBehaviour
     public GameManager gameManager;
     public bool isOpenMap = false; //マップを大きく開いているか
 
+    private List<string> destroyObjects = new List<string>();
+
     public GameObject target;
     private Quaternion targetRotation;
 
@@ -40,5 +42,18 @@ public class MiniMapManager : MonoBehaviour
             cameraObject.transform.localPosition = new Vector3(0,-1000,-0.5f);
             mapCamera.rect = new Rect(0.04f, 0.04f, 0.2f, 0.2f);
         }
+
+        if(Input.GetKeyDown(KeyCode.F1))
+        {
+            Debug.Log("マップの隠し状況リセット ※確認したいならセーブして終了してね※");
+            destroyObjects.Clear();
+        }
+    }
+
+    public void RecordDestroyedObject(GameObject obj)
+    {
+        destroyObjects.Add(obj.name);
+        gameManager.UpdateDestroyObject(destroyObjects);
+        Debug.Log(obj.name + "の霊圧が消えた");
     }
 }

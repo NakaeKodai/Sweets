@@ -10,6 +10,7 @@ public class SaveData
 {
     public Vector3 position; //プレイヤーの位置
     public float[] scrolbarValue; //現在　0はLight 1はAudio
+    public List<string> destroyObjectNames;
 }
 
 public class GameManager : MonoBehaviour
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] SettingManager settingManager;
     [SerializeField] Image lightImage;
     public bool pause = false;
+    public List<string> destroyObjects = new List<string>();
 
     public static List<int> wishList = new List<int>();//ウィッシュリスト
 
@@ -61,6 +63,8 @@ public class GameManager : MonoBehaviour
             data.scrolbarValue[i] = settingManager.scrollbar[i].value;
         }
 
+        data.destroyObjectNames = destroyObjects;
+
         string json = JsonUtility.ToJson(data,true);
         Debug.Log(json);
         File.WriteAllText(GetFilePath(),json);
@@ -91,6 +95,15 @@ public class GameManager : MonoBehaviour
                     break;
                 }
             }
+
+            foreach(string obectName in data.destroyObjectNames)
+            {
+                GameObject obj = GameObject.Find(obectName);
+                if(obj != null)
+                {
+                    Destroy(obj);
+                }
+            }
         }
         else
         {
@@ -116,5 +129,11 @@ public class GameManager : MonoBehaviour
     // ウィッシュリストの同期
     public List<int> WishListSetting(){
         return wishList;
+    }
+
+    // マップを隠しているやつのセーブ
+    public void UpdateDestroyObject(List<string> list)
+    {
+        destroyObjects = list;
     }
 }

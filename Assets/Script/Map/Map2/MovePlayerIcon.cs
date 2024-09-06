@@ -31,4 +31,13 @@ public class MovePlayerIcon : MonoBehaviour
             }
         }
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.CompareTag("HiddenObject"))
+        {
+            miniMapManager.RecordDestroyedObject(other.gameObject);
+            Destroy(other.gameObject);
+        }
+    }
 }
