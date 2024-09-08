@@ -12,6 +12,7 @@ TagManager:
   - Teleport
   - Checkpoint
   - HiddenObject
+  - Target
   layers:
   - Default
   - TransparentFX

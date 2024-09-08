@@ -28,19 +28,10 @@ public class MiniMapManager : MonoBehaviour
         if(playerInputAction.Player.OpenMap.triggered && !isOpenMap && !gameManager.pause)
         {
             Debug.Log("おーきくなーる");
-            isOpenMap = true;
-            gameManager.pause = true;
-            target.SetActive(true);
-            target.transform.rotation = targetRotation;
-            mapCamera.rect = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
+            OpenMap();
         }else if((playerInputAction.Map.Cancel.triggered || playerInputAction.Player.OpenMap.triggered) && isOpenMap && gameManager.pause)
         {
-            isOpenMap = false;
-            gameManager.pause = false;
-            target.transform.localPosition = new Vector3(0, -1000, 48.5f);
-            target.SetActive(false);
-            cameraObject.transform.localPosition = new Vector3(0,-1000,-0.5f);
-            mapCamera.rect = new Rect(0.04f, 0.04f, 0.2f, 0.2f);
+            CloseMap();
         }
 
         if(Input.GetKeyDown(KeyCode.F1))
@@ -55,5 +46,24 @@ public class MiniMapManager : MonoBehaviour
         destroyObjects.Add(obj.name);
         gameManager.UpdateDestroyObject(destroyObjects);
         Debug.Log(obj.name + "の霊圧が消えた");
+    }
+
+    public void OpenMap()
+    {
+        isOpenMap = true;
+        gameManager.pause = true;
+        target.SetActive(true);
+        target.transform.rotation = targetRotation;
+        mapCamera.rect = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
+    }
+
+    public void CloseMap()
+    {
+        isOpenMap = false;
+        gameManager.pause = false;
+        target.transform.localPosition = new Vector3(0, -1000, 48.5f);
+        target.SetActive(false);
+        cameraObject.transform.localPosition = new Vector3(0,-1000,-0.5f);
+        mapCamera.rect = new Rect(0.04f, 0.04f, 0.2f, 0.2f);
     }
 }

@@ -11,7 +11,7 @@ public class MapManager : MonoBehaviour
 
     public Talk talkScript;
 
-    bool opening = false;
+    //bool opening = false;
 
     public GameObject mapObject;
     public GameObject mapCursor;
@@ -58,17 +58,17 @@ public class MapManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerInputAction = new PlayerInputAction();
-        playerInputAction.Enable();
+        // playerInputAction = new PlayerInputAction();
+        // playerInputAction.Enable();
 
-        mapTransform = mapObject.GetComponent<RectTransform>();
-        cursorTransform = mapCursor.GetComponent<RectTransform>();
+        // mapTransform = mapObject.GetComponent<RectTransform>();
+        // cursorTransform = mapCursor.GetComponent<RectTransform>();
 
-        playerMarkTransform = playerMark.GetComponent<RectTransform>();
+        // playerMarkTransform = playerMark.GetComponent<RectTransform>();
 
-        kyanpuTransform = kyanpuKarsor.GetComponent<RectTransform>();
+        // kyanpuTransform = kyanpuKarsor.GetComponent<RectTransform>();
 
-        mainCamera = Camera.main;
+        // mainCamera = Camera.main;
     }
 
     // Update is called once per frame
