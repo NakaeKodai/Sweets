@@ -12,6 +12,7 @@ public class ManagementManager : MonoBehaviour
     public GameManager gameManager;
 
     public int Customer;
+    public int managementFlug = 0;
     public TextMeshProUGUI testText;
 
 
@@ -25,11 +26,19 @@ public class ManagementManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        while (Customer > 0){
+        testText.text = "残りの客の数："+Customer;
+        if(managementFlug == 0){
             if(playerInputAction.UI.MenuSelect.triggered){
-                testText.text = "残りの客の数："+Customer;
+                // testText.text = "残りの客の数："+Customer;
+                Customer--;
+            }
+            if(Customer == 0){
+                managementFlug = 1;
             }
         }
-        testText.text = "客数０、終わり";
+        else if(managementFlug == 1){
+            testText.text = "客数０、終わり";
+        }
+        
     }
 }
