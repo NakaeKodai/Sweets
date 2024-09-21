@@ -33,6 +33,15 @@ public class ManagementManager : MonoBehaviour
     private List<showcase> showcaseSweets = new List<showcase>();//売り出すスイーツの情報のリスト
     private int sumSweets;//スイーツの合計
 
+    public class demand{
+        public int 需要名;//需要に名前つけるとわかりやすい
+        public int 甘さ;//甘さの数値
+        public int 酸味;//酸味の数値
+        public int 苦味;//苦味の数値
+    }
+    [Header("需要関連")]
+    public List<demand> demandList = new List<demand>();//需要をリスト化する
+
 
     // Start is called before the first frame update
     void Start()
