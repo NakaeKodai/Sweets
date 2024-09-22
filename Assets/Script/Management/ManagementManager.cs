@@ -32,15 +32,21 @@ public class ManagementManager : MonoBehaviour
     }
     private List<showcase> showcaseSweets = new List<showcase>();//売り出すスイーツの情報のリスト
     private int sumSweets;//スイーツの合計
+    // [Header("需要関連")]
 
-    public class demand{
-        public int 需要名;//需要に名前つけるとわかりやすい
-        public int 甘さ;//甘さの数値
-        public int 酸味;//酸味の数値
-        public int 苦味;//苦味の数値
+    [System.Serializable]public class demand{
+        [SerializeField]public string 需要名;//需要に名前つけるとわかりやすい
+        [SerializeField]public int 甘さ;//甘さの数値
+        [SerializeField]public int 酸味;//酸味の数値
+        [SerializeField]public int 苦味;//苦味の数値
     }
-    [Header("需要関連")]
-    public List<demand> demandList = new List<demand>();//需要をリスト化する
+    
+    [SerializeField]public List<demand> demandList = new List<demand>();//需要をリスト化する
+
+    
+    private List<List<int>> customerDemand = new List<List<int>>();//客が持っているほしいスイーツの味のリスト
+    public int customerDemandMax = 5;//上の最大数を割り振る最大の数
+
 
 
     // Start is called before the first frame update
@@ -94,6 +100,10 @@ public class ManagementManager : MonoBehaviour
             Debug.Log("売上："+salus+"、評判："+reputation);
         }
         
+    }
+
+    void Setting(){
+
     }
 
     
