@@ -67,6 +67,7 @@ public class ManagementManager : MonoBehaviour
     {
         // testText.text = "残りの客の数："+Customer;
         if(managementFlug == 0){
+            Setting();
             if(playerInputAction.UI.MenuSelect.triggered){
                 for(int i = 0; i < showcaseSweets.Count; i++){
                     sumSweets += showcaseSweets[i].quantity;
@@ -102,8 +103,27 @@ public class ManagementManager : MonoBehaviour
         
     }
 
+    //経営パートを始める前のセッティング
     void Setting(){
+        //ここで客数の設定を行う
 
+        //
+
+        //客のほしいものの設定
+        for(int i = 0; i < Customer; i++){
+            int m = customerDemandMax;//客が欲しい味の最大数の割り振りをする数
+            int a,s,n;//甘さ、酸味、苦味
+            a = Random.Range(0,m);
+            m -= a;
+            s = Random.Range(0,m);
+            m -= s;
+            n = m;
+            List<int> demandResult = new List<int>();
+            demandResult.Add(a);
+            demandResult.Add(s);
+            demandResult.Add(n);
+            customerDemand.Add(demandResult);
+        }
     }
 
     
