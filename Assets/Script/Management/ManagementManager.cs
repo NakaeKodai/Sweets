@@ -42,10 +42,14 @@ public class ManagementManager : MonoBehaviour
     }
     
     [SerializeField]public List<demand> demandList = new List<demand>();//需要をリスト化する
+    public int demandListNumber;//使用している需要
 
     
     private List<List<int>> customerDemand = new List<List<int>>();//客が持っているほしいスイーツの味のリスト
     public int customerDemandMax = 5;//上の最大数を割り振る最大の数
+    public int demandNumber = 10;//需要にかける変数
+
+    int customerNumber = 0;//客のリストを回すやつ
 
 
 
@@ -73,12 +77,20 @@ public class ManagementManager : MonoBehaviour
                     sumSweets += showcaseSweets[i].quantity;
                 }
                 managementFlug++;
+                
             }
         }
         if(managementFlug == 1){
             if(playerInputAction.UI.MenuSelect.triggered){
                 // testText.text = "残りの客の数："+Customer;
                 testText.text = "残りの客の数："+Customer;
+
+                // int a,s,m,rSum;//甘さ、酸味、苦味、合計
+                // a = customerDemand[customerNumber,0]*(1+demandList[demandListNumber].甘さ)*demandNumber;
+                // s = customerDemand[customerNumber,1]*(1+demandList[demandListNumber].酸味)*demandNumber;
+                // m = customerDemand[customerNumber,2]*(1+demandList[demandListNumber].苦味)*demandNumber;
+                
+
                 int r = Random.Range(0,showcaseSweets.Count);
                 if(showcaseSweets[r].quantity > 0){
                     testText2.text = sweetsDB.sweetsList[showcaseSweets[r].ID].name+"が売れた！";
@@ -91,6 +103,7 @@ public class ManagementManager : MonoBehaviour
                     reputation -= 100;//評判の増減（仮）
                 }
                 Customer--;
+                customerNumber++;
             }
             if(Customer == 0 || sumSweets <= 0){
                 managementFlug = 2;
