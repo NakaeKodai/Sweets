@@ -943,7 +943,9 @@ MonoBehaviour:
     "\u7518\u3055": 0
     "\u9178\u5473": 0
     "\u82E6\u5473": 1
+  demandListNumber: 1
   customerDemandMax: 5
+  demandNumber: 10
 --- !u!4 &1490433081
 Transform:
   m_ObjectHideFlags: 0
