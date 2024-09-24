@@ -34,16 +34,17 @@ public class ManagementManager : MonoBehaviour
     private int sumSweets;//スイーツの合計
     // [Header("需要関連")]
 
-    [System.Serializable]public class demand{
-        [SerializeField]public string 需要名;//需要に名前つけるとわかりやすい
-        [SerializeField]public int 甘さ;//甘さの数値
-        [SerializeField]public int 酸味;//酸味の数値
-        [SerializeField]public int 苦味;//苦味の数値
-    }
+    // [System.Serializable]public class demand{
+    //     [SerializeField]public string 需要名;//需要に名前つけるとわかりやすい
+    //     [SerializeField]public int 甘さ;//甘さの数値
+    //     [SerializeField]public int 酸味;//酸味の数値
+    //     [SerializeField]public int 苦味;//苦味の数値
+    // }
     
-    [SerializeField]public List<demand> demandList = new List<demand>();//需要をリスト化する
+    // [SerializeField]public List<demand> demandList = new List<demand>();//需要をリスト化する
     [Header("↓使用する需要をここで指定してネ")]
     public int demandListNumber;//使用している需要
+    public DemandDB demandDB;
 
     
     private List<List<int>> customerDemand = new List<List<int>>();//客が持っているほしいスイーツの味のリスト
@@ -88,9 +89,9 @@ public class ManagementManager : MonoBehaviour
                 testText.text = "残りの客の数："+Customer;
 
                 int a,s,n;//甘さ、酸味、苦味
-                a = customerDemand[customerNumber][0]*(1+demandList[demandListNumber].甘さ)*demandNumber;
-                s = customerDemand[customerNumber][1]*(1+demandList[demandListNumber].酸味)*demandNumber;
-                n = customerDemand[customerNumber][2]*(1+demandList[demandListNumber].苦味)*demandNumber;
+                a = customerDemand[customerNumber][0]*(1+demandDB.demandList[demandListNumber].甘さ)*demandNumber;
+                s = customerDemand[customerNumber][1]*(1+demandDB.demandList[demandListNumber].酸味)*demandNumber;
+                n = customerDemand[customerNumber][2]*(1+demandDB.demandList[demandListNumber].苦味)*demandNumber;
                 
                 //客のほしい味とか需要に基づいたスイーツごとの確率を格納する
                 int[] showcaseR = new int[showcaseSweets.Count];
@@ -98,6 +99,11 @@ public class ManagementManager : MonoBehaviour
                 for(int i = 0; i < showcaseR.Length; i++){
                     showcaseR[i] = sweetsDB.sweetsList[showcaseSweets[i].ID].甘さ*a + sweetsDB.sweetsList[showcaseSweets[i].ID].酸味*s + sweetsDB.sweetsList[showcaseSweets[i].ID].苦味*n;
                     showcaseRSum += showcaseR[i];
+                }
+
+                //需要とか客が欲しい味のかみ合いですべてが0になったときの対処ですべて無作為にする
+                if(showcaseRSum == 0){
+                    showcaseRSum = showcaseSweets.Count;
                 }
 
                 int r = Random.Range(0,showcaseRSum);
