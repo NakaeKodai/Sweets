@@ -76,7 +76,7 @@ public class ManagementManager : MonoBehaviour
     {
         // testText.text = "残りの客の数："+Customer;
         if(managementFlug == 0){
-            
+            testText.text = "残りの客の数："+Customer;
             if(playerInputAction.UI.MenuSelect.triggered){
                 Setting();
                 for(int i = 0; i < showcaseSweets.Count; i++){
@@ -89,7 +89,7 @@ public class ManagementManager : MonoBehaviour
         if(managementFlug == 1){
             if(playerInputAction.UI.MenuSelect.triggered){
                 // testText.text = "残りの客の数："+Customer;
-                testText.text = "残りの客の数："+Customer;
+                
 
                 float a,s,n;//甘さ、酸味、苦味
                 // a = customerDemand[customerNumber][0]*(1+demandDB.demandList[demandListNumber].甘さ)*demandNumber;
@@ -134,6 +134,7 @@ public class ManagementManager : MonoBehaviour
                 }
                 Customer--;
                 customerNumber++;
+                testText.text = "残りの客の数："+Customer;
             }
             if(Customer == 0 || sumSweets <= 0){
                 managementFlug = 2;
