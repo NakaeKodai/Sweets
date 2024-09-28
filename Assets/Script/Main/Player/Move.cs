@@ -61,6 +61,7 @@ public class Move : MonoBehaviour
             };
 
             playerDirection = playerInputAction.Player.Move.ReadValue<Vector2>();
+            if(playerDirection.magnitude < 0.5f) playerDirection = Vector2.zero;
 
             if(playerDirection.x != 0 || playerDirection.y != 0)
             {
