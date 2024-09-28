@@ -53,13 +53,16 @@ public class ManagementManager : MonoBehaviour
 
     int customerNumber = 0;//客のリストを回すやつ
 
-
+    [Header("倍率系")]
+    public List<float> customorDiameter = new List<float>();//客のほしい味による倍率
+    public List<float> demandDiameter = new List<float>();//需要の味による倍率
 
     // Start is called before the first frame update
     void Start()
     {
         playerInputAction = new PlayerInputAction();
         playerInputAction.Enable();
+        
 
         //デバッグ用のショーケース仮置き
         showcaseSweets.Add(new showcase(0,10,100));
@@ -88,16 +91,20 @@ public class ManagementManager : MonoBehaviour
                 // testText.text = "残りの客の数："+Customer;
                 testText.text = "残りの客の数："+Customer;
 
-                int a,s,n;//甘さ、酸味、苦味
-                a = customerDemand[customerNumber][0]*(1+demandDB.demandList[demandListNumber].甘さ)*demandNumber;
-                s = customerDemand[customerNumber][1]*(1+demandDB.demandList[demandListNumber].酸味)*demandNumber;
-                n = customerDemand[customerNumber][2]*(1+demandDB.demandList[demandListNumber].苦味)*demandNumber;
+                float a,s,n;//甘さ、酸味、苦味
+                // a = customerDemand[customerNumber][0]*(1+demandDB.demandList[demandListNumber].甘さ)*demandNumber;
+                // s = customerDemand[customerNumber][1]*(1+demandDB.demandList[demandListNumber].酸味)*demandNumber;
+                // n = customerDemand[customerNumber][2]*(1+demandDB.demandList[demandListNumber].苦味)*demandNumber;
+
+                a = customorDiameter[customerDemand[customerNumber][0]]*demandDiameter[demandDB.demandList[demandListNumber].甘さ]*demandNumber;
+                s = customorDiameter[customerDemand[customerNumber][1]]*demandDiameter[demandDB.demandList[demandListNumber].酸味]*demandNumber;
+                n = customorDiameter[customerDemand[customerNumber][2]]*demandDiameter[demandDB.demandList[demandListNumber].苦味]*demandNumber;
                 
                 //客のほしい味とか需要に基づいたスイーツごとの確率を格納する
                 int[] showcaseR = new int[showcaseSweets.Count];
                 int showcaseRSum = 0;
                 for(int i = 0; i < showcaseR.Length; i++){
-                    showcaseR[i] = sweetsDB.sweetsList[showcaseSweets[i].ID].甘さ*a + sweetsDB.sweetsList[showcaseSweets[i].ID].酸味*s + sweetsDB.sweetsList[showcaseSweets[i].ID].苦味*n;
+                    showcaseR[i] = sweetsDB.sweetsList[showcaseSweets[i].ID].甘さ*(int)a + sweetsDB.sweetsList[showcaseSweets[i].ID].酸味*(int)s + sweetsDB.sweetsList[showcaseSweets[i].ID].苦味*(int)n;
                     showcaseRSum += showcaseR[i];
                 }
 
