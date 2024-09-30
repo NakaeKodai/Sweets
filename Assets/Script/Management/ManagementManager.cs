@@ -53,6 +53,8 @@ public class ManagementManager : MonoBehaviour
 
     int customerNumber = 0;//客のリストを回すやつ
 
+    int typeMax = 5;//スイーツの種類数
+
     [Header("倍率系")]
     public List<float> customorDiameter = new List<float>();//客のほしい味による倍率
     public List<float> demandDiameter = new List<float>();//需要の味による倍率
@@ -99,7 +101,6 @@ public class ManagementManager : MonoBehaviour
                 a = customorDiameter[customerDemand[customerNumber][0]]*demandDiameter[demandDB.demandList[demandListNumber].甘さ]*demandNumber;
                 s = customorDiameter[customerDemand[customerNumber][1]]*demandDiameter[demandDB.demandList[demandListNumber].酸味]*demandNumber;
                 n = customorDiameter[customerDemand[customerNumber][2]]*demandDiameter[demandDB.demandList[demandListNumber].苦味]*demandNumber;
-                
                 //客のほしい味とか需要に基づいたスイーツごとの確率を格納する
                 int[] showcaseR = new int[showcaseSweets.Count];
                 int showcaseRSum = 0;
@@ -156,18 +157,20 @@ public class ManagementManager : MonoBehaviour
         //客のほしいものの設定
         for(int i = 0; i < Customer; i++){
             int m = customerDemandMax;//客が欲しい味の最大数の割り振りをする数
-            int a,s,n;//甘さ、酸味、苦味
+            int a,s,n,t;//甘さ、酸味、苦味、ほしいスイーツの種類
             a = Random.Range(0,m);
             m -= a;
             s = Random.Range(0,m);
             m -= s;
             n = m;
+            t = Random.Range(0,typeMax);
             List<int> demandResult = new List<int>();
             demandResult.Add(a);
             demandResult.Add(s);
             demandResult.Add(n);
+            demandResult.Add(t);
             customerDemand.Add(demandResult);
-            Debug.Log("客"+(1+i)+"のほしい味、甘さ："+a+"酸味："+s+"苦味："+n);
+            Debug.Log("客"+(1+i)+"のほしい味、甘さ："+a+"酸味："+s+"苦味："+n+"種類："+t);
         }
     }
 
