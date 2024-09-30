@@ -9,4 +9,5 @@ using System;
     public int 甘さ;//甘さの数値
     public int 酸味;//酸味の数値
     public int 苦味;//苦味の数値
+    public int type;//スイーツの種類
 }

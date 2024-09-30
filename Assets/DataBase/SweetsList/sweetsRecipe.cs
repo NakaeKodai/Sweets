@@ -12,6 +12,7 @@ using System;
     public bool canMake;//作成可能か否か(処理を楽にするため)
     public string infomation;//説明文
     public bool wishList = false;//ウィッシュリストに入っているかを判別する
+    public int type;//スイーツの種類（ケーキ等）
     [Header("味関連")]
     public int 甘さ;//甘さの数値
     public int 酸味;
