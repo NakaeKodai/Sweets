@@ -110,10 +110,10 @@ public class ManagementManager : MonoBehaviour
                     showcaseR[i] = sweetsDB.sweetsList[showcaseSweets[i].ID].甘さ*(int)a + sweetsDB.sweetsList[showcaseSweets[i].ID].酸味*(int)s + sweetsDB.sweetsList[showcaseSweets[i].ID].苦味*(int)n;
                     //スイーツの種類が一致したときの処理
                     if(customerDemand[customerNumber][3] == sweetsDB.sweetsList[showcaseSweets[i].ID].type){
-                        showcaseR[i] *= (int)typeMagnification;
+                        showcaseR[i] = showcaseR[i]+typeMagnification;
                         Debug.Log("客のほしいスイーツと一致した");
                         if(customerDemand[customerNumber][3] == demandDB.demandList[demandListNumber].type){
-                            showcaseR[i] *= (int)typeMagnification;
+                            showcaseR[i] = showcaseR[i]+typeMagnification;
                             Debug.Log("客のほしいスイーツと需要が一致した");
                         }
                     }
