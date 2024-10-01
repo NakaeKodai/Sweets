@@ -53,11 +53,13 @@ public class ManagementManager : MonoBehaviour
 
     int customerNumber = 0;//客のリストを回すやつ
 
-    int typeMax = 5;//スイーツの種類数
+    public int typeMax = 5;//スイーツの種類数
+    
 
     [Header("倍率系")]
     public List<float> customorDiameter = new List<float>();//客のほしい味による倍率
     public List<float> demandDiameter = new List<float>();//需要の味による倍率
+    public float typeMagnification = 1.5f;//ほしい種類がマッチしたときの倍率
 
     // Start is called before the first frame update
     void Start()
@@ -106,6 +108,15 @@ public class ManagementManager : MonoBehaviour
                 int showcaseRSum = 0;
                 for(int i = 0; i < showcaseR.Length; i++){
                     showcaseR[i] = sweetsDB.sweetsList[showcaseSweets[i].ID].甘さ*(int)a + sweetsDB.sweetsList[showcaseSweets[i].ID].酸味*(int)s + sweetsDB.sweetsList[showcaseSweets[i].ID].苦味*(int)n;
+                    //スイーツの種類が一致したときの処理
+                    if(customerDemand[customerNumber][3] == sweetsDB.sweetsList[showcaseSweets[i].ID].type){
+                        showcaseR[i] *= (int)typeMagnification;
+                        Debug.Log("客のほしいスイーツと一致した");
+                        if(customerDemand[customerNumber][3] == demandDB.demandList[demandListNumber].type){
+                            showcaseR[i] *= (int)typeMagnification;
+                            Debug.Log("客のほしいスイーツと需要が一致した");
+                        }
+                    }
                     showcaseRSum += showcaseR[i];
                 }
 
