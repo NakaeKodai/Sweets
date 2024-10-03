@@ -58,7 +58,7 @@ public class ManagementManager : MonoBehaviour
 
     [Header("倍率系")]
     public List<float> customorDiameter = new List<float>();//客のほしい味による倍率
-    public List<float> demandDiameter = new List<float>();//需要の味による倍率
+    // public List<float> demandDiameter = new List<float>();//需要の味による倍率
     public float typeMagnification = 1.5f;//ほしい種類がマッチしたときの倍率
 
     // Start is called before the first frame update
@@ -100,9 +100,15 @@ public class ManagementManager : MonoBehaviour
                 // s = customerDemand[customerNumber][1]*(1+demandDB.demandList[demandListNumber].酸味)*demandNumber;
                 // n = customerDemand[customerNumber][2]*(1+demandDB.demandList[demandListNumber].苦味)*demandNumber;
 
-                a = customorDiameter[customerDemand[customerNumber][0]]*demandDiameter[demandDB.demandList[demandListNumber].甘さ]*demandNumber;
-                s = customorDiameter[customerDemand[customerNumber][1]]*demandDiameter[demandDB.demandList[demandListNumber].酸味]*demandNumber;
-                n = customorDiameter[customerDemand[customerNumber][2]]*demandDiameter[demandDB.demandList[demandListNumber].苦味]*demandNumber;
+                // 需要ありバージョン
+                // a = customorDiameter[customerDemand[customerNumber][0]]*demandDiameter[demandDB.demandList[demandListNumber].甘さ]*demandNumber;
+                // s = customorDiameter[customerDemand[customerNumber][1]]*demandDiameter[demandDB.demandList[demandListNumber].酸味]*demandNumber;
+                // n = customorDiameter[customerDemand[customerNumber][2]]*demandDiameter[demandDB.demandList[demandListNumber].苦味]*demandNumber;
+                //需要なしバージョン
+                a = customorDiameter[customerDemand[customerNumber][0]]*demandNumber;
+                s = customorDiameter[customerDemand[customerNumber][1]]*demandNumber;
+                n = customorDiameter[customerDemand[customerNumber][2]]*demandNumber;
+                
                 //客のほしい味とか需要に基づいたスイーツごとの確率を格納する
                 int[] showcaseR = new int[showcaseSweets.Count];
                 int showcaseRSum = 0;
@@ -110,12 +116,14 @@ public class ManagementManager : MonoBehaviour
                     showcaseR[i] = sweetsDB.sweetsList[showcaseSweets[i].ID].甘さ*(int)a + sweetsDB.sweetsList[showcaseSweets[i].ID].酸味*(int)s + sweetsDB.sweetsList[showcaseSweets[i].ID].苦味*(int)n;
                     //スイーツの種類が一致したときの処理
                     if(customerDemand[customerNumber][3] == sweetsDB.sweetsList[showcaseSweets[i].ID].type){
-                        showcaseR[i] = showcaseR[i]+typeMagnification;
-                        Debug.Log("客のほしいスイーツと一致した");
-                        if(customerDemand[customerNumber][3] == demandDB.demandList[demandListNumber].type){
-                            showcaseR[i] = showcaseR[i]+typeMagnification;
-                            Debug.Log("客のほしいスイーツと需要が一致した");
-                        }
+                        showcaseR[i] = (int)((float)showcaseR[i]+typeMagnification);
+                        // Debug.Log(showcaseR[i]);
+                        // Debug.Log("客のほしいスイーツと一致した");
+                        // if(customerDemand[customerNumber][3] == demandDB.demandList[demandListNumber].type){
+                        //     showcaseR[i] = (int)((float)showcaseR[i]+typeMagnification);
+                        //     // Debug.Log(showcaseR[i]);
+                        //     // Debug.Log("客のほしいスイーツと需要が一致した");
+                        // }
                     }
                     showcaseRSum += showcaseR[i];
                 }
