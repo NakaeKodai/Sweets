@@ -5,8 +5,15 @@ using UnityEngine;
 public class Attack : MonoBehaviour
 {
     private PlayerInputAction playerInputAction;  //InputSystemを入れている変数 
+    public Vector2 playerDirection; //プレイヤーの向き
     public bool isEnter;
     public byte attackPoint = 2;
+
+    public GameObject attackRange;
+    public float distance = 1.0f;
+    public float attackTime = 1.0f;
+
+    private Coroutine hideCoroutine;
     Enemy enemy;
     
     public GameManager gameManager;
@@ -20,27 +27,26 @@ public class Attack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(playerInputAction.Player.Fire.triggered && isEnter && !gameManager.pause)
+        playerDirection = playerInputAction.Player.Move.ReadValue<Vector2>();
+        if(playerDirection.magnitude < 0.5f) playerDirection = Vector2.zero;
+        if(playerDirection != Vector2.zero)
         {
-            enemy.Damage(attackPoint);
-            isEnter = false;
+            Vector3 direction = new Vector3(playerDirection.x, 0, playerDirection.y).normalized;
+            Vector3 attackRangePosition = gameObject.transform.position + direction * distance;
+            attackRange.transform.position = attackRangePosition;
+        }
+        if(playerInputAction.Player.Fire.triggered && !gameManager.pause)
+        {
+            Debug.Log("こうげき！");
+            attackRange.SetActive(true);
+            if(hideCoroutine != null) StopCoroutine(hideCoroutine);
+            hideCoroutine = StartCoroutine(HideattackRange());
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    private IEnumerator HideattackRange()
     {
-        if (other.CompareTag("Enemy"))
-        {
-            enemy = other.gameObject.GetComponent<Enemy>();
-            isEnter = true;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Enemy"))
-        {
-            isEnter = false;
-        }
+        yield return new WaitForSeconds(attackTime);
+        attackRange.SetActive(false);
     }
 }

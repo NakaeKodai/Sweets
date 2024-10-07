@@ -13,6 +13,7 @@ TagManager:
   - Checkpoint
   - HiddenObject
   - Target
+  - Attack
   layers:
   - Default
   - TransparentFX
