@@ -52698,13 +52698,17 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1427255694}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b596870ce71637648868bdb52b12c2fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerDirection: {x: 0, y: 0}
   isEnter: 0
   attackPoint: 2
+  attackRange: {fileID: 0}
+  distance: 1
+  attackTime: 1
   gameManager: {fileID: 565515798}
 --- !u!114 &1427255696
 MonoBehaviour:
