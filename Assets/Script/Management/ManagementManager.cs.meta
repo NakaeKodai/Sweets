@@ -7,8 +7,10 @@ MonoImporter:
   - ingredientsDB: {fileID: 11400000, guid: 89317c2866f8d824a88d23ec19f537e2, type: 2}
   - sweetsDB: {fileID: 11400000, guid: e0ca94ceffe1439459fd67cd7dbd71ed, type: 2}
   - gameManager: {instanceID: 0}
-  - menuManager: {instanceID: 0}
+  - playerstatus: {fileID: 11400000, guid: 5269610277b817c4f846c1f7c0d38683, type: 2}
   - testText: {instanceID: 0}
+  - testText2: {instanceID: 0}
+  - demandDB: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

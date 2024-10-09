@@ -10,6 +10,7 @@ public class ManagementManager : MonoBehaviour
     public IngredientsDB ingredientsDB;
     public SweetsDB sweetsDB;
     public GameManager gameManager;
+    public PlayerStatus playerstatus;
 
     public int Customer;//客数
     public int managementFlug = 0;
@@ -60,6 +61,7 @@ public class ManagementManager : MonoBehaviour
     public List<float> customorDiameter = new List<float>();//客のほしい味による倍率
     // public List<float> demandDiameter = new List<float>();//需要の味による倍率
     public float typeMagnification = 1.5f;//ほしい種類がマッチしたときの倍率
+    public List<float> greadMagnification;//グレードによる倍率
 
     // Start is called before the first frame update
     void Start()
@@ -170,7 +172,8 @@ public class ManagementManager : MonoBehaviour
     //経営パートを始める前のセッティング
     void Setting(){
         //ここで客数の設定を行う
-
+        int r = Random.Range(0,10);
+        // float a,s,n;//甘さ、酸味、苦味
         //
 
         //客のほしいものの設定
