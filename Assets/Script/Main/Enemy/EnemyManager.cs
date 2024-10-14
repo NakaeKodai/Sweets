@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private EnemyStatus enemyStatus;
+    [SerializeField] private PlayerStatus playerStatus;
     public int id;
     private string name;
     private int hp;
@@ -146,11 +147,12 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Attack"))
         {
-            Debug.Log("うわ");
+            this.hp -= (playerStatus.attack/2)-(this.defense/4);
+            Debug.Log(this.hp);
         }
     }
 }

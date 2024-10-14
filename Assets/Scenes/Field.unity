@@ -13318,6 +13318,7 @@ GameObject:
   - component: {fileID: 451299978}
   - component: {fileID: 451299977}
   - component: {fileID: 451299976}
+  - component: {fileID: 451299979}
   m_Layer: 0
   m_Name: AttackRange
   m_TagString: Attack
@@ -13355,7 +13356,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -13380,8 +13381,7 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -13411,6 +13411,33 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 451299974}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &451299979
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 451299974}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 116
+  m_CollisionDetection: 0
 --- !u!1 &456496968
 GameObject:
   m_ObjectHideFlags: 0
@@ -68388,9 +68415,9 @@ GameObject:
   - component: {fileID: 2109989259}
   - component: {fileID: 2109989262}
   - component: {fileID: 2109989261}
+  - component: {fileID: 2109989264}
   - component: {fileID: 2109989260}
   - component: {fileID: 2109989263}
-  - component: {fileID: 2109989264}
   - component: {fileID: 2109989265}
   m_Layer: 0
   m_Name: "Enemy(\u4EEE)"
@@ -68573,6 +68600,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyStatus: {fileID: 11400000, guid: 3bc2b9911b57a9540a957696129fbd37, type: 2}
+  playerStatus: {fileID: 11400000, guid: 5269610277b817c4f846c1f7c0d38683, type: 2}
   id: 0
   player: {fileID: 770100816}
   HarvestList: []
