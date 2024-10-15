@@ -9360,7 +9360,7 @@ GameObject:
   - component: {fileID: 316897219}
   m_Layer: 0
   m_Name: AttackRange
-  m_TagString: Attack
+  m_TagString: E_Attack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68736,8 +68736,8 @@ MonoBehaviour:
   enemyStatus: {fileID: 11400000, guid: 3bc2b9911b57a9540a957696129fbd37, type: 2}
   playerStatus: {fileID: 11400000, guid: 5269610277b817c4f846c1f7c0d38683, type: 2}
   id: 0
-  attackDistance: 0
   distance: 0
+  canAttack: 1
   attackType: 0
   attackRange: {fileID: 316897217}
   player: {fileID: 770100816}

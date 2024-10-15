@@ -14,11 +14,13 @@ public class EnemyManager : MonoBehaviour
     private int defense;
     private float hostileDistance; //敵対距離
     private float lostDistance; //非敵対距離
-    public float attackDistance;
+    private float attackDistance;//攻撃可能距離
+    private float attackInterval;//次回攻撃までのインターバル
 
     public float distance;
     private bool isBattle = false;
     private bool canAction = true;
+    public bool canAttack = true;
     UnityEngine.AI.NavMeshAgent agent;
 
     public enum AttackType
@@ -59,12 +61,13 @@ public class EnemyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(canAttack);
         if (hp <= 0)
         {
             DropItem();
             Destroy(gameObject);
         }
-        else if(canAction)
+        else if (canAction)
         {
             distance = Vector3.Distance(player.position, gameObject.transform.position);
             if (!isBattle)
@@ -77,21 +80,27 @@ public class EnemyManager : MonoBehaviour
             }
             else
             {
+                if (distance <= attackDistance && canAttack)
+                {
+                    Attack();
+                    canAttack = false;
+                    canAction = false;
+                    StartCoroutine(AttackInterval(attackInterval));
+                }
                 if (lostDistance <= distance)
                 {
                     isBattle = false;
                     Debug.Log("どこじゃあ");
-                    if(distance <= attackDistance) 
-                    {
-                        Attack();
-                        canAction = false;
-                    }
                 }
                 // if(navMeshAgent.pathStatus != navMeshPathStatus.PathInvalid)
                 // {
                 agent.SetDestination(player.position);
                 // }
             }
+        }
+        else
+        {
+            agent.SetDestination(gameObject.transform.position);
         }
     }
 
@@ -176,18 +185,17 @@ public class EnemyManager : MonoBehaviour
 
     private void Attack()
     {
-        Debug.Log(" 俺の攻撃!");
-        if(attackType == AttackType.shortType)
+        if (attackType == AttackType.shortType)
         {
             Debug.Log("敵の近接攻撃");
             attackRange.SetActive(true);
-            if(hideCoroutine != null) StopCoroutine(hideCoroutine);
+            if (hideCoroutine != null) StopCoroutine(hideCoroutine);
             hideCoroutine = StartCoroutine(HideattackRange(1.0f));
         }
-        else if(attackType == AttackType.longType)
+        else if (attackType == AttackType.longType)
         {
             Debug.Log("敵の遠距離攻撃");
-            if(hideCoroutine != null) StopCoroutine(hideCoroutine);
+            if (hideCoroutine != null) StopCoroutine(hideCoroutine);
             hideCoroutine = StartCoroutine(HideattackRange(3.0f));
         }
     }
@@ -198,7 +206,14 @@ public class EnemyManager : MonoBehaviour
         canAction = true;
         attackRange.SetActive(false);
     }
-    
+
+    private IEnumerator AttackInterval(float attackInterval)
+    {
+        Debug.Log("攻撃待ち");
+        yield return new WaitForSeconds(attackInterval);
+        canAttack = true;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Attack"))

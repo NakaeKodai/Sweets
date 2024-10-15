@@ -14,6 +14,7 @@ TagManager:
   - HiddenObject
   - Target
   - Attack
+  - E_Attack
   layers:
   - Default
   - TransparentFX
