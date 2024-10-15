@@ -18,4 +18,5 @@ public class EnemyData
     public int defense;
     public float hostileDistance; //敵対距離
     public float lostDistance; //非敵対距離
+    public float attackDistance;//攻撃距離
 }

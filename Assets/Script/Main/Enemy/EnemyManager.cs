@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
+    [Header("ステータス関連")]
     [SerializeField] private EnemyStatus enemyStatus;
     [SerializeField] private PlayerStatus playerStatus;
     public int id;
@@ -13,9 +14,23 @@ public class EnemyManager : MonoBehaviour
     private int defense;
     private float hostileDistance; //敵対距離
     private float lostDistance; //非敵対距離
+    public float attackDistance;
 
+    public float distance;
     private bool isBattle = false;
+    private bool canAction = true;
     UnityEngine.AI.NavMeshAgent agent;
+
+    public enum AttackType
+    {
+        shortType,
+        longType
+    }
+    public AttackType attackType;
+
+    public GameObject attackRange;
+
+    private Coroutine hideCoroutine;
 
     public Transform player;
 
@@ -35,6 +50,7 @@ public class EnemyManager : MonoBehaviour
         this.defense = enemyStatus.enemyList[id].defense;
         this.hostileDistance = enemyStatus.enemyList[id].hostileDistance;
         this.lostDistance = enemyStatus.enemyList[id].lostDistance;
+        this.attackDistance = enemyStatus.enemyList[id].attackDistance;
 
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         agent.updateRotation = false;
@@ -48,21 +64,32 @@ public class EnemyManager : MonoBehaviour
             DropItem();
             Destroy(gameObject);
         }
-        else
+        else if(canAction)
         {
-            float distance = Vector3.Distance(player.position, gameObject.transform.position);
-            if(!isBattle)
+            distance = Vector3.Distance(player.position, gameObject.transform.position);
+            if (!isBattle)
             {
-                if(distance <= hostileDistance) {isBattle = true;
-                Debug.Log("見つけた");}
+                if (distance <= hostileDistance)
+                {
+                    isBattle = true;
+                    Debug.Log("見つけた");
+                }
             }
             else
             {
-                if(lostDistance <= distance) {isBattle = false;
-                Debug.Log("どこじゃあ");}
+                if (lostDistance <= distance)
+                {
+                    isBattle = false;
+                    Debug.Log("どこじゃあ");
+                    if(distance <= attackDistance) 
+                    {
+                        Attack();
+                        canAction = false;
+                    }
+                }
                 // if(navMeshAgent.pathStatus != navMeshPathStatus.PathInvalid)
                 // {
-                    agent.SetDestination(player.position);
+                agent.SetDestination(player.position);
                 // }
             }
         }
@@ -147,11 +174,36 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    private void Attack()
+    {
+        Debug.Log(" 俺の攻撃!");
+        if(attackType == AttackType.shortType)
+        {
+            Debug.Log("敵の近接攻撃");
+            attackRange.SetActive(true);
+            if(hideCoroutine != null) StopCoroutine(hideCoroutine);
+            hideCoroutine = StartCoroutine(HideattackRange(1.0f));
+        }
+        else if(attackType == AttackType.longType)
+        {
+            Debug.Log("敵の遠距離攻撃");
+            if(hideCoroutine != null) StopCoroutine(hideCoroutine);
+            hideCoroutine = StartCoroutine(HideattackRange(3.0f));
+        }
+    }
+
+    private IEnumerator HideattackRange(float attackTime)
+    {
+        yield return new WaitForSeconds(attackTime);
+        canAction = true;
+        attackRange.SetActive(false);
+    }
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Attack"))
         {
-            this.hp -= (playerStatus.attack/2)-(this.defense/4);
+            this.hp -= (playerStatus.attack / 2) - (this.defense / 4);
             Debug.Log(this.hp);
         }
     }

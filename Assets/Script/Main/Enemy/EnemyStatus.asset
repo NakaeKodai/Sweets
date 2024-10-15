@@ -20,3 +20,4 @@ MonoBehaviour:
     defense: 4
     hostileDistance: 20
     lostDistance: 8
+    attackDistance: 6
