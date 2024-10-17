@@ -15,7 +15,6 @@ public class EnemyManager : MonoBehaviour
     private float hostileDistance; //敵対距離
     private float lostDistance; //非敵対距離
     private float attackDistance;//攻撃可能距離
-    private float attackInterval;//次回攻撃までのインターバル
 
     public float distance;
     private bool isBattle = false;
@@ -61,18 +60,17 @@ public class EnemyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(canAttack);
         if (hp <= 0)
         {
             DropItem();
             Destroy(gameObject);
         }
-        else if (canAction)
+        else
         {
             distance = Vector3.Distance(player.position, gameObject.transform.position);
             if (!isBattle)
             {
-                if (distance <= hostileDistance)
+                if (distance <= enemyStatus.enemyList[id].hostileDistance)
                 {
                     isBattle = true;
                     Debug.Log("見つけた");
@@ -80,14 +78,15 @@ public class EnemyManager : MonoBehaviour
             }
             else
             {
-                if (distance <= attackDistance && canAttack)
+                if (distance <= enemyStatus.enemyList[id].attackDistance && canAttack)
                 {
+                    Debug.Log("オラ");
                     Attack();
                     canAttack = false;
                     canAction = false;
-                    StartCoroutine(AttackInterval(attackInterval));
+                    // StartCoroutine(AttackInterval(attackInterval));
                 }
-                if (lostDistance <= distance)
+                if (enemyStatus.enemyList[id].lostDistance <= distance)
                 {
                     isBattle = false;
                     Debug.Log("どこじゃあ");
@@ -98,8 +97,11 @@ public class EnemyManager : MonoBehaviour
                 // }
             }
         }
-        else
+        if(canAction)
         {
+            agent.SetDestination(player.position);
+        }
+        else{
             agent.SetDestination(gameObject.transform.position);
         }
     }
@@ -190,29 +192,34 @@ public class EnemyManager : MonoBehaviour
             Debug.Log("敵の近接攻撃");
             attackRange.SetActive(true);
             if (hideCoroutine != null) StopCoroutine(hideCoroutine);
-            hideCoroutine = StartCoroutine(HideattackRange(1.0f));
+            hideCoroutine = StartCoroutine(HideattackRange(1.0f,enemyStatus.enemyList[id].attackInterval));
         }
         else if (attackType == AttackType.longType)
         {
             Debug.Log("敵の遠距離攻撃");
             if (hideCoroutine != null) StopCoroutine(hideCoroutine);
-            hideCoroutine = StartCoroutine(HideattackRange(3.0f));
+            hideCoroutine = StartCoroutine(HideattackRange(3.0f,enemyStatus.enemyList[id].attackInterval));
         }
     }
 
-    private IEnumerator HideattackRange(float attackTime)
+    private IEnumerator HideattackRange(float attackTime, float interval)
     {
+        Debug.Log("HideattackRange started"); // コルーチン開始時のログ
         yield return new WaitForSeconds(attackTime);
         canAction = true;
         attackRange.SetActive(false);
-    }
 
-    private IEnumerator AttackInterval(float attackInterval)
-    {
-        Debug.Log("攻撃待ち");
-        yield return new WaitForSeconds(attackInterval);
+        Debug.Log("Waiting for attack interval: " + interval); // コルーチン開始時のログ
+        yield return new WaitForSeconds(interval);
         canAttack = true;
     }
+
+    // private IEnumerator AttackInterval(float attackInterval)
+    // {
+    //     Debug.Log("攻撃待ち");
+    //     yield return new WaitForSeconds(attackInterval);
+    //     canAttack = true;
+    // }
 
     private void OnTriggerEnter(Collider other)
     {

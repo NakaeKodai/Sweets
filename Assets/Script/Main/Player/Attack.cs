@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
+    [SerializeField] private PlayerStatus playerStatus;
     private PlayerInputAction playerInputAction;  //InputSystemを入れている変数 
     public Vector2 playerDirection; //プレイヤーの向き
     public bool isEnter;
@@ -48,5 +49,14 @@ public class Attack : MonoBehaviour
     {
         yield return new WaitForSeconds(attackTime);
         attackRange.SetActive(false);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("E_Attack"))
+        {
+            playerStatus.hp -= (playerStatus.attack / 2) - (playerStatus.defense / 4); //仮
+            Debug.Log(playerStatus.hp);
+        }
     }
 }
