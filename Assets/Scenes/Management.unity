@@ -931,7 +931,7 @@ MonoBehaviour:
   managementFlug: 0
   testText: {fileID: 429279338}
   testText2: {fileID: 818035608}
-  demandListNumber: 1
+  demandListNumber: 3
   demandDB: {fileID: 11400000, guid: 5fe9559208cc090459e4ababee4ec736, type: 2}
   customerDemandMax: 5
   demandNumber: 10

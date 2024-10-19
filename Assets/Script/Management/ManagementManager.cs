@@ -72,8 +72,8 @@ public class ManagementManager : MonoBehaviour
 
         //デバッグ用のショーケース仮置き
         showcaseSweets.Add(new showcase(0,10,100));
-        showcaseSweets.Add(new showcase(1,1,200));
-        showcaseSweets.Add(new showcase(2,0,300));
+        showcaseSweets.Add(new showcase(3,5,200));
+        showcaseSweets.Add(new showcase(4,5,300));
 
     }
 
@@ -182,8 +182,11 @@ public class ManagementManager : MonoBehaviour
             demandCustomerCount += (demandDB.demandList[demandListNumber].甘さ*sweetsDB.sweetsList[showcaseSweets[i].ID].甘さ)+1;
             demandCustomerCount += (demandDB.demandList[demandListNumber].酸味*sweetsDB.sweetsList[showcaseSweets[i].ID].酸味)+1;
             demandCustomerCount += (demandDB.demandList[demandListNumber].苦味*sweetsDB.sweetsList[showcaseSweets[i].ID].苦味)+1;
+            if(demandDB.demandList[demandListNumber].type == sweetsDB.sweetsList[showcaseSweets[i].ID].type){
+                demandCustomerCount+=5;
+            }
         }
-        dCustomer = (float)(1+0.01*r)*gradeMagnification[playerstatus.grade]*(float)demandCustomerCount;
+        dCustomer = (float)(1+0.01*r)*gradeMagnification[playerstatus.grade-1]*(float)demandCustomerCount;
         Customer = (int)dCustomer;
 
         //
