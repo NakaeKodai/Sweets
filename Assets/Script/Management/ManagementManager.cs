@@ -183,7 +183,7 @@ public class ManagementManager : MonoBehaviour
             demandCustomerCount += (demandDB.demandList[demandListNumber].酸味*sweetsDB.sweetsList[showcaseSweets[i].ID].酸味)+1;
             demandCustomerCount += (demandDB.demandList[demandListNumber].苦味*sweetsDB.sweetsList[showcaseSweets[i].ID].苦味)+1;
             if(demandDB.demandList[demandListNumber].type == sweetsDB.sweetsList[showcaseSweets[i].ID].type){
-                demandCustomerCount+=5;
+                demandCustomerCount+=3;
             }
         }
         dCustomer = (float)(1+0.01*r)*gradeMagnification[playerstatus.grade-1]*(float)demandCustomerCount;
