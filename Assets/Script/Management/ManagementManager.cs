@@ -61,7 +61,7 @@ public class ManagementManager : MonoBehaviour
     public List<float> customorDiameter = new List<float>();//客のほしい味による倍率
     // public List<float> demandDiameter = new List<float>();//需要の味による倍率
     public float typeMagnification = 1.5f;//ほしい種類がマッチしたときの倍率
-    public List<float> greadMagnification;//グレードによる倍率
+    public List<float> gradeMagnification;//グレードによる倍率
 
     // Start is called before the first frame update
     void Start()
@@ -82,9 +82,10 @@ public class ManagementManager : MonoBehaviour
     {
         // testText.text = "残りの客の数："+Customer;
         if(managementFlug == 0){
-            testText.text = "残りの客の数："+Customer;
+            testText.text = "まってね♡";
             if(playerInputAction.UI.MenuSelect.triggered){
                 Setting();
+                testText.text = "残りの客の数："+Customer;
                 for(int i = 0; i < showcaseSweets.Count; i++){
                     sumSweets += showcaseSweets[i].quantity;
                 }
@@ -172,8 +173,19 @@ public class ManagementManager : MonoBehaviour
     //経営パートを始める前のセッティング
     void Setting(){
         //ここで客数の設定を行う
-        int r = Random.Range(0,10);
+        float dCustomer = 0;//客数（小数点の計算をするためのフロート、後でintのやつに代入する）
+        int r = Random.Range(0,30);
         // float a,s,n;//甘さ、酸味、苦味
+        int demandCustomerCount = 0;
+        //需要値
+        for(int i = 0; i < showcaseSweets.Count; i++){
+            demandCustomerCount += (demandDB.demandList[demandListNumber].甘さ*sweetsDB.sweetsList[showcaseSweets[i].ID].甘さ)+1;
+            demandCustomerCount += (demandDB.demandList[demandListNumber].酸味*sweetsDB.sweetsList[showcaseSweets[i].ID].酸味)+1;
+            demandCustomerCount += (demandDB.demandList[demandListNumber].苦味*sweetsDB.sweetsList[showcaseSweets[i].ID].苦味)+1;
+        }
+        dCustomer = (float)(1+0.01*r)*gradeMagnification[playerstatus.grade]*(float)demandCustomerCount;
+        Customer = (int)dCustomer;
+
         //
 
         //客のほしいものの設定

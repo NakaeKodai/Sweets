@@ -926,7 +926,7 @@ MonoBehaviour:
   ingredientsDB: {fileID: 11400000, guid: 89317c2866f8d824a88d23ec19f537e2, type: 2}
   sweetsDB: {fileID: 11400000, guid: e0ca94ceffe1439459fd67cd7dbd71ed, type: 2}
   gameManager: {fileID: 0}
-  playerstatus: {fileID: 0}
+  playerstatus: {fileID: 11400000, guid: 5269610277b817c4f846c1f7c0d38683, type: 2}
   Customer: 5
   managementFlug: 0
   testText: {fileID: 429279338}
@@ -944,7 +944,7 @@ MonoBehaviour:
   - 1.7
   - 2
   typeMagnification: 1.5
-  greadMagnification:
+  gradeMagnification:
   - 1
   - 1.2
   - 1.4
