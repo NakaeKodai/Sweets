@@ -11,11 +11,11 @@ public class MenuManager : MonoBehaviour
     public bool isMenu;//メニューウィンドウが開いているか
     private PlayerInputAction playerInputAction;
     [SerializeField] private GameObject menuWindow;
-    [SerializeField] private Button[] menuList;//メニューウィンドウのボタンを格納しているリスト
+    [SerializeField] private GameObject menuList;
     private int selectBottuonNum;//選択中のボタンのリスト番号
     private int beforeCursorNum = -1;
-    private Button selectBottuon;//今選択中のボタン
-    private Image buttonImage;
+    private GameObject selectBottuon;//今選択中のボタン
+    private GameObject buttonImage;
     public bool selectMenuNow;//メニュー項目が選択されているかを判別
     private bool isLongPushUp;
     private bool isLongPushDown;
@@ -59,9 +59,6 @@ public class MenuManager : MonoBehaviour
             Time.timeScale = 1;
             gameManager.pause = false;
             isMenu = false;
-            // selectBottuon = menuList[selectBottuonNum];
-            // Image buttonImage = selectBottuon.GetComponent<Image>();
-            // buttonImage.color = nomalColor;
             selectMenuNow = false;
             Debug.Log("そして時は動き出す");
         }
@@ -71,10 +68,10 @@ public class MenuManager : MonoBehaviour
         {
             if (beforeCursorNum != selectBottuonNum)
             {
-                selectBottuon = menuList[selectBottuonNum];
-                buttonImage = selectBottuon.GetComponent<Image>();
+                selectBottuon = menuWindow.transform.GetChild(selectBottuonNum).gameObject;
+                buttonImage = selectBottuon.transform.GetChild(1).gameObject;
                 beforeCursorNum = selectBottuonNum;
-                buttonImage.color = selectColor;
+                buttonImage.SetActive(true);
             }
 
 
@@ -84,26 +81,22 @@ public class MenuManager : MonoBehaviour
             {
                 downTime = Time.realtimeSinceStartup;
                 isLongPushUp = true;
-                selectBottuon = menuList[selectBottuonNum];
-                buttonImage = selectBottuon.GetComponent<Image>();
-                buttonImage.color = nomalColor;
+                buttonImage.SetActive(false);
                 selectBottuonNum--;
                 if (selectBottuonNum < 0)
                 {
-                    selectBottuonNum = menuList.Length - 1;
+                    selectBottuonNum = menuWindow.transform.childCount - 1;
                 }
             }
             if (isLongPushUp)
             {
                 if (Time.realtimeSinceStartup - downTime >= pushDuration)
                 {
-                    selectBottuon = menuList[selectBottuonNum];
-                    buttonImage = selectBottuon.GetComponent<Image>();
-                    buttonImage.color = nomalColor;
+                    buttonImage.SetActive(false);
                     selectBottuonNum--;
                     if (selectBottuonNum < 0)
                     {
-                        selectBottuonNum = menuList.Length - 1;
+                        selectBottuonNum = menuWindow.transform.childCount - 1;
                     }
                     pushDuration = 0.1f;
                     downTime = Time.realtimeSinceStartup;
@@ -120,11 +113,9 @@ public class MenuManager : MonoBehaviour
             {
                 downTime = Time.realtimeSinceStartup;
                 isLongPushDown = true;
-                selectBottuon = menuList[selectBottuonNum];
-                buttonImage = selectBottuon.GetComponent<Image>();
-                buttonImage.color = nomalColor;
+                buttonImage.SetActive(false);
                 selectBottuonNum++;
-                if (selectBottuonNum >= menuList.Length)
+                if (selectBottuonNum >= menuWindow.transform.childCount)
                 {
                     selectBottuonNum = 0;
                 }
@@ -133,11 +124,9 @@ public class MenuManager : MonoBehaviour
             {
                 if (Time.realtimeSinceStartup - downTime >= pushDuration)
                 {
-                    selectBottuon = menuList[selectBottuonNum];
-                    buttonImage = selectBottuon.GetComponent<Image>();
-                    buttonImage.color = nomalColor;
+                    buttonImage.SetActive(false);
                     selectBottuonNum++;
-                    if (selectBottuonNum >= menuList.Length)
+                    if (selectBottuonNum >= menuWindow.transform.childCount)
                     {
                         selectBottuonNum = 0;
                     }
