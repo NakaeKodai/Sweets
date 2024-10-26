@@ -23964,7 +23964,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b596870ce71637648868bdb52b12c2fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStatus: {fileID: 0}
+  playerStatus: {fileID: 11400000, guid: 5269610277b817c4f846c1f7c0d38683, type: 2}
   playerDirection: {x: 0, y: 0}
   isEnter: 0
   attackPoint: 2
