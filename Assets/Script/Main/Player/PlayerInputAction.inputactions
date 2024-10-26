@@ -347,6 +347,17 @@
                 },
                 {
                     "name": "",
+                    "id": "77c39b70-76cb-4098-b266-76299e543532",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "1667869f-d632-4b0c-bc76-7526669a8afc",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
