@@ -47,9 +47,9 @@ public class Talk : MonoBehaviour
             }
             isTalking = true;
             interval = true;
-            if(npcState.name != ""){
+            if(npcState.npcName != ""){
                 // nameTextWindow = nameWindow.GetComponent<TextMeshProUGUI>();
-                nameTextWindow.text = npcState.name;
+                nameTextWindow.text = npcState.npcName;
                 nameWindow.SetActive(true);
             }
         }
