@@ -25,6 +25,7 @@ public class Cooking : MonoBehaviour
             // クリックによってスイーツを作成
             // makeSweets.Cook(sweetsID);
             recipeManager.OpenRecipe(false);
+
         }
     }
 

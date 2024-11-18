@@ -92,6 +92,10 @@ public class RecipeManager : MonoBehaviour
             WishListObject.SetActive(false);
             opening = false;
             making = false;
+            if(!menuManager.isMenu){
+                Time.timeScale = 1;
+                gameManager.pause=false;
+            }
         }
         if (playerInputAction.UI.Sort.triggered)
         {
