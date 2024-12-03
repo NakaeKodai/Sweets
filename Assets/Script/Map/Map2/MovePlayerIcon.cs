@@ -27,17 +27,17 @@ public class MovePlayerIcon : MonoBehaviour
                 // Vector2から角度を計算（ラジアンをデグリーに変換）
                 float angle = Mathf.Atan2(playerDirection.y, playerDirection.x) * Mathf.Rad2Deg - 90;
                 
-                transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+                transform.rotation = Quaternion.Euler(new Vector3(90, 0, angle));
             }
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if(other.CompareTag("HiddenObject"))
-        {
-            miniMapManager.RecordDestroyedObject(other.gameObject);
-            Destroy(other.gameObject);
-        }
-    }
+    // void OnTriggerEnter2D(Collider2D other)
+    // {
+    //     if(other.CompareTag("HiddenObject"))
+    //     {
+    //         miniMapManager.RecordDestroyedObject(other.gameObject);
+    //         Destroy(other.gameObject);
+    //     }
+    // }
 }
