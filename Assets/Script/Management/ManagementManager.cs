@@ -146,13 +146,13 @@ public class ManagementManager : MonoBehaviour
                     }
                 }
                 if(showcaseSweets[result].quantity > 0){
-                    testText2.text = sweetsDB.sweetsList[showcaseSweets[result].ID].name+"が売れた！";
+                    testText2.text = "<color=#ff7f50>"+sweetsDB.sweetsList[showcaseSweets[result].ID].name+"</color>"+"が売れた！";
                     showcaseSweets[result].quantity--;
                     sumSweets--;
                     salus += showcaseSweets[result].price;
                     reputation += 100;//評判の増減（仮）
                 }else{
-                    testText2.text = sweetsDB.sweetsList[showcaseSweets[result].ID].name+"は品切れで売れなかった・・・";
+                    testText2.text = "<color=#ff0000>"+sweetsDB.sweetsList[showcaseSweets[result].ID].name+"</color>"+"は品切れで売れなかった・・・";
                     reputation -= 100;//評判の増減（仮）
                 }
                 Customer--;
