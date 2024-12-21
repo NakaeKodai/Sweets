@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyList:
   - id: 0
     name: "\u30C6\u30B9\u30C8"
-    hp: 999
+    hp: 2
     attack: 4
     defense: 4
     hostileDistance: 20

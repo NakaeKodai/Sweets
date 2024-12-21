@@ -29959,11 +29959,13 @@ MonoBehaviour:
   HarvestList:
   - Id: 0
     percent: 10
+    minAmount: 5
   - Id: 1
     percent: 10
+    minAmount: 7
   - Id: 2
     percent: 10
-  maxAmount: 2
+    minAmount: 9
   ingredientsDB: {fileID: 11400000, guid: 89317c2866f8d824a88d23ec19f537e2, type: 2}
   harvestCount: 3
   backpackScript: {fileID: 0}
@@ -60392,9 +60394,10 @@ MonoBehaviour:
   HarvestList:
   - Id: 0
     percent: 80
+    minAmount: 5
   - Id: 2
     percent: 20
-  maxAmount: 2
+    minAmount: 1
   ingredientsDB: {fileID: 11400000, guid: 89317c2866f8d824a88d23ec19f537e2, type: 2}
   harvestCount: 2
   backpackScript: {fileID: 0}
@@ -69672,6 +69675,7 @@ MonoBehaviour:
   HarvestList:
   - Id: 0
     percent: 100
+    minAmount: 0
   maxAmount: 4
   ingredientsDB: {fileID: 11400000, guid: 89317c2866f8d824a88d23ec19f537e2, type: 2}
   harvestCount: 1
@@ -69820,7 +69824,10 @@ MonoBehaviour:
   attackType: 0
   attackRange: {fileID: 316897217}
   player: {fileID: 770100816}
-  HarvestList: []
+  HarvestList:
+  - Id: 0
+    percent: 100
+    minAmount: 3
   maxAmount: 4
   ingredientsDB: {fileID: 11400000, guid: 89317c2866f8d824a88d23ec19f537e2, type: 2}
   harvestCount: 1

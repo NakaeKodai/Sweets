@@ -7,7 +7,7 @@ public class HarvestPoint : MonoBehaviour
     [Header("percentは合計が100以下で設定してにゃ")]
     [Header("percentは小数点第一位まで")]
     public List<HarvestItem> HarvestList = new List<HarvestItem>();//採取できるアイテムのリスト
-    public int maxAmount = 2;//最大採取量、これをプレイヤーの変数からとってスキルによる採取量変化とかやりたい
+    // public int maxAmount = 2;//最大採取量(アイテム側で最低個数決めたのでいったん廃止)、これをプレイヤーの変数からとってスキルによる採取量変化とかやりたい
     [SerializeField] public IngredientsDB ingredientsDB;//データベースの取得
     bool HarvestPointKiller = false;
     public int harvestCount;//採取する回数
@@ -51,28 +51,28 @@ public class HarvestPoint : MonoBehaviour
             int rand = Random.Range(1,101);//1から100を乱数で指定
             // Debug.Log(rand);
             int amount;//採取量の指定
-            // 採取量を乱数で変更
-            if(rand >= 80){
-                amount = maxAmount;
-            }
-            else if(rand >= 50){
-                amount = maxAmount-1;
-                if(amount <= 0) amount = 1;
-            }
-            else if(rand >= 20){
-                amount = maxAmount-2;
-                if(amount <= 0) amount = 1;
-            }
-            else{
-                amount = maxAmount-3;
-                if(amount <= 0) amount = 1;
-            }
 
             // 乱数によって取得できるアイテムを調整
             do{
                 int randItem = Random.Range(0,1000);
                 selectItemId = itemPercent[randItem];
             }while(selectItemId == -1);
+
+            // 採取量を乱数で変更
+            if(rand >= 80){
+                amount = HarvestList[selectItemId].minAmount;
+            }
+            else if(rand >= 50){
+                amount = HarvestList[selectItemId].minAmount+1;
+            }
+            else if(rand >= 20){
+                amount = HarvestList[selectItemId].minAmount+2;
+            }
+            else{
+                amount = HarvestList[selectItemId].minAmount+3;
+            }
+
+            
             
             // 所持していないアイテムを取得したときに持ち物欄に加える
             if(ingredientsDB.ingredientsList[selectItemId].quantity == 0){
