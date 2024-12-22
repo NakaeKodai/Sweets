@@ -60,49 +60,58 @@ public class EnemyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (hp <= 0)
+        if (hp <= 0) //死亡時の処理
         {
             DropItem();
             Destroy(gameObject);
         }
-        else
+        else // 非死亡時の処理
         {
+            //プレイヤーとの距離を取得
             distance = Vector3.Distance(player.position, gameObject.transform.position);
-            if (!isBattle)
+            if (!isBattle) //非戦闘状態の処理
             {
+                //もしプレイヤーとの距離が索敵範囲内になったら
                 if (distance <= enemyStatus.enemyList[id].hostileDistance)
                 {
+                    //戦闘状態に移行
                     isBattle = true;
                     Debug.Log("見つけた");
                 }
             }
-            else
+            else //戦闘状態の処理
             {
+                //もしプレイヤーとの距離が攻撃範囲内かつ、攻撃可能なら
                 if (distance <= enemyStatus.enemyList[id].attackDistance && canAttack)
                 {
+                    //攻撃して、一度攻撃と行動を不能にする
                     Debug.Log("オラ");
                     Attack();
                     canAttack = false;
                     canAction = false;
                     // StartCoroutine(AttackInterval(attackInterval));
                 }
+                //もしもプレイヤーとの距離が索敵範囲内から外れたら
                 if (enemyStatus.enemyList[id].lostDistance <= distance)
                 {
+                    //戦闘状態を解除
                     isBattle = false;
                     Debug.Log("どこじゃあ");
                 }
-                // if(navMeshAgent.pathStatus != navMeshPathStatus.PathInvalid)
-                // {
+                //プレイヤーを追いかける
                 agent.SetDestination(player.position);
-                // }
             }
-        }
-        if(canAction)
-        {
-            agent.SetDestination(player.position);
-        }
-        else{
-            agent.SetDestination(gameObject.transform.position);
+            //もしも行動可能状態なら
+            if(canAction)
+            {
+                //プレイヤーを追いかける
+                agent.SetDestination(player.position);
+            }
+            else
+            {
+                //その場にとどまる
+                agent.SetDestination(gameObject.transform.position);
+            }
         }
     }
 
@@ -178,16 +187,16 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    private void Attack()
+    private void Attack()//攻撃の処理
     {
-        if (attackType == AttackType.shortType)
+        if (attackType == AttackType.shortType)//近距離攻撃タイプの処理
         {
             Debug.Log("敵の近接攻撃");
             attackRange.SetActive(true);
             if (hideCoroutine != null) StopCoroutine(hideCoroutine);
             hideCoroutine = StartCoroutine(HideattackRange(1.0f,enemyStatus.enemyList[id].attackInterval));
         }
-        else if (attackType == AttackType.longType)
+        else if (attackType == AttackType.longType)//遠距離攻撃タイプの処理
         {
             Debug.Log("敵の遠距離攻撃");
             if (hideCoroutine != null) StopCoroutine(hideCoroutine);
@@ -195,7 +204,7 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    private IEnumerator HideattackRange(float attackTime, float interval)
+    private IEnumerator HideattackRange(float attackTime, float interval)//攻撃判定と攻撃可能までのインターバル処理
     {
         Debug.Log("HideattackRange started"); // コルーチン開始時のログ
         yield return new WaitForSeconds(attackTime);
@@ -214,7 +223,7 @@ public class EnemyManager : MonoBehaviour
     //     canAttack = true;
     // }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)//被弾の処理
     {
         if (other.gameObject.CompareTag("Attack"))
         {
