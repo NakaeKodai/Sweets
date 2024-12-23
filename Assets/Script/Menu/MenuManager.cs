@@ -7,11 +7,14 @@ using TMPro;
 public class MenuManager : MonoBehaviour
 {
     public GameManager gameManager;
+    [SerializeField] private PlayerStatus playerstatus;
 
     public bool isMenu;//メニューウィンドウが開いているか
     private PlayerInputAction playerInputAction;
     [SerializeField] private GameObject menuWindow;
     [SerializeField] private GameObject menuList;
+    [SerializeField] private GameObject money;
+    [SerializeField] private GameObject popularity;
     private int selectBottuonNum;//選択中のボタンのリスト番号
     private int beforeCursorNum = -1;
     private GameObject selectBottuon;//今選択中のボタン
@@ -47,6 +50,9 @@ public class MenuManager : MonoBehaviour
         if (!gameManager.pause && playerInputAction.UI.OpenMenu.triggered && !isMenu && !talkScript.isTalking)
         {
             menuWindow.SetActive(true);
+            money.SetActive(true);
+            popularity.SetActive(true);
+            setStatus();
             Time.timeScale = 0;
             gameManager.pause = true;
             isMenu = true;
@@ -56,6 +62,8 @@ public class MenuManager : MonoBehaviour
         else if (((gameManager.pause && playerInputAction.UI.OpenMenu.triggered) || (gameManager.pause && playerInputAction.UI.Cancel.triggered && !selectMenuNow)) && isMenu)
         {
             menuWindow.SetActive(false);
+            money.SetActive(false);
+            popularity.SetActive(false);
             Time.timeScale = 1;
             gameManager.pause = false;
             isMenu = false;
@@ -149,6 +157,8 @@ public class MenuManager : MonoBehaviour
                     case 0:
                         selectMenuNow = true;
                         menuWindow.SetActive(false);
+                        money.SetActive(false);
+                        popularity.SetActive(false);
                         Debug.Log("アイテム開く");
                         backpackManager.OpenBackpack();
                         // backpackScript.OpenBackpack();
@@ -156,6 +166,8 @@ public class MenuManager : MonoBehaviour
                     case 1:
                         selectMenuNow = true;
                         menuWindow.SetActive(false);
+                        money.SetActive(false);
+                        popularity.SetActive(false);
                         recipeMAnager.OpenRecipe(true);
                         // recipeScript.OpenRecipe();
                         break;
@@ -163,12 +175,16 @@ public class MenuManager : MonoBehaviour
                         Debug.Log("ウィッシュリスト");
                         selectMenuNow = true;
                         menuWindow.SetActive(false);
+                        money.SetActive(false);
+                        popularity.SetActive(false);
                         wishListManager.OpenWishList();
                         break;
                     case 3:
                         Debug.Log("図鑑");
                         selectMenuNow = true;
                         menuWindow.SetActive(false);
+                        money.SetActive(false);
+                        popularity.SetActive(false);
                         libraryManager.OpenLibrary();
                         break;
                     case 4:
@@ -178,6 +194,8 @@ public class MenuManager : MonoBehaviour
                         Debug.Log("設定");
                         selectMenuNow = true;
                         setting.SetActive(true);
+                        money.SetActive(false);
+                        popularity.SetActive(false);
                         menuWindow.SetActive(false);
                         break;
                     case 6:
@@ -206,7 +224,18 @@ public class MenuManager : MonoBehaviour
             {
                 selectMenuNow = false;
                 menuWindow.SetActive(true);
+                money.SetActive(true);
+                popularity.SetActive(true);
             }
         }
     }
+
+    public void setStatus(){
+        GameObject moneyT = money.transform.GetChild(0).gameObject;
+        TextMeshProUGUI moneyText = moneyT.GetComponent<TextMeshProUGUI>();
+        moneyText.text = playerstatus.money + "G";
+        GameObject popularityT = popularity.transform.GetChild(0).gameObject;
+        TextMeshProUGUI popularityText = popularityT.GetComponent<TextMeshProUGUI>();
+        popularityText.text = ""+playerstatus.popularity;
+    } 
 }
